@@ -50,7 +50,7 @@
             margin-bottom: 5px;
             font-weight: bold;
         }
-        input[type="text"], input[type="file"], select {
+        input[type="text"], select {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
@@ -124,18 +124,6 @@
         .logout a:hover {
             text-decoration: underline;
         }
-        .question-group {
-            margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background-color: #f9f9f9;
-        }
-        .remove-question {
-            color: #dc3545;
-            cursor: pointer;
-            float: right;
-        }
     </style>
 </head>
 <body>
@@ -145,7 +133,6 @@
     
     <nav>
         <a href="/">Home</a>
-        <a href="/upload">Upload Resources</a>
         <a href="/add_quiz">Add Quizzes</a>
     </nav>
 
@@ -157,14 +144,13 @@
         <div class="tab">
             <button class="tablinks active" onclick="openTab(event, 'UpdateSubject')">Update Existing Subject</button>
             <button class="tablinks" onclick="openTab(event, 'NewSubject')">Add New Subject</button>
-            <button class="tablinks" onclick="openTab(event, 'AddQuiz')">Add Quiz Questions</button>
         </div>
 
         <div id="message" class="message" style="display: none;"></div>
 
-        <div id="UpdateSubject" class="tabcontent" style="display: block;">
+ <div id="UpdateSubject" class="tabcontent" style="display: block;">
             <h2>Update Existing Subject Resources</h2>
-            <form id="updateForm" enctype="multipart/form-data">
+            <form id="updateForm">
                 <div class="form-group">
                     <label for="existingSubject">Select Subject:</label>
                     <select id="existingSubject" name="subject" required>
@@ -173,20 +159,32 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="notes">Notes File:</label>
-                    <input type="file" id="notes" name="notes">
+                    <label for="notesLink">Notes Link:</label>
+                    <input type="text" id="notesLink" name="notes" placeholder="https://example.com/notes">
                 </div>
                 <div class="form-group">
-                    <label for="videos">Videos Link:</label>
-                    <input type="text" id="videos" name="videos" placeholder="https://youtube.com/...">
+                    <label for="labManualLink">Lab Manual Link:</label>
+                    <input type="text" id="labManualLink" name="lab_manual" placeholder="https://example.com/lab_manual">
                 </div>
                 <div class="form-group">
-                    <label for="projects">Projects Link:</label>
-                    <input type="text" id="projects" name="projects" placeholder="https://github.com/...">
+                    <label for="assignmentsLink">Assignments Link:</label>
+                    <input type="text" id="assignmentsLink" name="assignments" placeholder="https://example.com/assignments">
                 </div>
                 <div class="form-group">
-                    <label for="lab_manual">Lab Manual File:</label>
-                    <input type="file" id="lab_manual" name="lab_manual">
+                    <label for="questionPapersLink">Question Papers Link:</label>
+                    <input type="text" id="questionPapersLink" name="question_papers" placeholder="https://example.com/question_papers">
+                </div>
+                <div class="form-group">
+                    <label for="impQuestionsLink">Important Questions Link:</label>
+                    <input type="text" id="impQuestionsLink" name="imp_questions" placeholder="https://example.com/imp_questions">
+                </div>
+                <div class="form-group">
+                    <label for="researchPapersLink">Research Papers Link:</label>
+                    <input type="text" id="researchPapersLink" name="research_papers" placeholder="https://example.com/research_papers">
+                </div>
+                <div class="form-group">
+                    <label for="subjectDescription">Subject Description:</label>
+                    <input type="text" id="subjectDescription" name="description" placeholder="Enter subject description" required>
                 </div>
                 <button type="button" onclick="uploadResources('update')">Update Resources</button>
             </form>
@@ -194,78 +192,53 @@
 
         <div id="NewSubject" class="tabcontent">
             <h2>Add New Subject Resources</h2>
-            <form id="newSubjectForm" enctype="multipart/form-data">
+            <form id="newSubjectForm">
                 <div class="form-group">
                     <label for="newSubjectName">Subject Name:</label>
                     <input type="text" id="newSubjectName" name="subject" placeholder="Enter subject name (lowercase)" required>
                 </div>
                 <div class="form-group">
-                    <label for="newNotes">Notes File:</label>
-                    <input type="file" id="newNotes" name="notes">
+                    <label for="newNotesLink">Notes Link:</label>
+                    <input type="text" id="newNotesLink" name="notes" placeholder="https://example.com/notes">
                 </div>
                 <div class="form-group">
-                    <label for="newVideos">Videos Link:</label>
-                    <input type="text" id="newVideos" name="videos" placeholder="https://youtube.com/...">
+                    <label for="newLabManualLink">Lab Manual Link:</label>
+                    <input type="text" id="newLabManualLink" name="lab_manual" placeholder="https://example.com/lab_manual">
                 </div>
                 <div class="form-group">
-                    <label for="newProjects">Projects Link:</label>
-                    <input type="text" id="newProjects" name="projects" placeholder="https://github.com/...">
+                    <label for="newAssignmentsLink">Assignments Link:</label>
+                    <input type="text" id="newAssignmentsLink" name="assignments" placeholder="https://example.com/assignments">
                 </div>
                 <div class="form-group">
-                    <label for="newLabManual">Lab Manual File:</label>
-                    <input type="file" id="newLabManual" name="lab_manual">
+                    <label for="newQuestionPapersLink">Question Papers Link:</label>
+                    <input type="text" id="newQuestionPapersLink" name="question_papers" placeholder="https://example.com/question_papers">
+                </div>
+                <div class="form-group">
+                    <label for="newImpQuestionsLink">Important Questions Link:</label>
+                    <input type="text" id="newImpQuestionsLink" name="imp_questions" placeholder="https://example.com/imp_questions">
+                </div>
+                <div class="form-group">
+                    <label for="newResearchPapersLink">Research Papers Link:</label>
+                    <input type="text" id="newResearchPapersLink" name="research_papers" placeholder="https://example.com/research_papers">
+                </div>
+                <div class="form-group">
+                    <label for="newSubjectDescription">Subject Description:</label>
+                    <input type="text" id="newSubjectDescription" name="description" placeholder="Enter subject description" required>
                 </div>
                 <button type="button" onclick="uploadResources('new')">Add Subject</button>
             </form>
         </div>
-
-        <div id="AddQuiz" class="tabcontent">
-            <h2>Add Quiz Questions</h2>
-            <form id="quizForm">
-                <div class="form-group">
-                    <label for="quizSubject">Select Subject:</label>
-                    <select id="quizSubject" name="subject" required>
-                        <option value="">-- Select a subject --</option>
-                        <!-- This will be populated dynamically -->
-                    </select>
-                </div>
-                <div id="questionsContainer">
-                    <div class="question-group">
-                        <label for="question">Question:</label>
-                        <input type="text" name="question" required>
-                        <label for="optionA">Option A:</label>
-                        <input type="text" name="option_a" required>
-                        <label for="optionB">Option B:</label>
-                        <input type="text" name="option_b" required>
-                        <label for="optionC">Option C:</label>
-                        <input type="text" name="option_c" required>
-                        <label for="optionD">Option D:</label>
-                        <input type="text" name="option_d" required>
-                        <label for="answer">Correct Answer:</label>
-                        <select name="answer" required>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                            <option value="D">D</option>
-                        </select>
-                        <span class="remove-question" onclick="removeQuestion(this)">Remove Question</span>
-                    </div>
-                </div>
-                <button type="button" onclick="addQuestion()">Add More Questions</button>
-                <button type="button" onclick="addQuizQuestion()">Submit Questions</button>
-            </form>
-        </div>
     </div>
 
-    <script>
+ <script>
         // Load available subjects for dropdown on page load
         async function loadSubjects() {
             try {
                 const response = await fetch('/subjects');
                 if (response.ok) {
- const subjects = await response.json();
-                    const dropdowns = [document.getElementById('existingSubject'), document.getElementById('quizSubject')];
-                    
+                    const subjects = await response.json();
+                    const dropdowns = [document.getElementById('existingSubject')];
+
                     // Clear existing options
                     dropdowns.forEach(dropdown => {
                         dropdown.innerHTML = '<option value="">-- Select a subject --</option>';
@@ -337,72 +310,6 @@
                     showMessage(data.message, "success");
                     loadSubjects();
                     form.reset();
-                } else {
-                    showMessage(data.error || "An error occurred.", "error");
-                }
-            } catch (error) {
-                showMessage("An error occurred. Please try again.", "error");
-                console.error("Error:", error);
-            }
-        }
-
-        function addQuestion() {
-            const questionsContainer = document.getElementById('questionsContainer');
-            const questionGroup = document.createElement('div');
-            questionGroup.className = 'question-group';
-            questionGroup.innerHTML = `
-                <label for="question">Question:</label>
-                <input type="text" name="question" required>
-                <label for="optionA">Option A:</label>
-                <input type="text" name="option_a" required>
-                <label for="optionB">Option B:</label>
-                <input type="text" name="option_b" required>
-                <label for="optionC">Option C:</label>
-                <input type="text" name="option_c" required>
-                <label for="optionD">Option D:</label>
-                <input type="text" name="option_d" required>
-                <label for="answer">Correct Answer:</label>
-                <select name="answer" required>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                </select>
-                <span class="remove-question" onclick="removeQuestion(this)">Remove Question</span>
-            `;
-            questionsContainer.appendChild(questionGroup);
-        }
-
-        function removeQuestion(element) {
-            const questionGroup = element.parentElement;
-            questionGroup.remove();
-        }
-
-        async function addQuizQuestion() {
-            const messageDiv = document.getElementById('message');
-            messageDiv.style.display = 'none';
-            const form = document.getElementById('quizForm');
-            const subject = document.getElementById('quizSubject').value;
-
-            if (!subject) {
-                showMessage("Please select a subject.", "error");
-                return;
-            }
-
-            const formData = new FormData(form);
-            
-            try {
-                const response = await fetch('/add_quiz', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const data = await response.json();
-                
-                if (response.ok) {
- showMessage(data.message, "success");
-                    form.reset();
-                    document.getElementById('questionsContainer').innerHTML = ''; // Clear questions after submission
                 } else {
                     showMessage(data.error || "An error occurred.", "error");
                 }

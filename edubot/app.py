@@ -1,16 +1,9 @@
-from flask import Flask, request, jsonify, render_template, redirect, url_for, session, send_from_directory
-from werkzeug.utils import secure_filename
+from flask import Flask, request, jsonify, render_template, redirect, url_for, session
 import os
 import json
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'your_secret_key')  # Use an environment variable for security
-UPLOAD_FOLDER = 'uploads'  # Folder to save uploaded files
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max upload size
-
-# Ensure the upload folder exists
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # Load resources from a JSON file
 def load_resources():
@@ -28,8 +21,8 @@ def save_resources():
 resources = load_resources()
 
 # Hardcoded admin credentials
-ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'admin')  # Use environment variable
-ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'password')  # Use environment variable
+ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'Learn Lab')  # Use environment variable
+ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', '9059')  # Use environment variable
 
 @app.route('/')
 def index():
@@ -59,11 +52,6 @@ def admin():
         return render_template('admin_login.html', error="Invalid credentials")
     return render_template('admin_login.html')
 
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    """Serve the uploaded files"""
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
-
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     if 'admin' not in session:
@@ -71,10 +59,15 @@ def upload():
 
     if request.method == 'POST':
         subject = request.form['subject'].lower()
-        notes_file = request.files.get('notes')
-        lab_manual_file = request.files.get('lab_manual')
+        notes_link = request.form.get('notes')
+        lab_manual_link = request.form.get('lab_manual')
         videos_link = request.form.get('videos')
         projects_link = request.form.get('projects')
+        assignments_link = request.form.get('assignments')
+        question_papers_link = request.form.get('question_papers')
+        imp_questions_link = request.form.get('imp_questions')
+        research_papers_link = request.form.get('research_papers')
+        subject_description = request.form.get('description')
         
         # Create a new subject if it doesn't exist
         if subject not in resources:
@@ -83,26 +76,41 @@ def upload():
                 "videos": "",
                 "projects": "",
                 "quizzes": [],
-                "lab_manual": ""
+                "lab_manual": "",
+                "assignments": "",
+                "question_papers": "",
+                "imp_questions": "",
+                "research_papers": "",
+                "description": ""
             }
         
-        # Update videos and projects links if provided
+        # Update links if provided
+        if notes_link:
+            resources[subject]['notes'] = notes_link
+            
+        if lab_manual_link:
+            resources[subject]['lab_manual'] = lab_manual_link
+            
         if videos_link:
             resources[subject]['videos'] = videos_link
             
         if projects_link:
             resources[subject]['projects'] = projects_link
-
-        # Handle file uploads
-        if notes_file and notes_file.filename:
-            notes_filename = secure_filename(notes_file.filename)
-            notes_file.save(os.path.join(app.config['UPLOAD_FOLDER'], notes_filename))
-            resources[subject]['notes'] = url_for('uploaded_file', filename=notes_filename, _external=True)
-
-        if lab_manual_file and lab_manual_file.filename:
-            lab_manual_filename = secure_filename(lab_manual_file.filename)
-            lab_manual_file.save(os.path.join(app.config['UPLOAD_FOLDER'], lab_manual_filename))
-            resources[subject]['lab_manual'] = url_for('uploaded_file', filename=lab_manual_filename, _external=True)
+            
+        if assignments_link:
+            resources[subject]['assignments'] = assignments_link
+            
+        if question_papers_link:
+            resources[subject]['question_papers'] = question_papers_link
+            
+        if imp_questions_link:
+            resources[subject]['imp_questions'] = imp_questions_link
+            
+        if research_papers_link:
+            resources[subject]['research_papers'] = research_papers_link
+            
+        if subject_description:
+            resources[subject]['description'] = subject_description
 
         # Save resources to JSON file
         save_resources()
@@ -117,52 +125,27 @@ def add_quiz():
         return redirect(url_for('admin'))  # Redirect to admin login if not logged in
         
     if request.method == 'POST':
-        subject = request.form['subject'].lower()
+        subject = request.form[' subject'].lower()
         question = request.form['question']
-        option_a = request.form['option_a']
-        option_b = request.form['option_b']
-        option_c = request.form['option_c']
-        option_d = request.form['option_d']
+        options = request.form.getlist('options')
         answer = request.form['answer']
-        
-        # Ensure the subject exists
-        if subject not in resources:
-            resources[subject] = {
-                "notes": "",
-                "videos": "",
-                "projects": "",
-                "quizzes": [],
-                "lab_manual": ""
-            }
-        
-        new_quiz = {
-            "question": question,
-            "options": [
-                f"A: {option_a}",
-                f"B: {option_b}",
-                f"C: {option_c}",
-                f"D: {option_d}"
-            ],
-            "answer": answer
-        }
-        
-        resources[subject]['quizzes'].append(new_quiz)
-        
-        # Save resources to JSON file
-        save_resources()
 
-        return jsonify({"message": "Quiz added successfully"})
-        
+        # Ensure the subject exists
+        if subject in resources:
+            quiz_entry = {
+                "question": question,
+                "options": options,
+                "answer": answer
+            }
+            resources[subject]['quizzes'].append(quiz_entry)
+
+            # Save resources to JSON file
+            save_resources()
+
+            return jsonify({"message": "Quiz added successfully."})
+        return jsonify({"error": "Subject not found."}), 404
+
     return render_template('add_quiz.html', subjects=resources.keys())
 
-@app.route('/subjects', methods=['GET'])
-def list_subjects():
-    return jsonify(list(resources.keys()))
-
-@app.route('/logout')
-def logout():
-    session.pop('admin', None)
-    return redirect(url_for('index'))  # Redirect to home after logout
-
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+     app.run(host='0.0.0.0', port=5000, debug=True)

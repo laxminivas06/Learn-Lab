@@ -130,6 +130,16 @@
         .suggestions div:hover {
             background: #f0f0f0;
         }
+        .developer-info {
+            text-align: center;
+            margin: 10px 0;
+            color: rgb(0, 0, 0);
+        }
+        .developer-info img {
+            width: 200px; /* Adjust the size as needed */
+            height: auto;
+            border-radius: 50%; /* Make it circular */
+        }
     </style>
 </head>
 <body>
@@ -138,9 +148,7 @@
     </header>
     
     <nav>
-        <a href="#" onclick="showPage('home')">Home</a>
-        <a href="#" onclick="showPage('team')">Team</a>
-        <a href="#" onclick="showPage('about')">About</a>
+        <a href="#" onclick ="showPage('home')">Home</a>
     </nav>
 
     <div id="home" class="welcome">
@@ -148,7 +156,7 @@
     </div>
 
     <div class="info">
-        <img src="https://via.placeholder.com/100" alt="Info Image" />
+        
         <p>Please type your subject name or anything in <strong>only lowercase letters</strong>.</p>
     </div>
 
@@ -168,45 +176,10 @@
         <a href="/admin">Admin Login</a>
     </div>
 
-    <div class="team" id="team">
-        <h2>Meet Our Team</h2>
-        <div class="team-member">
-            <img src="https://via.placeholder.com/80" alt="Team Member 1" />
-            <div>
-                <h3>Laxmi Nivas Morishetty</h3>
-                <p>Team Lead</p>
-            </div>
-        </div>
-        <div class="team-member">
-            <img src="https://via.placeholder.com/80" alt="Team Member 2" />
-            <div>
-                <h3>Member 2 Name</h3>
-                <p>Role</p>
-            </div>
-        </div>
-        <div class="team-member">
-            <img src="https://via.placeholder.com/80" alt="Team Member 3" />
-            <div>
-                <h3>Member 3 Name</h3>
-                <p>Role</p>
-            </div>
-        </div>
-        <div class="team-member">
-            <img src="https://via.placeholder.com/80" alt="Team Member 4" />
-            <div>
-                <h3>Member 4 Name</h3>
-                <p>Role</p>
-            </div>
-        </div>
+    <div class="developer-info">
+        <img src="https://media.licdn.com/dms/image/v2/D4D03AQF7lrEXSoVF0g/profile-displayphoto-shrink_200_200/B4DZPQVdRwHcAY-/0/1734367106621?e=2147483647&v=beta&t=jaISMiaIgB1W_MukX-moM1RmHq6UTFKgHPBIXQvUEaU" alt="Developer Photo" />
+        <p>This website was developed by Laxmi Nivas Morishetty</p>
     </div>
-
-    <div class="about" id="about">
-        <h2>About This Project</h2>
-        <p>This project was developed by Laxmi Nivas Morishetty and the team under the guidance of Professor [Professor Name].</p>
-        <img src="https://via.placeholder.com/100" alt="Professor" />
-        <p>Professor [Professor Name] is an expert in Cyber Security and has been instrumental in guiding the team throughout the development process.</p>
-    </div>
-
     <footer>
         <p>&copy; 2023 EduBot. All rights reserved.</p>
     </footer>
@@ -245,8 +218,14 @@
                     <ul>
                         <li><strong>Notes:</strong> ${data.notes ? `<a href="${data.notes}">Download</a>` : 'Not available'}</li>
                         <li><strong>Videos:</strong> ${data.videos ? `<a href="${data.videos}">Watch</a>` : 'Not available'}</li>
-                        <li><strong>Projects:</strong> ${data .projects ? `<a href="${data.projects}">View</a>` : 'Not available'}</li>
+                        <li><strong>Projects:</strong> ${data.projects ? `<a href="${data.projects}">View</a>` : 'Not available'}</li>
+                        <li><strong>Quizes:</strong> ${data.quizzes ? `<a href="${data.quizzes}">Download</a>` : 'Not available'}</li>
                         <li><strong>Lab Manual:</strong> ${data.lab_manual ? `<a href="${data.lab_manual}">Download</a>` : 'Not available'}</li>
+                        <li><strong>Assignments:</strong> ${data.assignments ? `<a href="${data.assignments}">Download</a>` : 'Not available'}</li>
+                        <li><strong>Question Papers:</strong> ${data.question_papers ? `<a href="${data.question_papers}">Download</a>` : 'Not available'}</li>
+                        <li><strong>Important Questions:</strong> ${data.imp_questions ? `<a href="${data.imp_questions}">Download</a>` : 'Not available'}</li>
+                        <li><strong>Research Papers:</strong> ${data.research_papers ? `<a href="${data.research_papers}">View</a>` : 'Not available'}</li>
+                        <li><strong>Subject Description:</strong> ${data.description ? `<a href="${data.description}">View</a>` : 'Not available'}</li>
                     </ul>
                 `;
 
@@ -263,15 +242,14 @@
         }
 
         function startQuiz() {
-    const currentSubject = getCurrentSubject(); // Function to get the current subject
-    window.location.href = `quiz.html?subject=${currentSubject}`; // Redirect to quiz.html with the subject as a query parameter
-}
+            const currentSubject = getCurrentSubject(); // Function to get the current subject
+            window.location.href = `quiz.html?subject=${currentSubject}`; // Redirect to quiz.html with the subject as a query parameter
+        }
 
-function getCurrentSubject() {
-    // This function should return the current subject based on user input or selection
-    // For example, you might have a variable that stores the current subject
-    return currentSubject; // Make sure currentSubject is defined in your script
-}
+        function getCurrentSubject() {
+            return currentSubject; // Make sure currentSubject is defined in your script
+        }
+
         async function fetchSuggestions() {
             const query = document.getElementById('subject').value.trim().toLowerCase();
             const suggestionsDiv = document.getElementById('suggestions');
@@ -299,18 +277,6 @@ function getCurrentSubject() {
             document.getElementById('suggestions').classList.remove('show');
         }
 
-        async function loadSubjects() {
-            try {
-    const response = await fetch(`/quiz/${subject}`);
-    if (!response.ok) throw new Error('Network response was not ok');
-    quizData = await response.json();
-} catch (error) {
-    console.error("Fetch error:", error);
-    document.getElementById('quiz-container').innerHTML = `<h3>Error loading quiz: ${error.message}</h3>`;
-}
-        }
-
-        window.addEventListener('DOMContentLoaded', loadSubjects);
         window.onload = function() {
             document.getElementById('home').style.display = 'block';
             document.querySelector('.welcome').style.display = 'block';
@@ -318,16 +284,9 @@ function getCurrentSubject() {
 
         function showPage(page) {
             document.getElementById('home').style.display = 'none';
-            document.getElementById('team').style.display = 'none';
-            document.getElementById('about').style.display = 'none';
 
             if (page === 'home') {
                 document.getElementById('home').style.display = 'block';
-                document.querySelector('.welcome').style.display = 'block';
-            } else if (page === 'team') {
-                document.getElementById('team').style.display = 'block';
-            } else if (page === 'about') {
-                document.getElementById('about').style.display = 'block';
             }
         }
     </script>
