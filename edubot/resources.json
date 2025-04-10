@@ -1,0 +1,34 @@
+{
+    "subject1": {
+        "notes": "",
+        "videos": "",
+        "projects": "",
+        "quizzes": [
+            {
+                "question": "What is ...?",
+                "options": [
+                    "A: Option A",
+                    "B: Option B",
+                    "C: Option C",
+                    "D: Option D"
+                ],
+                "answer": "A"
+            }
+        ],
+        "lab_manual": ""
+    },
+    "maths": {
+        "notes": "http://127.0.0.1:5000/uploads/4f085c57-5ce0-4a88-b8b0-efb1710d46a5.JPG",
+        "videos": "www.google.com",
+        "projects": "",
+        "quizzes": [],
+        "lab_manual": "http://127.0.0.1:5000/uploads/BOOT_CAMP_3.pdf"
+    },
+    "software engineering": {
+        "notes": "http://127.0.0.1:5000/uploads/BOOT_CAMP_3.pdf",
+        "videos": "",
+        "projects": "",
+        "quizzes": [],
+        "lab_manual": "http://127.0.0.1:5000/uploads/form_copy.png"
+    }
+}

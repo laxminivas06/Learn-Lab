@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Learn Lab</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background: #007bff;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            background: #0056b3;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            margin: 20px auto;
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #007bff;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="file"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+            border-radius: 4px 4px 0 0;
+        }
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            color: #333;
+        }
+        .tab button:hover {
+            background-color: #ddd;
+        }
+        .tab button.active {
+            background-color: #007bff;
+            color: white;
+        }
+        .tabcontent {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+        }
+        .logout {
+            text-align: right;
+            margin-bottom: 10px;
+        }
+        .logout a {
+            color: #dc3545;
+            text-decoration: none;
+        }
+        .logout a:hover {
+            text-decoration: underline;
+        }
+        .question-group {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        .remove-question {
+            color: #dc3545;
+            cursor: pointer;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Learn Lab - Admin Dashboard</h1>
+    </header>
+    
+    <nav>
+        <a href="/">Home</a>
+        <a href="/upload">Upload Resources</a>
+        <a href="/add_quiz">Add Quizzes</a>
+    </nav>
+
+    <div class="container">
+        <div class="logout">
+            <a href="/logout">Logout</a>
+        </div>
+
+        <div class="tab">
+            <button class="tablinks active" onclick="openTab(event, 'UpdateSubject')">Update Existing Subject</button>
+            <button class="tablinks" onclick="openTab(event, 'NewSubject')">Add New Subject</button>
+            <button class="tablinks" onclick="openTab(event, 'AddQuiz')">Add Quiz Questions</button>
+        </div>
+
+        <div id="message" class="message" style="display: none;"></div>
+
+        <div id="UpdateSubject" class="tabcontent" style="display: block;">
+            <h2>Update Existing Subject Resources</h2>
+            <form id="updateForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="existingSubject">Select Subject:</label>
+                    <select id="existingSubject" name="subject" required>
+                        <option value="">-- Select a subject --</option>
+                        <!-- This will be populated dynamically -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Notes File:</label>
+                    <input type="file" id="notes" name="notes">
+                </div>
+                <div class="form-group">
+                    <label for="videos">Videos Link:</label>
+                    <input type="text" id="videos" name="videos" placeholder="https://youtube.com/...">
+                </div>
+                <div class="form-group">
+                    <label for="projects">Projects Link:</label>
+                    <input type="text" id="projects" name="projects" placeholder="https://github.com/...">
+                </div>
+                <div class="form-group">
+                    <label for="lab_manual">Lab Manual File:</label>
+                    <input type="file" id="lab_manual" name="lab_manual">
+                </div>
+                <button type="button" onclick="uploadResources('update')">Update Resources</button>
+            </form>
+        </div>
+
+        <div id="NewSubject" class="tabcontent">
+            <h2>Add New Subject Resources</h2>
+            <form id="newSubjectForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="newSubjectName">Subject Name:</label>
+                    <input type="text" id="newSubjectName" name="subject" placeholder="Enter subject name (lowercase)" required>
+                </div>
+                <div class="form-group">
+                    <label for="newNotes">Notes File:</label>
+                    <input type="file" id="newNotes" name="notes">
+                </div>
+                <div class="form-group">
+                    <label for="newVideos">Videos Link:</label>
+                    <input type="text" id="newVideos" name="videos" placeholder="https://youtube.com/...">
+                </div>
+                <div class="form-group">
+                    <label for="newProjects">Projects Link:</label>
+                    <input type="text" id="newProjects" name="projects" placeholder="https://github.com/...">
+                </div>
+                <div class="form-group">
+                    <label for="newLabManual">Lab Manual File:</label>
+                    <input type="file" id="newLabManual" name="lab_manual">
+                </div>
+                <button type="button" onclick="uploadResources('new')">Add Subject</button>
+            </form>
+        </div>
+
+        <div id="AddQuiz" class="tabcontent">
+            <h2>Add Quiz Questions</h2>
+            <form id="quizForm">
+                <div class="form-group">
+                    <label for="quizSubject">Select Subject:</label>
+                    <select id="quizSubject" name="subject" required>
+                        <option value="">-- Select a subject --</option>
+                        <!-- This will be populated dynamically -->
+                    </select>
+                </div>
+                <div id="questionsContainer">
+                    <div class="question-group">
+                        <label for="question">Question:</label>
+                        <input type="text" name="question" required>
+                        <label for="optionA">Option A:</label>
+                        <input type="text" name="option_a" required>
+                        <label for="optionB">Option B:</label>
+                        <input type="text" name="option_b" required>
+                        <label for="optionC">Option C:</label>
+                        <input type="text" name="option_c" required>
+                        <label for="optionD">Option D:</label>
+                        <input type="text" name="option_d" required>
+                        <label for="answer">Correct Answer:</label>
+                        <select name="answer" required>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select>
+                        <span class="remove-question" onclick="removeQuestion(this)">Remove Question</span>
+                    </div>
+                </div>
+                <button type="button" onclick="addQuestion()">Add More Questions</button>
+                <button type="button" onclick="addQuizQuestion()">Submit Questions</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Load available subjects for dropdown on page load
+        async function loadSubjects() {
+            try {
+                const response = await fetch('/subjects');
+                if (response.ok) {
+ const subjects = await response.json();
+                    const dropdowns = [document.getElementById('existingSubject'), document.getElementById('quizSubject')];
+                    
+                    // Clear existing options
+                    dropdowns.forEach(dropdown => {
+                        dropdown.innerHTML = '<option value="">-- Select a subject --</option>';
+                    });
+
+                    // Add all subjects to dropdowns
+                    subjects.forEach(subject => {
+                        dropdowns.forEach(dropdown => {
+                            const option = document.createElement('option');
+                            option.value = subject;
+                            option.textContent = subject;
+                            dropdown.appendChild(option);
+                        });
+                    });
+                }
+            } catch (error) {
+                console.error("Error loading subjects:", error);
+                showMessage("Error loading subjects. Please try again.", "error");
+            }
+        }
+
+        function openTab(evt, tabName) {
+            const tabcontent = document.getElementsByClassName("tabcontent");
+            for (let i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            const tablinks = document.getElementsByClassName("tablinks");
+            for (let i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        async function uploadResources(type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.style.display = 'none';
+            
+            let form;
+            if (type === 'update') {
+                form = document.getElementById('updateForm');
+                const subject = document.getElementById('existingSubject').value;
+                if (!subject) {
+                    showMessage("Please select a subject.", "error");
+                    return;
+                }
+            } else {
+                form = document.getElementById('newSubjectForm');
+                const subject = document.getElementById('newSubjectName').value.trim().toLowerCase();
+                if (!subject) {
+                    showMessage("Please enter a subject name.", "error");
+                    return;
+                }
+            }
+
+            const formData = new FormData(form);
+            
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showMessage(data.message, "success");
+                    loadSubjects();
+                    form.reset();
+                } else {
+                    showMessage(data.error || "An error occurred.", "error");
+                }
+            } catch (error) {
+                showMessage("An error occurred. Please try again.", "error");
+                console.error("Error:", error);
+            }
+        }
+
+        function addQuestion() {
+            const questionsContainer = document.getElementById('questionsContainer');
+            const questionGroup = document.createElement('div');
+            questionGroup.className = 'question-group';
+            questionGroup.innerHTML = `
+                <label for="question">Question:</label>
+                <input type="text" name="question" required>
+                <label for="optionA">Option A:</label>
+                <input type="text" name="option_a" required>
+                <label for="optionB">Option B:</label>
+                <input type="text" name="option_b" required>
+                <label for="optionC">Option C:</label>
+                <input type="text" name="option_c" required>
+                <label for="optionD">Option D:</label>
+                <input type="text" name="option_d" required>
+                <label for="answer">Correct Answer:</label>
+                <select name="answer" required>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                </select>
+                <span class="remove-question" onclick="removeQuestion(this)">Remove Question</span>
+            `;
+            questionsContainer.appendChild(questionGroup);
+        }
+
+        function removeQuestion(element) {
+            const questionGroup = element.parentElement;
+            questionGroup.remove();
+        }
+
+        async function addQuizQuestion() {
+            const messageDiv = document.getElementById('message');
+            messageDiv.style.display = 'none';
+            const form = document.getElementById('quizForm');
+            const subject = document.getElementById('quizSubject').value;
+
+            if (!subject) {
+                showMessage("Please select a subject.", "error");
+                return;
+            }
+
+            const formData = new FormData(form);
+            
+            try {
+                const response = await fetch('/add_quiz', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+ showMessage(data.message, "success");
+                    form.reset();
+                    document.getElementById('questionsContainer').innerHTML = ''; // Clear questions after submission
+                } else {
+                    showMessage(data.error || "An error occurred.", "error");
+                }
+            } catch (error) {
+                showMessage("An error occurred. Please try again.", "error");
+                console.error("Error:", error);
+            }
+        }
+
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = message;
+            messageDiv.className = `message ${type}`;
+            messageDiv.style.display = 'block';
+            messageDiv.scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        window.addEventListener('DOMContentLoaded', loadSubjects);
+    </script>
+</body>
+</html>
