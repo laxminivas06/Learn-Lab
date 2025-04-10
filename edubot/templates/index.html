@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learn Lab</title>
     <link rel="stylesheet" href="styles.css"> <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Add your styles here */
         body {
@@ -140,6 +141,114 @@
             height: auto;
             border-radius: 50%; /* Make it circular */
         }
+        .popup {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.popup-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.popup-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.social-links {
+    margin-top: 10px;
+}
+
+.social-links a {
+    margin: 0 10px;
+    color: #007bff; /* Change this to your preferred color */
+    font-size: 24px; /* Adjust size as needed */
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    color: #0056b3; /* Change color on hover */
+}
+@keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #e9ecef;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        li:hover {
+            background: #d1e7dd;
+        }
+        
     </style>
 </head>
 <body>
@@ -152,16 +261,16 @@
     </nav>
 
     <div id="home" class="welcome">
-        <p>Welcome to EduBot! Your one-stop solution for engineering knowledge.</p>
+        <p>Welcome to Learn Lab! Your one-stop solution for engineering knowledge.</p>
     </div>
 
     <div class="info">
         
-        <p>Please type your subject name or anything in <strong>only lowercase letters</strong>.</p>
+        <p><strong>Please type the subject name </strong></p>
     </div>
 
     <div id="chat">
-        <input type="text" id="subject" placeholder="Type a subject (e.g., python)" oninput="fetchSuggestions()" />
+        <input type="text" id="subject" placeholder="Type a subject (e.g., maths)" oninput="fetchSuggestions()" />
         <button onclick="sendQuery()">Ask EduBot</button>
         <div id="suggestions" class="suggestions"></div> <!-- Suggestions dropdown -->
     </div>
@@ -175,16 +284,89 @@
     <div class="admin-link">
         <a href="/admin">Admin Login</a>
     </div>
-
     <div class="developer-info">
         <img src="https://media.licdn.com/dms/image/v2/D4D03AQF7lrEXSoVF0g/profile-displayphoto-shrink_200_200/B4DZPQVdRwHcAY-/0/1734367106621?e=2147483647&v=beta&t=jaISMiaIgB1W_MukX-moM1RmHq6UTFKgHPBIXQvUEaU" alt="Developer Photo" />
         <p>This website was developed by Laxmi Nivas Morishetty</p>
+        <button id="bioButton">About Me</button>
     </div>
+    
+    <!-- Popup Modal -->
+    <div id="bioPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" id="closePopup">&times;</span>
+            <h2>About Me</h2>
+            <p>Hello! I'm Laxmi Nivas Morishetty, a passionate web developer with experience in building dynamic and responsive websites. I love coding and exploring new technologies.</p>
+            <p>Connect with me:</p>
+            <div class="social-links">
+                <a href="https://laxminivas-self-porfolio.vercel.app/" target="_blank" title="Visit my website">
+                    <i class="fas fa-globe"></i> 
+                </a>
+                <a href="https://in.linkedin.com/in/laxmi-nivas-morishetty-02468m" target="_blank" title="Connect on LinkedIn">
+                    <i class="fab fa-linkedin"></i> 
+                </a>
+                <a href="https://www.instagram.com/laxminivasmorishetty/" target="_blank" title="Follow me on Instagram">
+                    <i class="fab fa-instagram"></i> 
+                </a>
+                <a href="https://github.com/laxminivas06" target="_blank" title="View my GitHub">
+                    <i class="fab fa-github"></i> 
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <section class="overview">
+            <h2 style="text-align: center ;">About Learn Lab</h2>
+            <p style="font-family:Verdana, Geneva, Tahoma, sans-serif;">Learn Lab is an innovative online learning platform designed to empower students and professionals with the skills they need to succeed in today's fast-paced digital world. Our mission is to provide high-quality, accessible education that caters to diverse learning styles and paces.</p>
+        </section>
+    
+        <section class="features">
+            <h2>Key Features</h2>
+            <ul>
+                <li>Diverse Course Offerings</li>
+                <li>Interactive Learning Environment</li>
+                <li>Flexible Learning Paths</li>
+                <li>Certification and Career Support</li>
+                <li>Mobile Accessibility</li>
+                <li>Live Workshops and Webinars</li>
+                <li>Affordable Pricing</li>
+            </ul>
+        </section>
+    
+        <section class="target-audience">
+            <h2>Target Audience</h2>
+            <p>Students, professionals, and lifelong learners looking to enhance their skills and knowledge.</p>
+        </section>
+        </div>
     <footer>
-        <p>&copy; 2023 EduBot. All rights reserved.</p>
+        <p>&copy; 2025 Learn Lab. All rights reserved.</p>
     </footer>
 
     <script>
+        // Get the modal
+var popup = document.getElementById("bioPopup");
+
+// Get the button that opens the modal
+var btn = document.getElementById("bioButton");
+
+// Get the <span> element that closes the modal
+var span = document.getElementById("closePopup");
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    popup.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    popup.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == popup) {
+        popup.style.display = "none";
+    }
+}
         let currentSubject = '';
 
         async function sendQuery() {
@@ -219,13 +401,12 @@
                         <li><strong>Notes:</strong> ${data.notes ? `<a href="${data.notes}">Download</a>` : 'Not available'}</li>
                         <li><strong>Videos:</strong> ${data.videos ? `<a href="${data.videos}">Watch</a>` : 'Not available'}</li>
                         <li><strong>Projects:</strong> ${data.projects ? `<a href="${data.projects}">View</a>` : 'Not available'}</li>
-                        <li><strong>Quizes:</strong> ${data.quizzes ? `<a href="${data.quizzes}">Download</a>` : 'Not available'}</li>
                         <li><strong>Lab Manual:</strong> ${data.lab_manual ? `<a href="${data.lab_manual}">Download</a>` : 'Not available'}</li>
                         <li><strong>Assignments:</strong> ${data.assignments ? `<a href="${data.assignments}">Download</a>` : 'Not available'}</li>
                         <li><strong>Question Papers:</strong> ${data.question_papers ? `<a href="${data.question_papers}">Download</a>` : 'Not available'}</li>
                         <li><strong>Important Questions:</strong> ${data.imp_questions ? `<a href="${data.imp_questions}">Download</a>` : 'Not available'}</li>
                         <li><strong>Research Papers:</strong> ${data.research_papers ? `<a href="${data.research_papers}">View</a>` : 'Not available'}</li>
-                        <li><strong>Subject Description:</strong> ${data.description ? `<a href="${data.description}">View</a>` : 'Not available'}</li>
+                       <li><strong>Subject Description:</strong> ${data.description ? data.description : 'Not available'}</li>
                     </ul>
                 `;
 

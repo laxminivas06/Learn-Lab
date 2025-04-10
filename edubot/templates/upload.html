@@ -133,7 +133,6 @@
     
     <nav>
         <a href="/">Home</a>
-        <a href="/add_quiz">Add Quizzes</a>
     </nav>
 
     <div class="container">
@@ -144,23 +143,34 @@
         <div class="tab">
             <button class="tablinks active" onclick="openTab(event, 'UpdateSubject')">Update Existing Subject</button>
             <button class="tablinks" onclick="openTab(event, 'NewSubject')">Add New Subject</button>
+            <button class="tablinks" onclick="openTab(event, 'DeleteSubject')">Delete Subject</button>
         </div>
 
         <div id="message" class="message" style="display: none;"></div>
 
- <div id="UpdateSubject" class="tabcontent" style="display: block;">
+        <div id="UpdateSubject" class="tabcontent" style="display: block;">
             <h2>Update Existing Subject Resources</h2>
             <form id="updateForm">
                 <div class="form-group">
                     <label for="existingSubject">Select Subject:</label>
                     <select id="existingSubject" name="subject" required>
                         <option value="">-- Select a subject --</option>
-                        <!-- This will be populated dynamically -->
+                        {% for subject in subjects %}
+                            <option value="{{ subject }}">{{ subject.capitalize() }}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="notesLink">Notes Link:</label>
                     <input type="text" id="notesLink" name="notes" placeholder="https://example.com/notes">
+                </div>
+                <div class="form-group">
+                    <label for="videosLink">Videos Link:</label>
+                    <input type="text" id="videosLink" name="videos" placeholder="https://example.com/videos">
+                </div>
+                <div class="form-group">
+                    <label for="projectsLink">Projects Link:</label>
+                    <input type="text" id="projectsLink" name="projects" placeholder="https://example.com/projects">
                 </div>
                 <div class="form-group">
                     <label for="labManualLink">Lab Manual Link:</label>
@@ -202,12 +212,20 @@
                     <input type="text" id="newNotesLink" name="notes" placeholder="https://example.com/notes">
                 </div>
                 <div class="form-group">
+                    <label for="newVideosLink">Videos Link:</label>
+                    <input type="text" id="newVideosLink" name="videos" placeholder="https://example.com/videos">
+                </div>
+                <div class="form-group">
+                    <label for="newProjectsLink">Projects Link:</label>
+                    <input type="text" id="newProjectsLink" name="projects" placeholder="https://example.com/projects">
+                </div>
+                <div class="form-group">
                     <label for="newLabManualLink">Lab Manual Link:</label>
                     <input type="text" id="newLabManualLink" name="lab_manual" placeholder="https://example.com/lab_manual">
                 </div>
                 <div class="form-group">
                     <label for="newAssignmentsLink">Assignments Link:</label>
-                    <input type="text" id="newAssignmentsLink" name="assignments" placeholder="https://example.com/assignments">
+                    <input type="text" id="newAssignmentsLink " name="assignments" placeholder="https://example.com/assignments">
                 </div>
                 <div class="form-group">
                     <label for="newQuestionPapersLink">Question Papers Link:</label>
@@ -227,18 +245,51 @@
                 </div>
                 <button type="button" onclick="uploadResources('new')">Add Subject</button>
             </form>
+        
         </div>
+        <div id="DeleteSubject" class="tabcontent">
+        <h2>Delete Subject</h2>
+    <form id="deleteForm" method="POST" action="{{ url_for('delete_subject') }}">
+        <div class="form-group">
+            <label for="deleteSubject">Select Subject to Delete:</label>
+            <select id="deleteSubject" name="subject" required>
+                <option value="">-- Select a subject --</option>
+                {% for subject in subjects %}
+                    <option value="{{ subject }}">{{ subject.capitalize() }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit">Delete Subject</button>
+    </form>
     </div>
+</div>
 
- <script>
+    <script>
+         document.getElementById('deleteForm').addEventListener('submit', async function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        const formData = new FormData(this);
+        const response = await fetch('/delete_subject', {
+            method: 'POST',
+            body: formData
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            alert(data.message);
+            location.reload(); // Reload the page to reflect changes
+        } else {
+            alert(data.error);
+        }
+    });
         // Load available subjects for dropdown on page load
         async function loadSubjects() {
             try {
                 const response = await fetch('/subjects');
                 if (response.ok) {
-                    const subjects = await response.json();
+ const subjects = await response.json();
                     const dropdowns = [document.getElementById('existingSubject')];
-
+                    
                     // Clear existing options
                     dropdowns.forEach(dropdown => {
                         dropdown.innerHTML = '<option value="">-- Select a subject --</option>';

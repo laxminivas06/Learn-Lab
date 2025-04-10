@@ -52,6 +52,18 @@ def admin():
         return render_template('admin_login.html', error="Invalid credentials")
     return render_template('admin_login.html')
 
+@app.route('/delete_subject', methods=['POST'])
+def delete_subject():
+    if 'admin' not in session:
+        return redirect(url_for('admin'))  # Redirect to admin login if not logged in
+
+    subject = request.form.get('subject', '').lower()
+    if subject in resources:
+        del resources[subject]  # Remove the subject from resources
+        save_resources()  # Save the updated resources to the JSON file
+        return jsonify({"message": "Subject deleted successfully."})
+    return jsonify({"error": "Subject not found."}), 404
+
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     if 'admin' not in session:
@@ -117,35 +129,9 @@ def upload():
 
         return jsonify({"message": "Resources updated successfully."})
 
+    # Always load the latest resources for the dropdown
     return render_template('upload.html', subjects=resources.keys())
 
-@app.route('/add_quiz', methods=['GET', 'POST'])
-def add_quiz():
-    if 'admin' not in session:
-        return redirect(url_for('admin'))  # Redirect to admin login if not logged in
-        
-    if request.method == 'POST':
-        subject = request.form[' subject'].lower()
-        question = request.form['question']
-        options = request.form.getlist('options')
-        answer = request.form['answer']
-
-        # Ensure the subject exists
-        if subject in resources:
-            quiz_entry = {
-                "question": question,
-                "options": options,
-                "answer": answer
-            }
-            resources[subject]['quizzes'].append(quiz_entry)
-
-            # Save resources to JSON file
-            save_resources()
-
-            return jsonify({"message": "Quiz added successfully."})
-        return jsonify({"error": "Subject not found."}), 404
-
-    return render_template('add_quiz.html', subjects=resources.keys())
 
 if __name__ == '__main__':
-     app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
