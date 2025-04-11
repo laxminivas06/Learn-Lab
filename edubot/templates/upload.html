@@ -134,7 +134,7 @@
     <nav>
         <a href="#" onclick="showPage('home')">Home</a>
         <a href="/admin" onclick="showPage('admin')">Admin</a>
-        <a href="/admin/subjects" onclick="showPage('admin_subjects')">Manage Subjects</a>
+        <a href="/admin_subjects" onclick="showPage('admin_subjects')">Manage Subjects</a>
     </nav>
 
     <div class="container">
@@ -439,6 +439,37 @@
         }
 
         window.addEventListener('DOMContentLoaded', loadSubjects);
+        
+        document.getElementById('addSubjectForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('/add_subject', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message || data.error);
+                if (data.message) {
+                    this.reset(); // Reset the form after successful submission
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        document.getElementById('updateForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('/update_subject', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message || data.error);
+            })
+            .catch(error => console.error('Error:', error));
+        });
     </script>
 </body>
 </html>

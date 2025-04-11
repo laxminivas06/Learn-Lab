@@ -35,12 +35,7 @@ def query():
         return jsonify(resources[subject])
     return jsonify({"error": "Subject not found."}), 404
 
-@app.route('/admin/subjects', methods=['GET'])
-def admin_subjects():
-    if 'admin' not in session:
-        return redirect(url_for('admin'))  # Redirect to admin login if not logged in
 
-    return render_template('admin_subjects.html', resources=resources)
     
 @app.route('/suggestions', methods=['GET'])
 def suggestions():
@@ -58,6 +53,16 @@ def admin():
             return redirect(url_for('upload'))  # Redirect to upload page after login
         return render_template('admin_login.html', error="Invalid credentials")
     return render_template('admin_login.html')
+
+
+@app.route('/admin_subjects', methods=['GET'])
+def admin_subjects():
+    if 'admin' not in session:
+        return redirect(url_for('admin'))  # Redirect to admin login if not logged in
+    return render_template('admin_subjects.html', resources=resources)
+
+
+
 
 @app.route('/delete_subject', methods=['POST'])
 def delete_subject():
