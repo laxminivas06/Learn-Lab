@@ -142,102 +142,72 @@
             border-radius: 50%; /* Make it circular */
         }
         .popup {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
 
-.popup-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-}
+        .popup-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-.popup {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
 
-.popup-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-}
+        .social-links {
+            margin-top: 10px;
+        }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
+        .social-links a {
+            margin: 0 10px;
+            color: #007bff; /* Change this to your preferred color */
+            font-size: 24px; /* Adjust size as needed */
+            text-decoration: none;
+        }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
+        .social-links a:hover {
+            color: #0056b3; /* Change color on hover */
+        }
 
-.social-links {
-    margin-top: 10px;
-}
-
-.social-links a {
-    margin: 0 10px;
-    color: #007bff; /* Change this to your preferred color */
-    font-size: 24px; /* Adjust size as needed */
-    text-decoration: none;
-}
-
-.social-links a:hover {
-    color: #0056b3; /* Change color on hover */
-}
-@keyframes fadeIn {
+        @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
+
         .container {
             width: 80%;
             margin: auto;
             overflow: hidden;
             padding: 20px;
         }
+
         ul {
             list-style-type: none;
             padding: 0;
         }
+
         li {
             background: #e9ecef;
             margin: 10px 0;
@@ -245,10 +215,10 @@
             border-radius: 5px;
             transition: background 0.3s;
         }
+
         li:hover {
             background: #d1e7dd;
         }
-        
     </style>
 </head>
 <body>
@@ -258,6 +228,7 @@
     
     <nav>
         <a href="#" onclick ="showPage('home')">Home</a>
+        <a href="/admin" onclick ="showPage('admin')">Admin</a>
     </nav>
 
     <div id="home" class="welcome">
@@ -265,7 +236,6 @@
     </div>
 
     <div class="info">
-        
         <p><strong>Please type the subject name </strong></p>
     </div>
 
@@ -281,9 +251,6 @@
         <button id="start-quiz-button" onclick="startQuiz()">Start Quiz</button>
     </div>
 
-    <div class="admin-link">
-        <a href="/admin">Admin Login</a>
-    </div>
     <div class="developer-info">
         <img src="https://media.licdn.com/dms/image/v2/D4D03AQF7lrEXSoVF0g/profile-displayphoto-shrink_200_200/B4DZPQVdRwHcAY-/0/1734367106621?e=2147483647&v=beta&t=jaISMiaIgB1W_MukX-moM1RmHq6UTFKgHPBIXQvUEaU" alt="Developer Photo" />
         <p>This website was developed by Laxmi Nivas Morishetty</p>
@@ -301,7 +268,7 @@
                 <a href="https://laxminivas-self-porfolio.vercel.app/" target="_blank" title="Visit my website">
                     <i class="fas fa-globe"></i> 
                 </a>
-                <a href="https://in.linkedin.com/in/laxmi-nivas-morishetty-02468m" target="_blank" title="Connect on LinkedIn">
+                <a href="https://in.linkedin.com/in/laxmi-n ivas-morishetty-02468m" target="_blank" title="Connect on LinkedIn">
                     <i class="fab fa-linkedin"></i> 
                 </a>
                 <a href="https://www.instagram.com/laxminivasmorishetty/" target="_blank" title="Follow me on Instagram">
@@ -313,9 +280,10 @@
             </div>
         </div>
     </div>
+    
     <div class="container">
         <section class="overview">
-            <h2 style="text-align: center ;">About Learn Lab</h2>
+            <h2 style="text-align: center;">About Learn Lab</h2>
             <p style="font-family:Verdana, Geneva, Tahoma, sans-serif;">Learn Lab is an innovative online learning platform designed to empower students and professionals with the skills they need to succeed in today's fast-paced digital world. Our mission is to provide high-quality, accessible education that caters to diverse learning styles and paces.</p>
         </section>
     
@@ -336,37 +304,39 @@
             <h2>Target Audience</h2>
             <p>Students, professionals, and lifelong learners looking to enhance their skills and knowledge.</p>
         </section>
-        </div>
+    </div>
+    
     <footer>
         <p>&copy; 2025 Learn Lab. All rights reserved.</p>
     </footer>
 
     <script>
         // Get the modal
-var popup = document.getElementById("bioPopup");
+        var popup = document.getElementById("bioPopup");
 
-// Get the button that opens the modal
-var btn = document.getElementById("bioButton");
+        // Get the button that opens the modal
+        var btn = document.getElementById("bioButton");
 
-// Get the <span> element that closes the modal
-var span = document.getElementById("closePopup");
+        // Get the <span> element that closes the modal
+        var span = document.getElementById("closePopup");
 
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-    popup.style.display = "block";
-}
+        // When the user clicks the button, open the modal 
+        btn.onclick = function() {
+            popup.style.display = "block";
+        }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    popup.style.display = "none";
-}
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            popup.style.display = "none";
+        }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == popup) {
-        popup.style.display = "none";
-    }
-}
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == popup) {
+                popup.style.display = "none";
+            }
+        }
+
         let currentSubject = '';
 
         async function sendQuery() {
@@ -398,15 +368,15 @@ window.onclick = function(event) {
                 responseDiv.innerHTML = `
                     <h3>Resources for ${subject}:</h3>
                     <ul>
-                        <li><strong>Notes:</strong> ${data.notes ? `<a href="${data.notes}">Download</a>` : 'Not available'}</li>
-                        <li><strong>Videos:</strong> ${data.videos ? `<a href="${data.videos}">Watch</a>` : 'Not available'}</li>
-                        <li><strong>Projects:</strong> ${data.projects ? `<a href="${data.projects}">View</a>` : 'Not available'}</li>
-                        <li><strong>Lab Manual:</strong> ${data.lab_manual ? `<a href="${data.lab_manual}">Download</a>` : 'Not available'}</li>
-                        <li><strong>Assignments:</strong> ${data.assignments ? `<a href="${data.assignments}">Download</a>` : 'Not available'}</li>
-                        <li><strong>Question Papers:</strong> ${data.question_papers ? `<a href="${data.question_papers}">Download</a>` : 'Not available'}</li>
-                        <li><strong>Important Questions:</strong> ${data.imp_questions ? `<a href="${data.imp_questions}">Download</a>` : 'Not available'}</li>
-                        <li><strong>Research Papers:</strong> ${data.research_papers ? `<a href="${data.research_papers}">View</a>` : 'Not available'}</li>
-                       <li><strong>Subject Description:</strong> ${data.description ? data.description : 'Not available'}</li>
+                        <li><strong>Notes:</strong> ${data.notes.length ? data.notes.map(link => `<a href="${link}">Download</a>`).join(', ') : 'Not available'}</li>
+                        <li><strong>Videos:</strong> ${data.videos.length ? data.videos.map(link => `<a href="${link}">Watch</a>`).join(', ') : 'Not available'}</li>
+                        <li><strong>Projects:</strong> ${data.projects.length ? data.projects.map(link => `<a href="${link}">View</a>`).join(', ') : 'Not available'}</li>
+                        <li><strong>Lab Manual:</strong> ${data.lab_manual.length ? data.lab_manual.map(link => `<a href="${link}">Download</a>`).join(', ') : 'Not available'}</li>
+                        <li><strong>Assignments:</strong> ${data.assignments.length ? data.assignments.map(link => `<a href="${link}">Download</a>`).join(', ') : 'Not available'}</li>
+                        <li><strong>Question Papers:</strong> ${data.question_papers.length ? data.question_papers.map(link => `<a href="${link}">Download</a>`).join(', ') : 'Not available'}</li>
+                        <li><strong>Important Questions:</strong> ${data.imp_questions.length ? data.imp_questions.map(link => `<a href="${link}">Download</a>`).join(', ') : 'Not available'}</li>
+                        <li><strong>Research Papers:</strong> ${data.research_papers.length ? data.research_papers.map(link => `<a href="${link}">View</a>`).join(', ') : 'Not available'}</li>
+                        <li><strong>Subject Description:</strong> ${data.description ? data.description : 'Not available'}</li>
                     </ul>
                 `;
 

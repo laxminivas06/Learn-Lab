@@ -35,6 +35,13 @@ def query():
         return jsonify(resources[subject])
     return jsonify({"error": "Subject not found."}), 404
 
+@app.route('/admin/subjects', methods=['GET'])
+def admin_subjects():
+    if 'admin' not in session:
+        return redirect(url_for('admin'))  # Redirect to admin login if not logged in
+
+    return render_template('admin_subjects.html', resources=resources)
+    
 @app.route('/suggestions', methods=['GET'])
 def suggestions():
     query = request.args.get('query', '').lower()
@@ -71,58 +78,59 @@ def upload():
 
     if request.method == 'POST':
         subject = request.form['subject'].lower()
-        notes_link = request.form.get('notes')
-        lab_manual_link = request.form.get('lab_manual')
-        videos_link = request.form.get('videos')
-        projects_link = request.form.get('projects')
-        assignments_link = request.form.get('assignments')
-        question_papers_link = request.form.get('question_papers')
-        imp_questions_link = request.form.get('imp_questions')
-        research_papers_link = request.form.get('research_papers')
-        subject_description = request.form.get('description')
         
+        # Collect links as lists
+        notes_links = request.form.getlist('notes[]')
+        lab_manual_links = request.form.getlist('lab_manual[]')
+        videos_links = request.form.getlist('videos[]')
+        projects_links = request.form.getlist('projects[]')
+        assignments_links = request.form.getlist('assignments[]')
+        question_papers_links = request.form.getlist('question_papers[]')
+        imp_questions_links = request.form.getlist('imp_questions[]')
+        research_papers_links = request.form.getlist('research_papers[]')
+        subject_description = request.form.get('description')
+
         # Create a new subject if it doesn't exist
         if subject not in resources:
             resources[subject] = {
-                "notes": "",
-                "videos": "",
-                "projects": "",
-                "quizzes": [],
-                "lab_manual": "",
-                "assignments": "",
-                "question_papers": "",
-                "imp_questions": "",
-                "research_papers": "",
+                "notes": [],
+                "videos": [],
+                "projects": [],
+                "lab_manual": [],
+                "assignments": [],
+                "question_papers": [],
+                "imp_questions": [],
+                "research_papers": [],
                 "description": ""
             }
         
         # Update links if provided
-        if notes_link:
-            resources[subject]['notes'] = notes_link
+        if notes_links:
+            resources[subject]['notes'] = notes_links
             
-        if lab_manual_link:
-            resources[subject]['lab_manual'] = lab_manual_link
+        if lab_manual_links:
+            resources[subject]['lab_manual'] = lab_manual_links
             
-        if videos_link:
-            resources[subject]['videos'] = videos_link
+        if videos_links:
+            resources[subject]['videos'] = videos_links
             
-        if projects_link:
-            resources[subject]['projects'] = projects_link
+        if projects_links:
+            resources[subject]['projects'] = projects_links
             
-        if assignments_link:
-            resources[subject]['assignments'] = assignments_link
+        if assignments_links:
+            resources[subject]['assignments'] = assignments_links
             
-        if question_papers_link:
-            resources[subject]['question_papers'] = question_papers_link
+        if question_papers_links:
+            resources[subject]['question_papers'] = question_papers_links
             
-        if imp_questions_link:
-            resources[subject]['imp_questions'] = imp_questions_link
+        if imp_questions_links:
+            resources[subject]['imp_questions'] = imp_questions_links
             
-        if research_papers_link:
-            resources[subject]['research_papers'] = research_papers_link
+        if research_papers_links:
+            resources[subject]['research_papers'] = research_papers_links
             
         if subject_description:
-            resources[subject]['description'] = subject_description
+            resources[subject][' description'] = subject_description
 
         # Save resources to JSON file
         save_resources()
@@ -131,7 +139,6 @@ def upload():
 
     # Always load the latest resources for the dropdown
     return render_template('upload.html', subjects=resources.keys())
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

@@ -132,7 +132,9 @@
     </header>
     
     <nav>
-        <a href="/">Home</a>
+        <a href="#" onclick="showPage('home')">Home</a>
+        <a href="/admin" onclick="showPage('admin')">Admin</a>
+        <a href="/admin/subjects" onclick="showPage('admin_subjects')">Manage Subjects</a>
     </nav>
 
     <div class="container">
@@ -147,7 +149,6 @@
         </div>
 
         <div id="message" class="message" style="display: none;"></div>
-
         <div id="UpdateSubject" class="tabcontent" style="display: block;">
             <h2>Update Existing Subject Resources</h2>
             <form id="updateForm">
@@ -160,46 +161,65 @@
                         {% endfor %}
                     </select>
                 </div>
-                <div class="form-group">
+                
+                <div class="form-group" id="notesLinks">
                     <label for="notesLink">Notes Link:</label>
-                    <input type="text" id="notesLink" name="notes" placeholder="https://example.com/notes">
+                    <input type="text" name="notes[]" placeholder="https://example.com/notes">
+                    <button type="button" onclick="addLinkField('notesLinks')">+</button>
                 </div>
-                <div class="form-group">
+                
+                <div class="form-group" id="videosLinks">
                     <label for="videosLink">Videos Link:</label>
-                    <input type="text" id="videosLink" name="videos" placeholder="https://example.com/videos">
+                    <input type="text" name="videos[]" placeholder="https://example.com/videos">
+                    <button type="button" onclick="addLinkField('videosLinks')">+</button>
                 </div>
-                <div class="form-group">
+                
+                <div class="form-group" id="projectsLinks">
                     <label for="projectsLink">Projects Link:</label>
-                    <input type="text" id="projectsLink" name="projects" placeholder="https://example.com/projects">
+                    <input type="text" name="projects[]" placeholder="https://example.com/projects">
+                    <button type="button" onclick="addLinkField('projectsLinks')">+</button>
                 </div>
-                <div class="form-group">
+                
+                <div class="form-group" id="labManualLinks">
                     <label for="labManualLink">Lab Manual Link:</label>
-                    <input type="text" id="labManualLink" name="lab_manual" placeholder="https://example.com/lab_manual">
+                    <input type="text" name="lab_manual[]" placeholder="https://example.com/lab_manual">
+                    <button type="button" onclick="addLinkField('labManualLinks')">+</button>
                 </div>
-                <div class="form-group">
+                
+                <div class="form-group" id="assignmentsLinks">
                     <label for="assignmentsLink">Assignments Link:</label>
-                    <input type="text" id="assignmentsLink" name="assignments" placeholder="https://example.com/assignments">
+                    <input type="text" name="assignments[]" placeholder="https://example.com/assignments">
+                    <button type="button" onclick="addLinkField('assignmentsLinks')">+</button>
                 </div>
-                <div class="form-group">
+                
+                <div class="form-group" id="questionPapersLinks">
                     <label for="questionPapersLink">Question Papers Link:</label>
-                    <input type="text" id="questionPapersLink" name="question_papers" placeholder="https://example.com/question_papers">
+                    <input type="text" name="question_papers[]" placeholder="https://example.com/question_papers">
+                    <button type="button" onclick="addLinkField('questionPapersLinks')">+</button>
                 </div>
-                <div class="form-group">
+                
+                <div class="form-group" id="impQuestionsLinks">
                     <label for="impQuestionsLink">Important Questions Link:</label>
-                    <input type="text" id="impQuestionsLink" name="imp_questions" placeholder="https://example.com/imp_questions">
+                    <input type="text" name="imp_questions[]" placeholder="https://example.com/imp_questions">
+                    <button type="button" onclick="addLinkField('impQuestionsLinks')">+</button>
                 </div>
-                <div class="form-group">
+                
+                <div class="form-group" id="researchPapersLinks">
                     <label for="researchPapersLink">Research Papers Link:</label>
-                    <input type="text" id="researchPapersLink" name="research_papers" placeholder="https://example.com/research_papers">
+                    <input type="text" name="research_papers[]" placeholder="https://example.com/research_papers">
+                    <button type="button" onclick="addLinkField('researchPapersLinks')">+</button>
                 </div>
+                
                 <div class="form-group">
                     <label for="subjectDescription">Subject Description:</label>
                     <input type="text" id="subjectDescription" name="description" placeholder="Enter subject description" required>
                 </div>
+                
                 <button type="button" onclick="uploadResources('update')">Update Resources</button>
             </form>
         </div>
-
+        
+        
         <div id="NewSubject" class="tabcontent">
             <h2>Add New Subject Resources</h2>
             <form id="newSubjectForm">
@@ -207,46 +227,65 @@
                     <label for="newSubjectName">Subject Name:</label>
                     <input type="text" id="newSubjectName" name="subject" placeholder="Enter subject name (lowercase)" required>
                 </div>
-                <div class="form-group">
+                
+                <div class="form-group" id="newNotesLinks">
                     <label for="newNotesLink">Notes Link:</label>
-                    <input type="text" id="newNotesLink" name="notes" placeholder="https://example.com/notes">
+                    <input type="text" name="notes[]" placeholder="https://example.com/notes">
+                    <button type="button" onclick="addLinkField('newNotesLinks')">+</button>
                 </div>
-                <div class="form-group">
+                
+                <div class="form -group" id="newVideosLinks">
                     <label for="newVideosLink">Videos Link:</label>
-                    <input type="text" id="newVideosLink" name="videos" placeholder="https://example.com/videos">
+                    <input type="text" name="videos[]" placeholder="https://example.com/videos">
+                    <button type="button" onclick="addLinkField('newVideosLinks')">+</button>
                 </div>
-                <div class="form-group">
+                
+                <div class="form-group" id="newProjectsLinks">
                     <label for="newProjectsLink">Projects Link:</label>
-                    <input type="text" id="newProjectsLink" name="projects" placeholder="https://example.com/projects">
+                    <input type="text" name="projects[]" placeholder="https://example.com/projects">
+                    <button type="button" onclick="addLinkField('newProjectsLinks')">+</button>
                 </div>
-                <div class="form-group">
+                
+                <div class="form-group" id="newLabManualLinks">
                     <label for="newLabManualLink">Lab Manual Link:</label>
-                    <input type="text" id="newLabManualLink" name="lab_manual" placeholder="https://example.com/lab_manual">
+                    <input type="text" name="lab_manual[]" placeholder="https://example.com/lab_manual">
+                    <button type="button" onclick="addLinkField('newLabManualLinks')">+</button>
                 </div>
-                <div class="form-group">
+                
+                <div class="form-group" id="newAssignmentsLinks">
                     <label for="newAssignmentsLink">Assignments Link:</label>
-                    <input type="text" id="newAssignmentsLink " name="assignments" placeholder="https://example.com/assignments">
+                    <input type="text" name="assignments[]" placeholder="https://example.com/assignments">
+                    <button type="button" onclick="addLinkField('newAssignmentsLinks')">+</button>
                 </div>
-                <div class="form-group">
+                
+                <div class="form-group" id="newQuestionPapersLinks">
                     <label for="newQuestionPapersLink">Question Papers Link:</label>
-                    <input type="text" id="newQuestionPapersLink" name="question_papers" placeholder="https://example.com/question_papers">
+                    <input type="text" name="question_papers[]" placeholder="https://example.com/question_papers">
+                    <button type="button" onclick="addLinkField('newQuestionPapersLinks')">+</button>
                 </div>
-                <div class="form-group">
+                
+                <div class="form-group" id="newImpQuestionsLinks">
                     <label for="newImpQuestionsLink">Important Questions Link:</label>
-                    <input type="text" id="newImpQuestionsLink" name="imp_questions" placeholder="https://example.com/imp_questions">
+                    <input type="text" name="imp_questions[]" placeholder="https://example.com/imp_questions">
+                    <button type="button" onclick="addLinkField('newImpQuestionsLinks')">+</button>
                 </div>
-                <div class="form-group">
+                
+                <div class="form-group" id="newResearchPapersLinks">
                     <label for="newResearchPapersLink">Research Papers Link:</label>
-                    <input type="text" id="newResearchPapersLink" name="research_papers" placeholder="https://example.com/research_papers">
+                    <input type="text" name="research_papers[]" placeholder="https://example.com/research_papers">
+                    <button type="button" onclick="addLinkField('newResearchPapersLinks')">+</button>
                 </div>
+                
                 <div class="form-group">
                     <label for="newSubjectDescription">Subject Description:</label>
                     <input type="text" id="newSubjectDescription" name="description" placeholder="Enter subject description" required>
                 </div>
+                
                 <button type="button" onclick="uploadResources('new')">Add Subject</button>
             </form>
-        
         </div>
+        
+        
         <div id="DeleteSubject" class="tabcontent">
         <h2>Delete Subject</h2>
     <form id="deleteForm" method="POST" action="{{ url_for('delete_subject') }}">
@@ -265,6 +304,24 @@
 </div>
 
     <script>
+       function addLinkField(containerId) {
+        const container = document.getElementById(containerId);
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.name = containerId.replace('Links', '').toLowerCase() + '[]';
+        input.placeholder = 'https://example.com/';
+        
+        const removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.textContent = '-';
+        removeButton.onclick = function() {
+            container.removeChild(input);
+            container.removeChild(removeButton);
+        };
+        
+        container.appendChild(input);
+        container.appendChild(removeButton);
+    }
          document.getElementById('deleteForm').addEventListener('submit', async function(event) {
         event.preventDefault(); // Prevent the default form submission
 
