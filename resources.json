@@ -1,20 +1,7 @@
 {
     "maths": {
-        "notes": "",
-        "videos": "",
-        "projects": "",
-        "quizzes": [],
-        "lab_manual": "",
-        "assignments": "",
-        "question_papers": "",
-        "imp_questions": "",
-        "research_papers": "",
-        "description": ""
-    },
-    "11": {
         "notes": [
-            "https://www.blackbox.ai/",
-            "https://www.blackbox.ai/"
+            "www.google.com"
         ],
         "videos": [
             ""
@@ -66,5 +53,33 @@
             ""
         ],
         "description": ""
+    },
+    "web development": {
+        "notes": [
+            "www.google.com"
+        ],
+        "videos": [
+            ""
+        ],
+        "projects": [
+            ""
+        ],
+        "lab_manual": [
+            ""
+        ],
+        "assignments": [
+            ""
+        ],
+        "question_papers": [
+            ""
+        ],
+        "imp_questions": [
+            ""
+        ],
+        "research_papers": [
+            ""
+        ],
+        "description": "",
+        " description": "jhgsujghbsdgv"
     }
 }

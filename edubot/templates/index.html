@@ -7,256 +7,781 @@
     <link rel="stylesheet" href="styles.css"> <!-- Link to the CSS file -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Add your styles here */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+        /* Base styles */
+        :root {
+            --primary-color: #007bff;
+            --primary-dark: #0056b3;
+            --background-color: #f4f4f4;
+            --text-color: #333;
+            --white: #ffffff;
+            --light-gray: #e9ecef;
+            --hover-gray: #d1e7dd;
+        }
+        
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            color: #333;
         }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        /* Header styles */
         header {
-            background: #007bff;
-            color: white;
-            padding: 10px 0;
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 0;
             text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
+        
+        header h1 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin: 0;
+            padding: 0 1rem;
+        }
+        
+        /* Navigation styles */
         nav {
-            background: #0056b3;
-            padding: 10px;
+            background: var(--primary-dark);
+            padding: 0.75rem;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
+        
         nav a {
-            color: white;
-            margin: 0 15px;
+            color: var(--white);
+            margin: 0 0.75rem;
             text-decoration: none;
+            font-size: 1rem;
+            padding: 0.5rem;
+            display: inline-block;
+            transition: all 0.3s ease;
         }
+        
         nav a:hover {
             text-decoration: underline;
+            transform: translateY(-2px);
         }
+        
+        /* Main content styles */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
         .welcome {
-            display: none; /* Initially hidden */
             text-align: center;
-            margin: 20px;
-            font-size: 24px;
+            margin: 2rem 0;
+            font-size: clamp(1.25rem, 3vw, 1.5rem);
             animation: fadeIn 2s forwards;
+            display: none; /* Initially hidden */
         }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
+        
         .info {
             text-align: center;
-            margin: 20px 0;
+            margin: 1.5rem 0;
+            padding: 0 1rem;
         }
-        .info img {
-            width: 100px; /* Adjust the size as needed */
-            height: auto;
+        
+        .info p {
+            font-size: 1.1rem;
+            font-weight: 500;
         }
-        footer {
-            text-align: center;
-            padding: 10px 0;
-            background: #007bff;
-            color: white;
-            position: relative;
-            bottom: 0;
-            width: 100%;
-            margin-top: 20px;
-        }
+        
+        /* Chat section styles */
         #chat {
-            margin: 20px auto;
+            margin: 2rem auto;
             max-width: 600px;
-            background: white;
-            padding: 20px;
+            background: var(--white);
+            padding: 1.5rem;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        input[type="text"] {
-            width: calc(100% - 22px);
-            padding: 10px;
+        
+        #subject {
+            width: 100%;
+            padding: 0.75rem;
             border: 1px solid #ccc;
             border-radius: 4px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
         }
+        
         button {
-            padding: 10px 15px;
-            background: #007bff;
-            color: white;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary-color);
+            color: var(--white);
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            margin-left: 5px;
+            font-size: 1rem;
+            transition: background 0.3s ease;
         }
+        
         button:hover {
-            background: #0056b3;
+            background: var(--primary-dark);
         }
+        
+/* Response section styles */
+#response {
+    margin: 2rem auto;
+    max-width: 800px;
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#response h3 {
+    margin-bottom: 1.5rem;
+    color: var(--primary-dark);
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+#response ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#response li {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: var(--light-gray);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+#response li:hover {
+    background: var(--hover-gray);
+    transform: translateY(-2px);
+}
+
+#response strong {
+    color: var(--primary-dark);
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.resource-link {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.resource-link:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.resource-link i {
+    margin-right: 0.4rem;
+    font-size: 0.9rem;
+}
+
+.not-available {
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #response {
+        padding: 1rem;
+    }
+    
+    #response li {
+        padding: 0.8rem;
+    }
+    
+    .resource-link {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .resource-link {
+        display: block;
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}
+/* Attractive Animation Styles */
+@keyframes textPop {
+    0% { 
+        transform: scale(0.8);
+        opacity: 0;
+        text-shadow: 0 0 0 rgba(0,0,0,0);
+    }
+    50% {
+        transform: scale(1.1);
+        text-shadow: 0 5px 15px rgba(0,91,187,0.3);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        text-shadow: 0 2px 5px rgba(0,91,187,0.1);
+    }
+}
+
+@keyframes wave {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-5px) rotate(5deg); }
+    50% { transform: translateY(0) rotate(0deg); }
+    75% { transform: translateY(-3px) rotate(-3deg); }
+}
+
+@keyframes flipIn {
+    0% {
+        transform: perspective(500px) rotateX(90deg);
+        opacity: 0;
+    }
+    100% {
+        transform: perspective(500px) rotateX(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes bubblePop {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(0,91,187,0);
+    }
+    50% {
+        transform: scale(1.15);
+        box-shadow: 0 5px 15px rgba(0,91,187,0.3);
+    }
+    100% {
+        transform: scale(1.05);
+        box-shadow: 0 2px 10px rgba(0,91,187,0.2);
+    }
+}
+
+@keyframes swing {
+    0% { transform: rotate(0deg); }
+    20% { transform: rotate(8deg); }
+    40% { transform: rotate(-6deg); }
+    60% { transform: rotate(4deg); }
+    80% { transform: rotate(-2deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* Animation Classes */
+.text-pop {
+    animation: textPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    opacity: 0;
+}
+
+.wave-text span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.flip-in {
+    opacity: 0;
+    transform-origin: top center;
+}
+
+.flip-in.animated {
+    animation: flipIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.bubble {
+    transition: all 0.3s ease;
+}
+
+.swing {
+    display: inline-block;
+    animation: swing 0.8s ease 1s forwards;
+    transform-origin: top center;
+}
+
+.links-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+/* Add some 3D depth to cards */
+#response li {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1),
+                -5px -5px 15px rgba(255,255,255,0.8);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+#response li:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 8px 8px 20px rgba(0,0,0,0.15),
+                -8px -8px 20px rgba(255,255,255,0.8);
+}
+        
+        /* Quiz button styles */
         .start-quiz {
+            text-align: center;
+            margin: 2rem 0;
             display: none; /* Initially hidden */
-            margin-top: 20px;
-            text-align: center;
         }
-        .admin-link {
-            text-align: center;
-            margin: 10px 0;
-        }
-        .admin-link a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        .admin-link a:hover {
-            text-decoration: underline;
-        }
-        .suggestions {
-            border: 1px solid #ccc;
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            position: absolute;
-            z-index: 1000;
-            display: none; /* Initially hidden */
-            opacity: 0; /* Start with opacity 0 for fade effect */
-            transition: opacity 0.3s ease; /* Smooth transition */
-        }
-        .suggestions.show {
-            display: block; /* Show the suggestions */
-            opacity: 1; /* Fade in */
-        }
-        .suggestions div {
-            padding: 10px;
-            cursor: pointer;
-        }
-        .suggestions div:hover {
-            background: #f0f0f0;
-        }
-        .developer-info {
-            text-align: center;
-            margin: 10px 0;
-            color: rgb(0, 0, 0);
-        }
-        .developer-info img {
-            width: 200px; /* Adjust the size as needed */
-            height: auto;
-            border-radius: 50%; /* Make it circular */
-        }
-        .popup {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-
-        .popup-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
+        
+        #start-quiz-button {
+            padding: 0.75rem 2rem;
             font-weight: bold;
         }
+        
 
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
+        /* Updated Suggestions dropdown */
+.suggestions {
+    width: 100%;
+    max-width: 600px;
+    background: #ffffff;
+    border: 1px solid #dfe1e5;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 6px rgba(32,33,36,0.28);
+    position: absolute;
+    z-index: 1000;
+    display: none;
+    max-height: 300px;
+    overflow-y: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: -1px; /* Align perfectly with input */
+}
+
+/* Show suggestions */
+.suggestions.show {
+    display: block;
+}
+
+/* Individual suggestion item */
+.suggestions div {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #202124;
+    font-size: 1rem;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.suggestions div:hover {
+    background-color: #f8f9fa;
+}
+
+.suggestions div:last-child {
+    border-bottom: none;
+}
+
+.suggestions div.highlighted {
+    background-color: #f1f3f4;
+}
+
+/* Mobile specific styles */
+@media (max-width: 768px) {
+    .suggestions {
+        width: calc(100% - 2rem); /* Account for container padding */
+        max-width: calc(100% - 2rem);
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 0 0 8px 8px;
+        box-shadow: 0 4px 6px rgba(32,33,36,0.28);
+    }
+    
+    #chat {
+        position: relative; /* Ensure suggestions are positioned relative to chat container */
+    }
+    
+    .suggestions div {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+    
+    #subject {
+        font-size: 1rem;
+        padding: 1rem;
+    }
+}
+
+      
+        
+        
+        
+        /* Developer info section */
+        .developer-info {
+            text-align: center;
+            margin: 3rem 0;
+            padding: 0 1rem;
+        }
+        
+        .developer-info img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .developer-info p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        
+        #bioButton {
+            margin-top: 0.5rem;
+        }
+        
+        /* Popup modal styles */
+        .popup {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        
+        .popup-content {
+            background-color: var(--white);
+            margin: 10% auto;
+            padding: 1.5rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: fadeIn 0.3s;
+        }
+        
+        .close {
+            color: #aaa;
+            position: absolute;
+            right: 1.5rem;
+            top: 1rem;
+            font-size: 1.75rem;
+            font-weight: bold;
             cursor: pointer;
         }
-
+        
+        .close:hover {
+            color: var(--text-color);
+        }
+        
+        .popup-content h2 {
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+        
+        .popup-content p {
+            margin-bottom: 1rem;
+        }
+        
         .social-links {
-            margin-top: 10px;
+            margin-top: 1.5rem;
+            text-align: center;
         }
-
+        
         .social-links a {
-            margin: 0 10px;
-            color: #007bff; /* Change this to your preferred color */
-            font-size: 24px; /* Adjust size as needed */
+            margin: 0 0.75rem;
+            color: var(--primary-color);
+            font-size: 1.5rem;
             text-decoration: none;
+            transition: color 0.3s ease;
         }
-
+        
         .social-links a:hover {
-            color: #0056b3; /* Change color on hover */
+            color: var(--primary-dark);
         }
-
+        
+        /* Features section */
+        .features {
+            margin: 2rem 0;
+        }
+        
+        .features h2, .overview h2, .target-audience h2 {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .features ul {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .features li {
+            background: var(--light-gray);
+            padding: 1rem;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        
+        .features li:hover {
+            background: var(--hover-gray);
+        }
+        .feature-info {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 90%;
+    max-width: 500px;
+}
+        
+        /* Footer styles */
+        footer {
+            text-align: center;
+            padding: 1.5rem 0;
+            background: var(--primary-color);
+            color: var(--white);
+            margin-top: 2rem;
+        }
+        
+        footer p {
+            margin: 0;
+        }
+        
+        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-            padding: 20px;
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            nav a {
+                margin: 0 0.5rem;
+                font-size: 0.9rem;
+            }
+            
+            #chat, #response {
+                padding: 1rem;
+            }
+            
+            .developer-info img {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .popup-content {
+                margin: 20% auto;
+                width: 95%;
+            }
         }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
+        
+        @media (max-width: 480px) {
+            nav {
+                padding: 0.5rem;
+            }
+            
+            nav a {
+                display: block;
+                margin: 0.5rem 0;
+            }
+            
+            #subject {
+                font-size: 0.9rem;
+            }
+            
+            button {
+                width: 100%;
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+            
+            .features ul {
+                grid-template-columns: 1fr;
+            }
         }
-
-        li {
-            background: #e9ecef;
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background 0.3s;
+        .feature-info {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            width: 90%;
+            max-width: 500px;
+            display: none;
+            animation: fadeIn 0.3s;
         }
-
-        li:hover {
-            background: #d1e7dd;
+        
+        .feature-info h3 {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            text-align: center;
         }
+        
+        .feature-info p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .feature-info .close-btn {
+            display: block;
+            margin: 0 auto;
+            padding: 0.5rem 1.5rem;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .feature-info .close-btn:hover {
+            background: var(--primary-dark);
+        }
+        
+        .feature-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+        
+        /* Update features list items to be more clickable */
+        .features li {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .features li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .features li i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+        
     </style>
 </head>
 <body>
     <header>
-        <h1>EduBot - Your Engineering Knowledge Assistant</h1>
+        <h1>Learn Lab - Your Engineering Knowledge Assistant</h1>
     </header>
-    
+
     <nav>
-        <a href="#" onclick ="showPage('home')">Home</a>
-        <a href="/admin" onclick ="showPage('admin')">Admin</a>
+        <a href="#" onclick="showPage('home')">Home</a>
+        <a href="/admin" onclick="showPage('admin')">Admin</a>
     </nav>
 
-    <div id="home" class="welcome">
-        <p>Welcome to Learn Lab! Your one-stop solution for engineering knowledge.</p>
+    <div class="container">
+        <div id="home" class="welcome">
+            <p>Welcome to Learn Lab! Your one-stop solution for engineering knowledge.</p>
+        </div>
+
+        <div class="info">
+            <p><strong>Please type the subject name you want to access</strong></p>
+        </div>
+
+        <div id="chat" style="position: relative;">
+            <input type="text" id="subject" placeholder="Type a subject (e.g., maths)" oninput="fetchSuggestions()" />
+            <div id="suggestions" class="suggestions"></div>
+            <button onclick="sendQuery()">Ask EduBot</button>
+        </div>
+
+        <div id="response"></div>
+
+        <div class="start-quiz" id="start-quiz">
+            <button id="start-quiz-button" onclick="startQuiz()">Start Quiz</button>
+        </div>
+
+        <section class="overview">
+            <h2>About Learn Lab</h2>
+            <p>Learn Lab is an innovative online learning platform designed to empower students and professionals with the skills they need to succeed in today's fast-paced digital world. Our mission is to provide high-quality, accessible education that caters to diverse learning styles and paces.</p>
+        </section>
+       
+        <section class="features">
+            <h2>Key Features</h2>
+            <ul type="none">
+                <li onclick="showFeatureInfo('Diverse Course Offerings', 'We offer a comprehensive range of courses across all major engineering disciplines including Computer Science, Mechanical, Electrical, Civil, and more. Our curriculum is regularly updated to reflect the latest industry trends and technological advancements.')">
+                    <i class="fas fa-book"></i> Diverse Course Offerings
+                </li>
+                <li onclick="showFeatureInfo('Interactive Learning Environment', 'Engage with interactive coding exercises, virtual labs, and real-world projects. Our platform includes discussion forums, live Q&A sessions, and peer collaboration tools to enhance your learning experience.')">
+                    <i class="fas fa-comments"></i> Interactive Learning Environment
+                </li>
+                <li onclick="showFeatureInfo('Flexible Learning Paths', 'Customize your learning journey with self-paced courses, micro-credentials, and personalized recommendations. Choose between intensive bootcamps or extended programs that fit your schedule.')">
+                    <i class="fas fa-road"></i> Flexible Learning Paths
+                </li>
+                <li onclick="showFeatureInfo('Certification and Career Support', 'Earn industry-recognized certificates upon completion. Access our career services including resume reviews, interview preparation, and exclusive job opportunities with our partner companies.')">
+                    <i class="fas fa-certificate"></i> Certification and Career Support
+                </li>
+                <li onclick="showFeatureInfo('Mobile Accessibility', 'Learn on-the-go with our fully responsive platform and dedicated mobile app. Download course materials for offline access and sync your progress across all devices.')">
+                    <i class="fas fa-mobile-alt"></i> Mobile Accessibility
+                </li>
+                <li onclick="showFeatureInfo('Live Workshops and Webinars', 'Participate in live sessions with industry experts, alumni, and faculty members. Get your questions answered in real-time and network with professionals in your field.')">
+                    <i class="fas fa-chalkboard-teacher"></i> Live Workshops and Webinars
+                </li>
+                <li onclick="showFeatureInfo('Affordable Pricing', 'We offer competitive pricing with flexible payment options including monthly installments. Scholarships and financial aid are available for eligible students.')">
+                    <i class="fas fa-tag"></i> Affordable Pricing
+                </li>
+            </ul>
+            
+            <!-- Feature info popup -->
+            <div class="feature-overlay" id="feature-overlay" onclick="closeFeatureInfo()"></div>
+            <div class="feature-info" id="feature-info">
+                <h3 id="feature-title">Feature Title</h3>
+                <p id="feature-description">Feature description goes here.</p>
+                <button class="close-btn" onclick="closeFeatureInfo()">Close</button>
+            </div>
+        </section>
+        
+        <section class="target-audience">
+            <h2>Target Audience</h2>
+            <p>Students, professionals, and lifelong learners looking to enhance their skills and knowledge.</p>
+        </section>
+
+        <div class="developer-info">
+            <img src="https://media.licdn.com/dms/image/v2/D4D03AQF7lrEXSoVF0g/profile-displayphoto-shrink_200_200/B4DZPQVdRwHcAY-/0/1734367106621?e=2147483647&v=beta&t=jaISMiaIgB1W_MukX-moM1RmHq6UTFKgHPBIXQvUEaU" alt="Developer Photo" />
+            <p style="text-align: center;">This website was developed by Laxmi Nivas Morishetty</p>
+            <button id="bioButton">About Me</button>
+        </div>
     </div>
 
-    <div class="info">
-        <p><strong>Please type the subject name </strong></p>
-    </div>
-
-    <div id="chat">
-        <input type="text" id="subject" placeholder="Type a subject (e.g., maths)" oninput="fetchSuggestions()" />
-        <button onclick="sendQuery()">Ask EduBot</button>
-        <div id="suggestions" class="suggestions"></div> <!-- Suggestions dropdown -->
-    </div>
-    
-    <div id="response"></div>
-
-    <div class="start-quiz" id="start-quiz">
-        <button id="start-quiz-button" onclick="startQuiz()">Start Quiz</button>
-    </div>
-
-    <div class="developer-info">
-        <img src="https://media.licdn.com/dms/image/v2/D4D03AQF7lrEXSoVF0g/profile-displayphoto-shrink_200_200/B4DZPQVdRwHcAY-/0/1734367106621?e=2147483647&v=beta&t=jaISMiaIgB1W_MukX-moM1RmHq6UTFKgHPBIXQvUEaU" alt="Developer Photo" />
-        <p>This website was developed by Laxmi Nivas Morishetty</p>
-        <button id="bioButton">About Me</button>
-    </div>
-    
     <!-- Popup Modal -->
     <div id="bioPopup" class="popup">
         <div class="popup-content">
@@ -266,51 +791,47 @@
             <p>Connect with me:</p>
             <div class="social-links">
                 <a href="https://laxminivas-self-porfolio.vercel.app/" target="_blank" title="Visit my website">
-                    <i class="fas fa-globe"></i> 
+                    <i class="fas fa-globe"></i>
                 </a>
-                <a href="https://in.linkedin.com/in/laxmi-n ivas-morishetty-02468m" target="_blank" title="Connect on LinkedIn">
-                    <i class="fab fa-linkedin"></i> 
+                <a href="https://in.linkedin.com/in/laxmi-nivas-morishetty-02468m" target="_blank" title="Connect on LinkedIn">
+                    <i class="fab fa-linkedin"></i>
                 </a>
                 <a href="https://www.instagram.com/laxminivasmorishetty/" target="_blank" title="Follow me on Instagram">
-                    <i class="fab fa-instagram"></i> 
+                    <i class="fab fa-instagram"></i>
                 </a>
                 <a href="https://github.com/laxminivas06" target="_blank" title="View my GitHub">
-                    <i class="fab fa-github"></i> 
+                    <i class="fab fa-github"></i>
                 </a>
             </div>
         </div>
     </div>
-    
-    <div class="container">
-        <section class="overview">
-            <h2 style="text-align: center;">About Learn Lab</h2>
-            <p style="font-family:Verdana, Geneva, Tahoma, sans-serif;">Learn Lab is an innovative online learning platform designed to empower students and professionals with the skills they need to succeed in today's fast-paced digital world. Our mission is to provide high-quality, accessible education that caters to diverse learning styles and paces.</p>
-        </section>
-    
-        <section class="features">
-            <h2>Key Features</h2>
-            <ul>
-                <li>Diverse Course Offerings</li>
-                <li>Interactive Learning Environment</li>
-                <li>Flexible Learning Paths</li>
-                <li>Certification and Career Support</li>
-                <li>Mobile Accessibility</li>
-                <li>Live Workshops and Webinars</li>
-                <li>Affordable Pricing</li>
-            </ul>
-        </section>
-    
-        <section class="target-audience">
-            <h2>Target Audience</h2>
-            <p>Students, professionals, and lifelong learners looking to enhance their skills and knowledge.</p>
-        </section>
-    </div>
-    
+
     <footer>
         <p>&copy; 2025 Learn Lab. All rights reserved.</p>
     </footer>
 
     <script>
+                function showFeatureInfo(title, description) {
+            document.getElementById('feature-title').textContent = title;
+            document.getElementById('feature-description').textContent = description;
+            document.getElementById('feature-info').style.display = 'block';
+            document.getElementById('feature-overlay').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+        }
+        
+        function closeFeatureInfo() {
+            document.getElementById('feature-info').style.display = 'none';
+            document.getElementById('feature-overlay').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+        
+        // Close feature info when pressing Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeFeatureInfo();
+            }
+        });
+
         // Get the modal
         var popup = document.getElementById("bioPopup");
 
@@ -320,7 +841,7 @@
         // Get the <span> element that closes the modal
         var span = document.getElementById("closePopup");
 
-        // When the user clicks the button, open the modal 
+        // When the user clicks the button, open the modal
         btn.onclick = function() {
             popup.style.display = "block";
         }
@@ -366,19 +887,94 @@
 
                 const data = await response.json();
                 responseDiv.innerHTML = `
-                    <h3>Resources for ${subject}:</h3>
-                    <ul>
-                        <li><strong>Notes:</strong> ${data.notes.length ? data.notes.map(link => `<a href="${link}">Download</a>`).join(', ') : 'Not available'}</li>
-                        <li><strong>Videos:</strong> ${data.videos.length ? data.videos.map(link => `<a href="${link}">Watch</a>`).join(', ') : 'Not available'}</li>
-                        <li><strong>Projects:</strong> ${data.projects.length ? data.projects.map(link => `<a href="${link}">View</a>`).join(', ') : 'Not available'}</li>
-                        <li><strong>Lab Manual:</strong> ${data.lab_manual.length ? data.lab_manual.map(link => `<a href="${link}">Download</a>`).join(', ') : 'Not available'}</li>
-                        <li><strong>Assignments:</strong> ${data.assignments.length ? data.assignments.map(link => `<a href="${link}">Download</a>`).join(', ') : 'Not available'}</li>
-                        <li><strong>Question Papers:</strong> ${data.question_papers.length ? data.question_papers.map(link => `<a href="${link}">Download</a>`).join(', ') : 'Not available'}</li>
-                        <li><strong>Important Questions:</strong> ${data.imp_questions.length ? data.imp_questions.map(link => `<a href="${link}">Download</a>`).join(', ') : 'Not available'}</li>
-                        <li><strong>Research Papers:</strong> ${data.research_papers.length ? data.research_papers.map(link => `<a href="${link}">View</a>`).join(', ') : 'Not available'}</li>
-                        <li><strong>Subject Description:</strong> ${data.description ? data.description : 'Not available'}</li>
-                    </ul>
-                `;
+                <h3>Resources for ${subject}:</h3>
+    <ul>
+        <li>
+            <strong>Notes:</strong> 
+            ${data.notes.length ? 
+                data.notes.map((link, index) => 
+                    `<a href="${link}" target="_blank" class="resource-link">
+                        <i class="fas fa-file-pdf"></i> Note ${index + 1}
+                    </a>`
+                ).join(' ') : 
+                '<span class="not-available">Not available</span>'}
+        </li>
+        <li>
+            <strong>Videos:</strong> 
+            ${data.videos.length ? 
+                data.videos.map((link, index) => 
+                    `<a href="${link}" target="_blank" class="resource-link">
+                        <i class="fas fa-video"></i> Video ${index + 1}
+                    </a>`
+                ).join(' ') : 
+                '<span class="not-available">Not available</span>'}
+        </li>
+        <li>
+            <strong>Projects:</strong> 
+            ${data.projects.length ? 
+                data.projects.map((link, index) => 
+                    `<a href="${link}" target="_blank" class="resource-link">
+                        <i class="fas fa-code"></i> Project ${index + 1}
+                    </a>`
+                ).join(' ') : 
+                '<span class="not-available">Not available</span>'}
+        </li>
+        <li>
+            <strong>Lab Manual:</strong> 
+            ${data.lab_manual.length ? 
+                data.lab_manual.map((link, index) => 
+                    `<a href="${link}" target="_blank" class="resource-link">
+                        <i class="fas fa-flask"></i> Lab ${index + 1}
+                    </a>`
+                ).join(' ') : 
+                '<span class="not-available">Not available</span>'}
+        </li>
+        <li>
+            <strong>Assignments:</strong> 
+            ${data.assignments.length ? 
+                data.assignments.map((link, index) => 
+                    `<a href="${link}" target="_blank" class="resource-link">
+                        <i class="fas fa-tasks"></i> Assignment ${index + 1}
+                    </a>`
+                ).join(' ') : 
+                '<span class="not-available">Not available</span>'}
+        </li>
+        <li>
+            <strong>Question Papers:</strong> 
+            ${data.question_papers.length ? 
+                data.question_papers.map((link, index) => 
+                    `<a href="${link}" target="_blank" class="resource-link">
+                        <i class="fas fa-file-alt"></i> QP ${index + 1}
+                    </a>`
+                ).join(' ') : 
+                '<span class="not-available">Not available</span>'}
+        </li>
+        <li>
+            <strong>Important Questions:</strong> 
+            ${data.imp_questions.length ? 
+                data.imp_questions.map((link, index) => 
+                    `<a href="${link}" target="_blank" class="resource-link">
+                        <i class="fas fa-question-circle"></i> Imp Q ${index + 1}
+                    </a>`
+                ).join(' ') : 
+                '<span class="not-available">Not available</span>'}
+        </li>
+        <li>
+            <strong>Research Papers:</strong> 
+            ${data.research_papers.length ? 
+                data.research_papers.map((link, index) => 
+                    `<a href="${link}" target="_blank" class="resource-link">
+                        <i class="fas fa-scroll"></i> Research ${index + 1}
+                    </a>`
+                ).join(' ') : 
+                '<span class="not-available">Not available</span>'}
+        </li>
+        <li>
+            <strong>Subject Description:</strong> 
+            ${data.description ? data.description : '<span class="not-available">Not available</span>'}
+        </li>
+    </ul>
+`;
 
                 // Show the Start Quiz button if quizzes are available
                 if (data.quizzes && data.quizzes.length > 0) {
@@ -387,18 +983,14 @@
                     document.getElementById('start-quiz').style.display = 'none';
                 }
             } catch (error) {
-                responseDiv.innerHTML = `<h3>Error: ${error.message}</h3>`;
-                document.getElementById('start-quiz').style.display = 'none'; // Hide the button on error
+                responseDiv.innerHTML = `<p class="error">Error: ${error.message}</p>`;
+                document.getElementById('start-quiz').style.display = 'none';
             }
         }
 
         function startQuiz() {
-            const currentSubject = getCurrentSubject(); // Function to get the current subject
-            window.location.href = `quiz.html?subject=${currentSubject}`; // Redirect to quiz.html with the subject as a query parameter
-        }
-
-        function getCurrentSubject() {
-            return currentSubject; // Make sure currentSubject is defined in your script
+            if (!currentSubject) return;
+            window.location.href = `quiz.html?subject=${encodeURIComponent(currentSubject)}`;
         }
 
         async function fetchSuggestions() {
@@ -410,9 +1002,11 @@
             }
 
             try {
-                const response = await fetch(`/suggestions?query=${query}`);
+                const response = await fetch(`/suggestions?query=${encodeURIComponent(query)}`);
                 const suggestions = await response.json();
-                suggestionsDiv.innerHTML = suggestions.map(subject => `<div onclick="selectSuggestion('${subject}')">${subject}</div>`).join('');
+                suggestionsDiv.innerHTML = suggestions.map(subject => 
+                    `<div onclick="selectSuggestion('${subject.replace(/'/g, "\\'")}')">${subject}</div>`
+                ).join('');
                 if (suggestions.length) {
                     suggestionsDiv.classList.add('show');
                 } else {
@@ -426,12 +1020,39 @@
         function selectSuggestion(subject) {
             document.getElementById('subject').value = subject;
             document.getElementById('suggestions').classList.remove('show');
+            sendQuery(); // Automatically send query when suggestion is selected
         }
+
+        // Close suggestions when clicking outside
+        document.addEventListener('click', function(event) {
+            const suggestions = document.getElementById('suggestions');
+            const subjectInput = document.getElementById('subject');
+            
+            if (event.target !== subjectInput && event.target !== suggestions) {
+                suggestions.classList.remove('show');
+            }
+        });
 
         window.onload = function() {
             document.getElementById('home').style.display = 'block';
             document.querySelector('.welcome').style.display = 'block';
+            
+            // Add animation to features
+            const features = document.querySelectorAll('.features li');
+            features.forEach((feature, index) => {
+                feature.style.animation = `fadeIn 0.5s ease ${index * 0.1}s forwards`;
+                feature.style.opacity = '0';
+            });
         };
+        function showFeatureInfo(title, description) {
+    document.getElementById('feature-title').innerText = title;
+    document.getElementById('feature-description').innerText = description;
+    document.getElementById('feature-info').style.display = 'block';
+}
+
+function closeFeatureInfo() {
+    document.getElementById('feature-info').style.display = 'none';
+}
 
         function showPage(page) {
             document.getElementById('home').style.display = 'none';
