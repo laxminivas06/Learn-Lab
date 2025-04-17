@@ -21,8 +21,8 @@ def save_resources():
 resources = load_resources()
 
 # Hardcoded admin credentials
-ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'Learn Lab')  # Use environment variable
-ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', '9059')  # Use environment variable
+ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'admin')  # Use environment variable
+ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'password')  # Use environment variable
 
 @app.route('/')
 def index():
