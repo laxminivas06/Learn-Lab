@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template, redirect, url_for, session
 import os
 import json
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'your_secret_key')  # Use an environment variable for security
@@ -11,7 +12,6 @@ def load_resources():
         with open('resources.json', 'r') as f:
             return json.load(f)
     return {}
-
 # Save resources to a JSON file
 def save_resources():
     with open('resources.json', 'w') as f:
@@ -20,9 +20,9 @@ def save_resources():
 # Load resources at startup
 resources = load_resources()
 
-# Hardcoded admin credentials
-ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'admin')  # Use environment variable
-ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'password')  # Use environment variable
+# Hardcoded admin credentials (hashed password)
+ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'Learn Lab')  # Use environment variable
+ADMIN_PASSWORD_HASH = generate_password_hash(os.environ.get('ADMIN_PASSWORD', '9059'))  # Use environment variable
 
 @app.route('/')
 def index():
@@ -35,8 +35,6 @@ def query():
         return jsonify(resources[subject])
     return jsonify({"error": "Subject not found."}), 404
 
-
-    
 @app.route('/suggestions', methods=['GET'])
 def suggestions():
     query = request.args.get('query', '').lower()
@@ -48,21 +46,17 @@ def admin():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+        if username == ADMIN_USERNAME and check_password_hash(ADMIN_PASSWORD_HASH, password):
             session['admin'] = True
             return redirect(url_for('upload'))  # Redirect to upload page after login
         return render_template('admin_login.html', error="Invalid credentials")
     return render_template('admin_login.html')
-
 
 @app.route('/admin_subjects', methods=['GET'])
 def admin_subjects():
     if 'admin' not in session:
         return redirect(url_for('admin'))  # Redirect to admin login if not logged in
     return render_template('admin_subjects.html', resources=resources)
-
-
-
 
 @app.route('/delete_subject', methods=['POST'])
 def delete_subject():
@@ -83,7 +77,7 @@ def upload():
 
     if request.method == 'POST':
         subject = request.form['subject'].lower()
-        
+
         # Collect links as lists
         notes_links = request.form.getlist('notes[]')
         lab_manual_links = request.form.getlist('lab_manual[]')
@@ -108,34 +102,34 @@ def upload():
                 "research_papers": [],
                 "description": ""
             }
-        
+
         # Update links if provided
         if notes_links:
             resources[subject]['notes'] = notes_links
-            
+
         if lab_manual_links:
             resources[subject]['lab_manual'] = lab_manual_links
-            
+
         if videos_links:
             resources[subject]['videos'] = videos_links
-            
+
         if projects_links:
             resources[subject]['projects'] = projects_links
-            
+
         if assignments_links:
             resources[subject]['assignments'] = assignments_links
-            
+
         if question_papers_links:
             resources[subject]['question_papers'] = question_papers_links
-            
+
         if imp_questions_links:
             resources[subject]['imp_questions'] = imp_questions_links
-            
+
         if research_papers_links:
             resources[subject]['research_papers'] = research_papers_links
-            
+
         if subject_description:
-            resources[subject][' description'] = subject_description
+            resources[subject]['description'] = subject_description
 
         # Save resources to JSON file
         save_resources()
@@ -147,3 +141,4 @@ def upload():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
+
