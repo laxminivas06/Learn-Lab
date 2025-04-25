@@ -262,12 +262,12 @@
                         {% endif %}
                     </div><br>
                     
-                    <strong><i class="fas fa-file-signature"></i> Question Papers:</strong>
+                    <strong><i class="fas fa-file-signature"></i> Previous Year Question Papers:</strong>
                     <div class="resource-links">
                         {% if details.question_papers %}
                             {% for paper in details.question_papers %}
                                 <a href="{{ paper }}" target="_blank" class="resource-link">
-                                    <i class="fas fa-file-alt"></i> Question Paper {{ loop.index }}
+                                    <i class="fas fa-file-alt"></i> Previous Year Question Paper {{ loop.index }}
                                 </a>
                             {% endfor %}
                         {% else %}

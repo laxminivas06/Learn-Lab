@@ -1,5 +1,341 @@
 {
+    "discrete mathematics": {
+        "notes": [
+            ""
+        ],
+        "videos": [
+            "https://www.youtube.com/watch?v=b-Bp3ZDyQu8&list=PLXj4XH7LcRfBB-4hXp4XI84HOCWkaBD63"
+        ],
+        "projects": [
+            ""
+        ],
+        "quizzes": [],
+        "lab_manual": [
+            ""
+        ],
+        "assignments": [
+            ""
+        ],
+        "question_papers": [
+            ""
+        ],
+        "imp_questions": [
+            ""
+        ],
+        "research_papers": [
+            ""
+        ],
+        "description": "Discrete Mathematics is the study of mathematical structures that are fundamentally discrete rather than continuous. It includes topics such as logic, set theory, graph theory, combinatorics, and algorithms, and forms the mathematical foundation for computer science."
+    },
     "computer networks": {
+        "notes": [
+            ""
+        ],
+        "videos": [
+            "https://www.youtube.com/watch?v=UdxiqHt-DCg&list=PLXj4XH7LcRfCKbi7Najz8EIr1JymxoFBW"
+        ],
+        "projects": [
+            ""
+        ],
+        "quizzes": [],
+        "lab_manual": [
+            ""
+        ],
+        "assignments": [
+            ""
+        ],
+        "question_papers": [
+            ""
+        ],
+        "imp_questions": [
+            ""
+        ],
+        "research_papers": [
+            ""
+        ],
+        "description": "Computer Network Engineering is a field that focuses on the design, implementation, and management of computer networks, ensuring reliable and secure data transmission. It involves both physical components like routers and switches, and logical elements like protocols and network services. Network engineers work with various types of networks, including LANs, WANs, and the Internet. "
+    },
+    "operating system": {
+        "notes": [
+            ""
+        ],
+        "videos": [
+            "https://www.youtube.com/watch?v=H3vZRDkzHdo&list=PLXj4XH7LcRfDrdQuJTHIPmKMpa7eYVaPm"
+        ],
+        "projects": [
+            ""
+        ],
+        "quizzes": [],
+        "lab_manual": [
+            ""
+        ],
+        "assignments": [
+            ""
+        ],
+        "question_papers": [
+            ""
+        ],
+        "imp_questions": [
+            ""
+        ],
+        "research_papers": [
+            ""
+        ],
+        "description": "Operating system (OS) projects can involve designing and implementing various components, such as CPU scheduling algorithms, memory management, file systems, or even creating a basic OS from scratch, offering practical experience with OS concepts. "
+    },
+    "software engineering": {
+        "notes": [
+            ""
+        ],
+        "videos": [
+            "https://www.youtube.com/watch?v=qxv6vPlx2Cs&list=PLmAmHQ-_5ySyCjVtHdSjJ64QU2x5TH8Dy"
+        ],
+        "projects": [
+            ""
+        ],
+        "quizzes": [],
+        "lab_manual": [
+            ""
+        ],
+        "assignments": [
+            ""
+        ],
+        "question_papers": [
+            ""
+        ],
+        "imp_questions": [
+            ""
+        ],
+        "research_papers": [
+            ""
+        ],
+        "description": "Software engineering is a discipline that applies engineering principles to design, develop, test, and maintain software, aiming to create reliable, effective, and efficient software solutions. "
+    },
+    "business economics & financial analysis": {
+        "notes": [
+            ""
+        ],
+        "videos": [
+            "https://www.youtube.com/watch?v=029I8yBDAmA&list=PLjURG_ugY2jBAd3HqVUznaRz27yhMWslY"
+        ],
+        "projects": [
+            ""
+        ],
+        "quizzes": [],
+        "lab_manual": [
+            ""
+        ],
+        "assignments": [
+            ""
+        ],
+        "question_papers": [
+            ""
+        ],
+        "imp_questions": [
+            ""
+        ],
+        "research_papers": [
+            ""
+        ],
+        "description": "Business Economics applies economic theories and methods to analyze and improve business decisions, while Fundamental Analysis assesses a company's value by examining its finances, market conditions, and competitors. Both are crucial for making informed decisions, whether within a business or for investment purposes. "
+    },
+    "data structures": {
+        "notes": [
+            ""
+        ],
+        "videos": [
+            "https://www.youtube.com/watch?v=5AL4yULLLto&list=PLBvTTYUOHEmfkCNkaoYI2IqRbr9YI6M5D"
+        ],
+        "projects": [
+            ""
+        ],
+        "quizzes": [],
+        "lab_manual": [
+            ""
+        ],
+        "assignments": [
+            ""
+        ],
+        "question_papers": [
+            ""
+        ],
+        "imp_questions": [
+            ""
+        ],
+        "research_papers": [
+            ""
+        ],
+        "description": "A data structure will have a collection of data and functions or operations that can be applied on the data. Primitive Data Structure defines a set of primitive elements that do not involve any other elements as its subparts. These are generally built-in data type in programming languages."
+    },
+    "digital electronics": {
+        "notes": [
+            ""
+        ],
+        "videos": [
+            "https://www.youtube.com/watch?v=0A9iGFPlH1k&list=PLkojphh8hBnYzy6aN8re8sMk1QG_eBafM"
+        ],
+        "projects": [
+            ""
+        ],
+        "quizzes": [],
+        "lab_manual": [
+            ""
+        ],
+        "assignments": [
+            ""
+        ],
+        "question_papers": [
+            ""
+        ],
+        "imp_questions": [
+            ""
+        ],
+        "research_papers": [
+            ""
+        ],
+        "description": "Digital Electronics involves the study of digital signals and the engineering of devices that use or produce them. It forms the foundation of modern electronic systems, including computers and communication devices."
+    },
+    "computer oriented statistical methods": {
+        "notes": [
+            ""
+        ],
+        "videos": [
+            "https://www.youtube.com/watch?v=XQFwvvBd2go&list=PL-m5AYudsZbTzYZKexGBagZAR69cIEkTl"
+        ],
+        "projects": [
+            ""
+        ],
+        "quizzes": [],
+        "lab_manual": [
+            ""
+        ],
+        "assignments": [
+            ""
+        ],
+        "question_papers": [
+            ""
+        ],
+        "imp_questions": [
+            ""
+        ],
+        "research_papers": [
+            ""
+        ],
+        "description": "Computer Oriented Statistical Methods focuses on the application of statistical techniques using computational tools. It encompasses probability distributions, hypothesis testing, regression analysis, and the use of software for statistical computations."
+    },
+    "computer organization and architecture": {
+        "notes": [
+            ""
+        ],
+        "videos": [
+            "https://www.youtube.com/watch?v=kTdvOlA2ko0&list=PLXj4XH7LcRfDXDRzSLv1FfZ-SSA38SiC0"
+        ],
+        "projects": [
+            ""
+        ],
+        "quizzes": [],
+        "lab_manual": [
+            ""
+        ],
+        "assignments": [
+            ""
+        ],
+        "question_papers": [
+            ""
+        ],
+        "imp_questions": [
+            ""
+        ],
+        "research_papers": [
+            ""
+        ],
+        "description": "Computer Organization and Architecture delves into the internal structure and operational principles of computer systems, covering topics like instruction sets, memory hierarchy, and processor design."
+    },
+    "object oriented programming through java": {
+        "notes": [
+            ""
+        ],
+        "videos": [
+            "https://www.youtube.com/watch?v=RmtbNoDUMos&list=PL11GaQ20h2V4MSSQaOpshhQy-K2IY8yKN"
+        ],
+        "projects": [
+            ""
+        ],
+        "quizzes": [],
+        "lab_manual": [
+            ""
+        ],
+        "assignments": [
+            ""
+        ],
+        "question_papers": [
+            ""
+        ],
+        "imp_questions": [
+            ""
+        ],
+        "research_papers": [
+            ""
+        ],
+        "description": "Object Oriented Programming through Java emphasizes the principles of object-oriented design and programming using Java, covering concepts like classes, objects, inheritance, polymorphism, and encapsulation."
+    },
+    "data structures lab": {
+        "notes": [
+            ""
+        ],
+        "videos": [
+            "https://www.youtube.com/watch?v=bgKEI1GCCFw&list=PLdQUW0_DsGt0Safe5g9iimRbSydxJ_g9Y"
+        ],
+        "projects": [
+            ""
+        ],
+        "quizzes": [],
+        "lab_manual": [
+            ""
+        ],
+        "assignments": [
+            ""
+        ],
+        "question_papers": [
+            ""
+        ],
+        "imp_questions": [
+            ""
+        ],
+        "research_papers": [
+            ""
+        ],
+        "description": "This lab provides practical experience in implementing data structures such as stacks, queues, trees, and graphs using programming languages."
+    },
+    "object oriented programming through java lab": {
+        "notes": [
+            "https://mrcet.com/downloads/digital_notes/CSE/II%20Year/CS/Object%20Oriented%20Programming%20through%20JAVA.pdf"
+        ],
+        "videos": [
+            "https://www.youtube.com/results?search_query=object+oriented+programming+through+java+lab"
+        ],
+        "projects": [
+            "https://nevonprojects.com/project-ideas/java-project-ideas/"
+        ],
+        "quizzes": [],
+        "lab_manual": [
+            "https://nnrg.edu.in/PDF/Course/cse/R18/II/OOPS%20JAVA%20LAB.pdf"
+        ],
+        "assignments": [
+            "https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-092-introduction-to-programming-in-java-january-iap-2010/assignments/"
+        ],
+        "question_papers": [
+            "https://jeppiaarcollege.org/wp-content/uploads/2019/02/II-YEAR-OOPJ-LAB.pdf"
+        ],
+        "imp_questions": [
+            "https://jeppiaarcollege.org/wp-content/uploads/2019/02/II-YEAR-OOPJ-LAB.pdf"
+        ],
+        "research_papers": [
+            "https://ieeexplore.ieee.org/document/9424850"
+        ],
+        "description": "This lab focuses on implementing object-oriented programming concepts through practical Java programs, covering classes, objects, inheritance, interfaces, exception handling, and file handling."
+    },
+    "engineering chemistry ": {
         "notes": [
             ""
         ],
@@ -24,6 +360,6 @@
         "research_papers": [
             ""
         ],
-        "description": "good"
+        "description": ""
     }
 }

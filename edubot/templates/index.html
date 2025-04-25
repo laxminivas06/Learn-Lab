@@ -15,6 +15,7 @@
             --white: #ffffff;
             --light-gray: #e9ecef;
             --hover-gray: #d1e7dd;
+            --mentor-bg: linear-gradient(135deg, #e0f7fa, #80deea)
         }
 
         * {
@@ -28,6 +29,7 @@
             background-color: var(--background-color);
             color: var(--text-color);
             line-height: 1.6;
+            font-size: 1rem;
         }
 
         /* Header styles */
@@ -144,6 +146,7 @@
             cursor: pointer;
             font-size: 1rem;
             transition: background 0.3s ease;
+            font-size: 1rem;
         }
 
         button:hover {
@@ -629,14 +632,7 @@
                 rem;
             }
             
-            nav {
-                padding: 0.5rem;
-            }
-            
-            nav a {
-                display: block;
-                margin: 0.5rem 0;
-            }
+           
             
             #subject {
                 font-size: 0.9rem;
@@ -652,6 +648,177 @@
                 grid-template-columns: 1fr;
             }
         }
+        .guidance-section {
+    margin: 20px 0;
+    padding: 15px;
+    background: var(--mentor-bg); /* Use the gradient background */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    animation: fadeIn 0.5s ease; /* Fade-in animation */
+}
+
+.mentor-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.mentor-card {
+    display: flex;
+    background: var(--white);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    transition: transform 0.3s ease; /* Smooth scaling on hover */
+}
+
+.mentor-card:hover {
+    transform: scale(1.05); /* Scale effect on hover */
+}
+
+@media (max-width: 768px) {
+    #chat {
+        flex-direction: column; /* Stack elements vertically */
+        align-items: stretch; /* Make elements full width */
+    }
+
+    #subject {
+        width: 100%; /* Full width on mobile */
+        margin-bottom: 0.5rem; /* Space between input and button */
+    }
+
+    #voice-search {
+        width: 100%; /* Full width on mobile */
+        margin-left: 0; /* Remove left margin */
+    }
+
+    button {
+        width: 100%; /* Full width for buttons */
+    }
+
+    .mentor-container {
+        flex-direction: column; /* Stack mentor cards vertically */
+        align-items: center; /* Center align cards */
+    }
+
+    .mentor-card {
+        width: 100%; /* Full width for mentor cards */
+        max-width: 400px; /* Limit max width */
+        margin-bottom: 1rem; /* Space between cards */
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        flex-direction: column; /* Stack links vertically */
+    }
+
+    nav a {
+        margin: 0.5rem 0; /* Space between links */
+        font-size: 1rem; /* Adjust font size */
+    }
+}
+    
+    .mentor-card img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 15px;
+    }
+    
+    .mentor-info {
+        flex: 1;
+    }
+    
+    .mentor-info h4 {
+        margin: 0 0 5px 0;
+        color: #120d1a;
+    }
+    
+    .mentor-info p {
+        margin: 3px 0;
+        font-size: 14px;
+        color: #100f0f;
+    }
+    .mentor-card {
+    display: flex;
+    background: var(--white);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    transition: transform 0.3s ease; /* Smooth scaling on hover */
+    width: 100%; /* Full width on mobile */
+}
+
+.mentor-card img {
+    width: 80px; /* Adjusted size for mobile */
+    height: 80px; /* Adjusted size for mobile */
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.mentor-info {
+    flex: 1;
+}
+
+.mentor-info h4 {
+    margin: 0 0 5px 0;
+    color: #120d1a;
+    font-size: 1.1rem; /* Slightly larger font for better readability */
+}
+
+.mentor-info p {
+    margin: 3px 0;
+    font-size: 12px; /* Adjusted font size for mobile */
+    color: #100f0f;
+}
+
+/* Responsive adjustments for mentor cards */
+@media (max-width: 768px) {
+    .mentor-card {
+        flex-direction: row; /* Keep the layout as row */
+        align-items: center; /* Center align items vertically */
+    }
+
+    .mentor-card img {
+        width: 70px; /* Further adjust size for smaller screens */
+        height: 70px; /* Further adjust size for smaller screens */
+    }
+
+    .mentor-info h4 {
+        font-size: 1rem; /* Adjust font size for mobile */
+    }
+
+    .mentor-info p {
+        font-size: 11px; /* Adjust font size for mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .mentor-card {
+        flex-direction: column; /* Stack image and text vertically */
+        align-items: center; /* Center align items */
+        text-align: center; /* Center text */
+    }
+
+    .mentor-card img {
+        margin-bottom: 10px; /* Space between image and text */
+    }
+
+    .mentor-info h4 {
+        font-size: 1.1rem; /* Keep font size readable */
+    }
+
+    .mentor-info p {
+        font-size: 12px; /* Keep font size readable */
+    }
+}
+    
     </style>
 </head>
 <body>
@@ -670,18 +837,23 @@
         </div>
 
         <div class="info">
-            <p><strong>Please type the subject name you want to access</strong></p>
+            <p><strong>“Please type or speak the subject name you want to access.”</strong></p>
         </div>
 
         <div id="chat">
-            <input type="text" id="subject" placeholder="Type a subject (e.g., maths)" oninput="fetchSuggestions()" />
+            <input type="text" id="subject" placeholder="Type a subject (e.g., maths)" oninput="validateInput()" />
+            
             <button id="voice-search" onclick="startVoiceRecognition()">
                 <i class="fas fa-microphone"></i>
             </button>
+            
+            <button id="clear-input" onclick="clearInput()" style="display: none;">
+                <i class="fas fa-times"></i>
+            </button>
+            
             <div id="suggestions" class="suggestions"></div>
             <button onclick="sendQuery()">Ask EduBot</button>
         </div>
-
         <div id="response"></div>
 
         <div class="start-quiz" id="start-quiz">
@@ -763,12 +935,105 @@
             </div>
         </div>
     </div>
+    <div class="guidance-section">
+        <h3>Under Guidance of</h3>
+        
+        <div class="mentor-container">
+            <div class="mentor-card">
+                <img src="https://www.sphoorthyengg.ac.in/public/assets/uploads/employees/images/5-profile-pic-1683182169.jpeg" alt="Mr. Rakesh Reddy">
+                <div class="mentor-info">
+                    <h4>Mr. G Rakesh Reddy</h4>
+                    <p><strong style="color: brown;">Head of the Department (CSE - Cyber Security)</strong></p>
+                    <p><strong>Education:</strong> B.Tech., M.Tech.(Ph.D).</p>
+                    <p><strong>Specialization:</strong> Computer Science</p>
+                    <p><strong>Experience:</strong> 11 years</p>
+                    <p><strong>JNTUH ID:</strong> 0242-150415-135750</p>
+                    <p><strong>Email:</strong> grakeshreddy@sphoorthyengg.ac.in</p>
+                </div>
+            </div>
+            
+            <div class="mentor-card">
+                <img src="https://www.sphoorthyengg.ac.in/public/assets/uploads/employees/images/140-profile-pic-1705828934.jpeg" alt="Mr. Mohd Nasair Uddin Khan">
+                <div class="mentor-info">
+                    <h4>Mr. Mohd Nasair Uddin Khan</h4>
+                    <p><strong style="color:#0056b3;">Assistant Professor (CSE - Cyber Security)</strong></p>
+                    <p><strong>Education:</strong> M.Tech</p>
+                    <p><strong>Specialization:</strong> Computer Science</p>
+                    <p><strong>Experience:</strong> 3 years</p>
+                    <p><strong>JNTUH ID:</strong> 7219-171109-124653</p>
+                    <p><strong>Email:</strong> nasairuddinkhan@sphoorthyengg.ac.in</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <p>&copy; 2025 Learn Lab. All rights reserved.</p>
     </footer>
 
     <script>
+        function validateInput() {
+    const inputField = document.getElementById('subject');
+    const clearButton = document.getElementById('clear-input');
+    
+    // Show the clear button if there is text in the input field
+    if (inputField.value.trim() !== '') {
+        clearButton.style.display = 'inline-block';
+    } else {
+        clearButton.style.display = 'none';
+    }
+}
+
+function clearInput() {
+    const inputField = document.getElementById('subject');
+    inputField.value = ''; // Clear the input field
+    validateInput(); // Update the visibility of the clear button
+}
+        
+        // JavaScript for popup functionality
+    document.getElementById('bioButton').addEventListener('click', function() {
+        document.getElementById('bioPopup').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    });
+    
+    document.getElementById('closePopup').addEventListener('click', function() {
+        document.getElementById('bioPopup').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+    
+    window.addEventListener('click', function(event) {
+        if (event.target == document.getElementById('bioPopup')) {
+            document.getElementById('bioPopup').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+    
+    // Add animation class when scrolling
+    window.addEventListener('scroll', function() {
+        const elements = document.querySelectorAll('.mentor-card, .social-icon');
+        elements.forEach(element => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+            
+            if (elementPosition < screenPosition) {
+                element.classList.add('animated');
+            }
+        });
+    });
+        // Add this JavaScript if you haven't already
+    document.getElementById('bioButton').addEventListener('click', function() {
+        document.getElementById('bioPopup').style.display = 'block';
+    });
+    
+    document.getElementById('closePopup').addEventListener('click', function() {
+        document.getElementById('bioPopup').style.display = 'none';
+    });
+    
+    window.addEventListener('click', function(event) {
+        if (event.target == document.getElementById('bioPopup')) {
+            document.getElementById('bioPopup').style.display = 'none';
+        }
+    });
         function showFeatureInfo(title, description) {
             document.getElementById('feature-title').textContent = title;
             document.getElementById('feature-description').textContent = description;
@@ -898,7 +1163,7 @@
                             '<span class="not-available">Not available</span>'}
                     </li>
                     <li>
-                        <strong>Question Papers:</strong>
+                        <strong>Previous Year Question Papers:</strong>
                         ${data.question_papers.length ?
                             data.question_papers.map((link, index) =>
                                 `<a href="${link}" target="_blank" class="resource-link">
