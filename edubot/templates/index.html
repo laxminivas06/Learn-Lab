@@ -22,14 +22,16 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            background-image: url('https://youtu.be/4xfaLyP2R20?feature=shared');
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background-color);
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            background-color:#d1e7dd;
             color: var(--text-color);
             line-height: 1.6;
             font-size: 1rem;
+            
         }
 
         /* Header styles */
@@ -807,7 +809,10 @@
     }
 
     .mentor-card img {
-        margin-bottom: 10px; /* Space between image and text */
+        
+        width: 150px;
+        height: 150px; /* Adjusted size for mobile */
+         /* Space between image and text */
     }
 
     .mentor-info h4 {
@@ -818,6 +823,238 @@
         font-size: 12px; /* Keep font size readable */
     }
 }
+.team-members-row {
+    display: flex;
+   
+    gap: 100px;
+    
+    margin: 2px 0;
+}
+
+.team-member {
+    
+    cursor: pointer;
+    transition: transform 0.3s;
+   
+}
+
+.team-member:hover {
+    transform: scale(1.05);
+}
+
+.team-member img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #0056b3;
+}
+
+.team-member p {
+    font-family:Arial, Helvetica, sans-serif;
+    font-display: swap;
+    color: #000000;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+/* Popup Styles */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    animation: popupFadeIn 0.3s;
+}
+
+.popup-content img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 4px solid #0056b3;
+}
+
+.popup-content h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.popup-content p {
+    margin-bottom: 20px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.social-links {
+    margin-top: 20px;
+}
+
+.social-links a {
+    margin: 0 8px;
+    color: #333;
+    font-size: 20px;
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: #0056b3;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #333;
+}
+
+@keyframes popupFadeIn {
+    from {opacity: 0; transform: scale(0.9);}
+    to {opacity: 1; transform: scale(1);}
+}
+
+@media (max-width: 480px) {
+    .team-members-row {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    
+    align-items: center;
+   
+   
+}
+    
+    /* .team-member {
+        width: 100px;
+        align-items: center;
+        
+    } */
+    
+    .team-member img {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .team-member h3 {
+        
+        font-family:Arial, Helvetica, sans-serif;
+        color: #000000;
+    }
+}
+.section-title {
+            text-align: center;
+            margin: 40px 0;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #0056b3;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #0056b3;
+            margin: 0 auto;
+        }
+        
+        /* Video Container Styles */
+        .engineering-excellence {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: #000;
+            transition: transform 0.3s ease;
+        }
+        
+        .video-container:hover {
+            transform: translateY(-5px);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Description Box */
+        .video-description {
+            background: white;
+            padding: 25px;
+            margin-top: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-description h3 {
+            color: #0056b3;
+            margin-top: 0;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .engineering-excellence {
+                padding: 20px 15px;
+            }
+            
+            .video-description {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+        }
+
     
     </style>
 </head>
@@ -902,66 +1139,205 @@
 
         <section class="target-audience">
             <h2>Target Audience</h2>
-            <p>Students, professionals, and lifelong learners looking to enhance their skills and knowledge.</p>
+            <p style="text-align: center;">Students, professionals, and lifelong learners looking to enhance their skills and knowledge.</p>
         </section>
 
-        <div class="developer-info">
-            <img src="https://media.licdn.com/dms/image/v2/D4D03AQF7lrEXSoVF0g/profile-displayphoto-shrink_200_200/B4DZPQVdRwHcAY-/0/1734367106621?e=2147483647&v=beta&t=jaISMiaIgB1W_MukX-moM1RmHq6UTFKgHPBIXQvUEaU" alt="Developer Photo" />
-            <p style="text-align: center;">This website was developed by Laxmi Nivas Morishetty</p>
-            <button id="bioButton">About Me</button>
-        </div>
-    </div>
+        <section class="engineering-excellence">
+            <div class="section-title">
+                <h2>Excellence of Computer Science Engineering</h2>
+            </div>
+            
+            <div class="video-container">
+                <!-- Replace VIDEO_ID with your actual YouTube video ID -->
+                <iframe 
+                    src="https://www.youtube.com/embed/wfxWEWMIaJU?si=g4aSp1Phkg7jQuAA" 
+                    frameborder="0" 
+                    
+                    allowfullscreen>
+                </iframe>
+            </div>
+            
+            <div class="video-description">
+                <h3>Engineering Innovation at Its Finest</h3>
+                <p>This video showcases the pinnacle of engineering achievements, demonstrating how cutting-edge technology and innovative thinking come together to solve complex challenges and push the boundaries of what's possible.</p>
+                <p>From precision manufacturing to sustainable design, witness the excellence that drives modern engineering forward.</p>
+            </div>
+        </section>
 
-    <!-- Popup Modal -->
-    <div id="bioPopup" class="popup">
-        <div class="popup-content">
-            <span class="close" id="closePopup">&times;</span>
-            <h2>About Me</h2>
-            <p>Hello! I'm Laxmi Nivas Morishetty, a passionate web developer with experience in building dynamic and responsive websites. I love coding and exploring new technologies.</p>
-            <p>Connect with me:</p>
-            <div class="social-links">
-                <a href="https://laxminivas-self-porfolio.vercel.app/" target="_blank" title="Visit my website">
-                    <i class="fas fa-globe"></i>
-                </a>
-                <a href="https://in.linkedin.com/in/laxmi-nivas-morishetty-02468m" target="_blank" title="Connect on LinkedIn">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="https://www.instagram.com/laxminivasmorishetty/" target="_blank" title="Follow me on Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://github.com/laxminivas06" target="_blank" title="View my GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
+
+        <div class="developer-info">
+            <h2 style="color: #0056b3;">Our Developer Team</h2>
+            <hr>
+            <br>
+            <div class="team-members-row">
+                <!-- Team Member 1 -->
+                <div class="team-member" onclick="openPopup('popup1')">
+                    <img src="https://media.licdn.com/dms/image/v2/D4D03AQF7lrEXSoVF0g/profile-displayphoto-shrink_200_200/B4DZPQVdRwHcAY-/0/1734367106621?e=2147483647&v=beta&t=jaISMiaIgB1W_MukX-moM1RmHq6UTFKgHPBIXQvUEaU" alt="Laxmi Nivas Morishetty" />
+                    <h3>Laxmi Nivas Morishetty</h3>
+                </div>
+                
+                <!-- Team Member 2 -->
+                <div class="team-member" onclick="openPopup('popup2')">
+                    <img src="https://media.licdn.com/dms/image/v2/D5603AQFD9P5PNCEzSQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1723524723711?e=1750896000&v=beta&t=j5m3jHuvLH2cvj9fOBpfz9Dcz5QFJxSaQiswVdEvcYI" alt="Team Member 2" />
+                    <h3>T Prabhav Achary</h3>
+                </div>
+                
+                <!-- Team Member 3 -->
+                <div class="team-member" onclick="openPopup('popup3')">
+                    <img src="https://media.licdn.com/dms/image/v2/D4D03AQF7lrEXSoVF0g/profile-displayphoto-shrink_200_200/B4DZPQVdRwHcAY-/0/1734367106621?e=2147483647&v=beta&t=jaISMiaIgB1W_MukX-moM1RmHq6UTFKgHPBIXQvUEaU" alt="Team Member 3" />
+                    <h3>P Sarika</h3>
+                </div>
+                
+                <!-- Team Member 4 -->
+                <div class="team-member" onclick="openPopup('popup4')">
+                    <img src="https://media.licdn.com/dms/image/v2/D4D03AQF7lrEXSoVF0g/profile-displayphoto-shrink_200_200/B4DZPQVdRwHcAY-/0/1734367106621?e=2147483647&v=beta&t=jaISMiaIgB1W_MukX-moM1RmHq6UTFKgHPBIXQvUEaU" alt="Team Member 4" />
+                    <h3> S Rajashekhar  </h3>
+                </div>
+                
+                <!-- Team Member 5 -->
+                <div class="team-member" onclick="openPopup('popup5')">
+                    <img src="https://media.licdn.com/dms/image/v2/D4D03AQF7lrEXSoVF0g/profile-displayphoto-shrink_200_200/B4DZPQVdRwHcAY-/0/1734367106621?e=2147483647&v=beta&t=jaISMiaIgB1W_MukX-moM1RmHq6UTFKgHPBIXQvUEaU" alt="Team Member 5" />
+                    <h3>N Himank Goud </h3>
+                </div>
             </div>
         </div>
-    </div>
+        
+        <!-- Popup for Team Member 1 -->
+        <div id="popup1" class="popup">
+            <div class="popup-content">
+                <span class="close" onclick="closePopup('popup1')">&times;</span>
+                <img src="https://media.licdn.com/dms/image/v2/D4D03AQF7lrEXSoVF0g/profile-displayphoto-shrink_200_200/B4DZPQVdRwHcAY-/0/1734367106621?e=2147483647&v=beta&t=jaISMiaIgB1W_MukX-moM1RmHq6UTFKgHPBIXQvUEaU" alt="Laxmi Nivas Morishetty" />
+                <h2>Laxmi Nivas Morishetty</h2>
+                <p>Hello! I'm Laxmi Nivas Morishetty, a passionate web developer with experience in building dynamic and responsive websites. I love coding and exploring new technologies.</p>
+                <div class="social-links">
+                    <a href="https://laxminivas-self-porfolio.vercel.app/" target="_blank" title="Visit my website">
+                        <i class="fas fa-globe"></i>
+                    </a>
+                    <a href="https://in.linkedin.com/in/laxmi-nivas-morishetty-02468m" target="_blank" title="Connect on LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://www.instagram.com/laxminivasmorishetty/" target="_blank" title="Follow me on Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://github.com/laxminivas06" target="_blank" title="View my GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Popup for Team Member 2 -->
+        <div id="popup2" class="popup">
+            <div class="popup-content">
+                <span class="close" onclick="closePopup('popup2')">&times;</span>
+                <img src="https://media.licdn.com/dms/image/v2/D5603AQFD9P5PNCEzSQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1723524723711?e=1750896000&v=beta&t=j5m3jHuvLH2cvj9fOBpfz9Dcz5QFJxSaQiswVdEvcYI" alt="Team Member 2" />
+                <h2>T Prabhav Achary </h2>
+                <p>🚀 CSE Student | Cyber Security Analyst | Developer | Sports Enthusiast | Entrepreneur 🌟</p>
+                <div class="social-links">
+                    
+                    <a href="https://www.linkedin.com/in/teki-prabhav-achary-6a389b321/" target="_blank" title="Connect on LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://www.instagram.com/mr_bobby_122/" target="_blank" title="Follow me on Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                   
+                </div>
+            </div>
+        </div>
+        
+        <!-- Popup for Team Member 3 -->
+        <div id="popup3" class="popup">
+            <div class="popup-content">
+                <span class="close" onclick="closePopup('popup3')">&times;</span>
+                <img src="https://media.licdn.com/dms/image/v2/D4D03AQF7lrEXSoVF0g/profile-displayphoto-shrink_200_200/B4DZPQVdRwHcAY-/0/1734367106621?e=2147483647&v=beta&t=jaISMiaIgB1W_MukX-moM1RmHq6UTFKgHPBIXQvUEaU" alt="Team Member 3" />
+                <h2>P Sarika</h2>
+                <p>About Team Member 3. Brief description of their role and contributions to the project.</p>
+                <div class="social-links">
+                    
+                    
+                    <a href="https://www.instagram.com/sarika_reddy_24/" target="_blank" title="Follow me on Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <!-- Popup for Team Member 4 -->
+        <div id="popup4" class="popup">
+            <div class="popup-content">
+                <span class="close" onclick="closePopup('popup4')">&times;</span>
+                <img src="https://media.licdn.com/dms/image/v2/D4D03AQF7lrEXSoVF0g/profile-displayphoto-shrink_200_200/B4DZPQVdRwHcAY-/0/1734367106621?e=2147483647&v=beta&t=jaISMiaIgB1W_MukX-moM1RmHq6UTFKgHPBIXQvUEaU" alt="Team Member 4" />
+                <h2>S Rajashekhar</h2>
+                <p>About Team Member 4. Brief description of their role and contributions to the project.</p>
+                <div class="social-links">
+                   
+                    
+                    <a href="https://www.instagram.com/rajurajack/" target="_blank" title="Follow me on Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <!-- Popup for Team Member 5 -->
+        <div id="popup5" class="popup">
+            <div class="popup-content">
+                <span class="close" onclick="closePopup('popup5')">&times;</span>
+                <img src="https://media.licdn.com/dms/image/v2/D4D03AQF7lrEXSoVF0g/profile-displayphoto-shrink_200_200/B4DZPQVdRwHcAY-/0/1734367106621?e=2147483647&v=beta&t=jaISMiaIgB1W_MukX-moM1RmHq6UTFKgHPBIXQvUEaU" alt="Team Member 5" />
+                <h2>N Himank Goud </h2>
+                <p>About Team Member 5. Brief description of their role and contributions to the project.</p>
+                <div class="social-links">
+                    
+                    <a href="https://www.instagram.com/dundu.goud/" target="_blank" title="Follow me on Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    
+                </div>
+            </div>
+        </div>
+
+        
+        
+
+
     <div class="guidance-section">
-        <h3>Under Guidance of</h3>
+        <h2 style="color: #0056b3;">Under Guidance of</h2>
+        <br>
         
         <div class="mentor-container">
             <div class="mentor-card">
+                <a href="https://www.sphoorthyengg.ac.in/hod-message/cse---cyber-security">
                 <img src="https://www.sphoorthyengg.ac.in/public/assets/uploads/employees/images/5-profile-pic-1683182169.jpeg" alt="Mr. Rakesh Reddy">
                 <div class="mentor-info">
                     <h4>Mr. G Rakesh Reddy</h4>
+                </a>
                     <p><strong style="color: brown;">Head of the Department (CSE - Cyber Security)</strong></p>
                     <p><strong>Education:</strong> B.Tech., M.Tech.(Ph.D).</p>
                     <p><strong>Specialization:</strong> Computer Science</p>
                     <p><strong>Experience:</strong> 11 years</p>
                     <p><strong>JNTUH ID:</strong> 0242-150415-135750</p>
                     <p><strong>Email:</strong> grakeshreddy@sphoorthyengg.ac.in</p>
+
                 </div>
             </div>
             
             <div class="mentor-card">
+              <a href="https://www.sphoorthyengg.ac.in/teaching-staff-profile/SPHN-T-CS-65ACB7B6DFF51">
                 <img src="https://www.sphoorthyengg.ac.in/public/assets/uploads/employees/images/140-profile-pic-1705828934.jpeg" alt="Mr. Mohd Nasair Uddin Khan">
+            
                 <div class="mentor-info">
                     <h4>Mr. Mohd Nasair Uddin Khan</h4>
+                </a>
                     <p><strong style="color:#0056b3;">Assistant Professor (CSE - Cyber Security)</strong></p>
                     <p><strong>Education:</strong> M.Tech</p>
                     <p><strong>Specialization:</strong> Computer Science</p>
                     <p><strong>Experience:</strong> 3 years</p>
                     <p><strong>JNTUH ID:</strong> 7219-171109-124653</p>
                     <p><strong>Email:</strong> nasairuddinkhan@sphoorthyengg.ac.in</p>
+                
                 </div>
             </div>
         </div>
@@ -972,6 +1348,20 @@
     </footer>
 
     <script>
+        function openPopup(popupId) {
+    document.getElementById(popupId).style.display = "block";
+}
+
+function closePopup(popupId) {
+    document.getElementById(popupId).style.display = "none";
+}
+
+// Close popup when clicking outside of it
+window.onclick = function(event) {
+    if (event.target.className === "popup") {
+        event.target.style.display = "none";
+    }
+}
         function validateInput() {
     const inputField = document.getElementById('subject');
     const clearButton = document.getElementById('clear-input');
