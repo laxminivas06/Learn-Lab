@@ -3,17 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Manage Subjects</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Admin - Manage Subjects | Learn Lab</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         :root {
-            --primary-color: #007bff;
-            --primary-dark: #0056b3;
-            --background-color: #f4f4f4;
-            --text-color: #333;
-            --white: #ffffff;
-            --light-gray: #e9ecef;
-            --hover-gray: #d1e7dd;
+            --primary-color: #4361ee;
+            --primary-dark: #3a0ca3;
+            --primary-light: #4895ef;
+            --secondary-color: #f72585;
+            --dark-color: #212529;
+            --light-color: #f8f9fa;
+            --success-color: #4cc9f0;
+            --error-color: #f72585;
+            --warning-color: #f8961e;
+            --container-bg: #ffffff;
+            --body-bg: #f8f9fa;
+            --nav-bg: #3a0ca3;
+            --header-bg: linear-gradient(135deg, #4361ee, #3a0ca3);
+            --border-radius: 8px;
+            --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --card-hover-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
         
         * {
@@ -24,117 +35,232 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
+            background-color: var(--body-bg);
+            color: var(--dark-color);
             line-height: 1.6;
+            min-height: 100vh;
         }
         
         header {
-            background: var(--primary-color);
-            color: var(--white);
-            padding: 1rem 0;
+            background: var(--header-bg);
+            color: white;
+            padding: 1.5rem 0;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeInDown 0.5s ease;
         }
         
         header h1 {
-            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
             margin: 0;
-            padding: 0 1rem;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         
         nav {
-            background: var(--primary-dark);
+            background: var(--nav-bg);
             padding: 0.75rem;
             text-align: center;
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         
         nav a {
-            color: var(--white);
-            margin: 0 0.75rem;
+            color: white;
+            margin: 0 1rem;
             text-decoration: none;
             font-size: 1rem;
-            padding: 0.5rem;
+            padding: 0.5rem 0.75rem;
             display: inline-block;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            border-radius: var(--border-radius);
         }
         
         nav a:hover {
-            text-decoration: underline;
+            background-color: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
         }
         
+        nav a i {
+            margin-right: 0.5rem;
+        }
+        
         .container {
-            width: 90%;
+            width: 95%;
             max-width: 1200px;
             margin: 2rem auto;
-            padding: 0 1rem;
+            padding: 1.5rem;
+            background: var(--container-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        .search-container {
+            margin: 0 auto 2rem;
+            max-width: 600px;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 1px solid #ced4da;
+            border-radius: 30px;
+            font-size: 1rem;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(67, 97, 238, 0.25);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-dark);
         }
         
         h2 {
             text-align: center;
             margin-bottom: 1.5rem;
             color: var(--primary-dark);
+            font-size: 1.75rem;
+            position: relative;
+            padding-bottom: 0.5rem;
         }
         
-        ul {
-            list-style-type: none;
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 3px;
         }
         
-        li {
-            background: var(--light-gray);
-            margin: 1rem 0;
+        .subjects-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .subject-card {
+            background: var(--container-bg);
+            border-radius: var(--border-radius);
             padding: 1.5rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            animation: fadeInUp 0.5s ease;
         }
         
-        li:hover {
-            background: var(--hover-gray);
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-hover-shadow);
         }
         
-        strong {
+        .subject-hidden {
+            display: none;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.2rem;
+            color: #6c757d;
+            display: none;
+            grid-column: 1 / -1;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .no-results i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .subject-title {
             color: var(--primary-dark);
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .subject-title i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .resource-section {
+            margin-bottom: 1.25rem;
+        }
+        
+        .resource-section-title {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .resource-section-title i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+            font-size: 0.9rem;
         }
         
         .resource-links {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin: 0.5rem 0;
         }
         
         .resource-link {
             background: var(--primary-color);
             color: white;
-            padding: 0.3rem 0.6rem;
-            border-radius: 4px;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
             text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
+            font-size: 0.85rem;
+            transition: var(--transition);
             display: inline-flex;
             align-items: center;
         }
         
         .resource-link:hover {
             background: var(--primary-dark);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         
         .resource-link i {
-            margin-right: 0.3rem;
-            font-size: 0.8rem;
+            margin-right: 0.4rem;
+            font-size: 0.75rem;
         }
         
         .not-available {
             color: #6c757d;
             font-style: italic;
+            font-size: 0.9rem;
+        }
+        
+        .subject-description {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #dee2e6;
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
         
         footer {
@@ -145,30 +271,49 @@
             margin-top: 2rem;
         }
         
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            nav a {
-                margin: 0 0.5rem;
-                font-size: 0.9rem;
+        footer p {
+            margin: 0;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
-            
-            li {
-                padding: 1rem;
-            }
-            
-            .resource-links {
-                flex-direction: column;
-                gap: 0.3rem;
-            }
-            
-            .resource-link {
-                width: 100%;
-                padding: 0.4rem;
-                justify-content: center;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
         
-        @media (max-width: 480px) {
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .subjects-list {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            nav a {
+                margin: 0 0.5rem;
+                font-size: 0.9rem;
+                padding: 0.5rem;
+            }
+            
+            .resource-link {
+                padding: 0.35rem 0.7rem;
+                font-size: 0.8rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 1rem;
+            }
+            
             nav {
                 padding: 0.5rem;
             }
@@ -176,6 +321,23 @@
             nav a {
                 display: block;
                 margin: 0.5rem 0;
+            }
+            
+            .subjects-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-input {
+                padding-left: 2.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .search-icon {
+                left: 0.8rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -185,127 +347,184 @@
     <header>
         <h1>Admin - Manage Subjects</h1>
     </header>
+    
     <nav>
         <a href="/" onclick="showPage('home')"><i class="fas fa-home"></i> Home</a>
         <a href="/upload" onclick="showPage('upload')"><i class="fas fa-upload"></i> Upload</a>
     </nav>
 
     <div class="container">
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="searchInput" class="search-input" placeholder="Search subjects..." aria-label="Search subjects">
+        </div>
+        
         <h2>Subjects and Resources</h2>
-        <ul>
+        
+        <div class="no-results" id="noResults">
+            <i class="fas fa-search-minus"></i>
+            <p>No subjects found matching your search</p>
+        </div>
+        
+        <div class="subjects-list" id="subjectsList">
             {% for subject, details in resources.items() %}
-                <li>
-                    <strong><i class="fas fa-book-open"></i> Subject:</strong> {{ subject }}<br><br>
+                <div class="subject-card subject-item" data-subject="{{ subject.lower() }}">
+                    <div class="subject-title">
+                        <i class="fas fa-book-open"></i>
+                        {{ subject }}
+                    </div>
                     
-                    <strong><i class="fas fa-file-alt"></i> Notes:</strong>
-                    <div class="resource-links">
-                        {% if details.notes %}
-                            {% for note in details.notes %}
-                                <a href="{{ note }}" target="_blank" class="resource-link">
-                                    <i class="fas fa-download"></i> Note {{ loop.index }}
-                                </a>
-                            {% endfor %}
-                        {% else %}
-                            <span class="not-available">Not available</span>
-                        {% endif %}
-                    </div><br>
+                    <div class="resource-section">
+                        <div class="resource-section-title">
+                            <i class="fas fa-file-alt"></i>
+                            Notes:
+                        </div>
+                        <div class="resource-links">
+                            {% if details.notes %}
+                                {% for note in details.notes %}
+                                    <a href="{{ note }}" target="_blank" class="resource-link animate__animated animate__fadeIn">
+                                        <i class="fas fa-download"></i> Note {{ loop.index }}
+                                    </a>
+                                {% endfor %}
+                            {% else %}
+                                <span class="not-available">Not available</span>
+                            {% endif %}
+                        </div>
+                    </div>
                     
-                    <strong><i class="fas fa-video"></i> Videos:</strong>
-                    <div class="resource-links">
-                        {% if details.videos %}
-                            {% for video in details.videos %}
-                                <a href="{{ video }}" target="_blank" class="resource-link">
-                                    <i class="fas fa-play"></i> Video {{ loop.index }}
-                                </a>
-                            {% endfor %}
-                        {% else %}
-                            <span class="not-available">Not available</span>
-                        {% endif %}
-                    </div><br>
+                    <div class="resource-section">
+                        <div class="resource-section-title">
+                            <i class="fas fa-video"></i>
+                            Videos:
+                        </div>
+                        <div class="resource-links">
+                            {% if details.videos %}
+                                {% for video in details.videos %}
+                                    <a href="{{ video }}" target="_blank" class="resource-link animate__animated animate__fadeIn">
+                                        <i class="fas fa-play"></i> Video {{ loop.index }}
+                                    </a>
+                                {% endfor %}
+                            {% else %}
+                                <span class="not-available">Not available</span>
+                            {% endif %}
+                        </div>
+                    </div>
                     
-                    <strong><i class="fas fa-project-diagram"></i> Projects:</strong>
-                    <div class="resource-links">
-                        {% if details.projects %}
-                            {% for project in details.projects %}
-                                <a href="{{ project }}" target="_blank" class="resource-link">
-                                    <i class="fas fa-code"></i> Project {{ loop.index }}
-                                </a>
-                            {% endfor %}
-                        {% else %}
-                            <span class="not-available">Not available</span>
-                        {% endif %}
-                    </div><br>
+                    <div class="resource-section">
+                        <div class="resource-section-title">
+                            <i class="fas fa-project-diagram"></i>
+                            Projects:
+                        </div>
+                        <div class="resource-links">
+                            {% if details.projects %}
+                                {% for project in details.projects %}
+                                    <a href="{{ project }}" target="_blank" class="resource-link animate__animated animate__fadeIn">
+                                        <i class="fas fa-code"></i> Project {{ loop.index }}
+                                    </a>
+                                {% endfor %}
+                            {% else %}
+                                <span class="not-available">Not available</span>
+                            {% endif %}
+                        </div>
+                    </div>
                     
-                    <strong><i class="fas fa-flask"></i> Lab Manual:</strong>
-                    <div class="resource-links">
-                        {% if details.lab_manual %}
-                            {% for manual in details.lab_manual %}
-                                <a href="{{ manual }}" target="_blank" class="resource-link">
-                                    <i class="fas fa-file-pdf"></i> Lab Manual {{ loop.index }}
-                                </a>
-                            {% endfor %}
-                        {% else %}
-                            <span class="not-available">Not available</span>
-                        {% endif %}
-                    </div><br>
+                    <div class="resource-section">
+                        <div class="resource-section-title">
+                            <i class="fas fa-flask"></i>
+                            Lab Manual:
+                        </div>
+                        <div class="resource-links">
+                            {% if details.lab_manual %}
+                                {% for manual in details.lab_manual %}
+                                    <a href="{{ manual }}" target="_blank" class="resource-link animate__animated animate__fadeIn">
+                                        <i class="fas fa-file-pdf"></i> Lab Manual {{ loop.index }}
+                                    </a>
+                                {% endfor %}
+                            {% else %}
+                                <span class="not-available">Not available</span>
+                            {% endif %}
+                        </div>
+                    </div>
                     
-                    <strong><i class="fas fa-tasks"></i> Assignments:</strong>
-                    <div class="resource-links">
-                        {% if details.assignments %}
-                            {% for assignment in details.assignments %}
-                                <a href="{{ assignment }}" target="_blank" class="resource-link">
-                                    <i class="fas fa-file-word"></i> Assignment {{ loop.index }}
-                                </a>
-                            {% endfor %}
-                        {% else %}
-                            <span class="not-available">Not available</span>
-                        {% endif %}
-                    </div><br>
+                    <div class="resource-section">
+                        <div class="resource-section-title">
+                            <i class="fas fa-tasks"></i>
+                            Assignments:
+                        </div>
+                        <div class="resource-links">
+                            {% if details.assignments %}
+                                {% for assignment in details.assignments %}
+                                    <a href="{{ assignment }}" target="_blank" class="resource-link animate__animated animate__fadeIn">
+                                        <i class="fas fa-file-word"></i> Assignment {{ loop.index }}
+                                    </a>
+                                {% endfor %}
+                            {% else %}
+                                <span class="not-available">Not available</span>
+                            {% endif %}
+                        </div>
+                    </div>
                     
-                    <strong><i class="fas fa-file-signature"></i> Previous Year Question Papers:</strong>
-                    <div class="resource-links">
-                        {% if details.question_papers %}
-                            {% for paper in details.question_papers %}
-                                <a href="{{ paper }}" target="_blank" class="resource-link">
-                                    <i class="fas fa-file-alt"></i> Previous Year Question Paper {{ loop.index }}
-                                </a>
-                            {% endfor %}
-                        {% else %}
-                            <span class="not-available">Not available</span>
-                        {% endif %}
-                    </div><br>
+                    <div class="resource-section">
+                        <div class="resource-section-title">
+                            <i class="fas fa-file-signature"></i>
+                            Previous Year Papers:
+                        </div>
+                        <div class="resource-links">
+                            {% if details.question_papers %}
+                                {% for paper in details.question_papers %}
+                                    <a href="{{ paper }}" target="_blank" class="resource-link animate__animated animate__fadeIn">
+                                        <i class="fas fa-file-alt"></i> Paper {{ loop.index }}
+                                    </a>
+                                {% endfor %}
+                            {% else %}
+                                <span class="not-available">Not available</span>
+                            {% endif %}
+                        </div>
+                    </div>
                     
-                    <strong><i class="fas fa-question-circle"></i> Important Questions:</strong>
-                    <div class="resource-links">
-                        {% if details.imp_questions %}
-                            {% for question in details.imp_questions %}
-                                <a href="{{ question }}" target="_blank" class="resource-link">
-                                    <i class="fas fa-question"></i> Important Q {{ loop.index }}
-                                </a>
-                            {% endfor %}
-                        {% else %}
-                            <span class="not-available">Not available</span>
-                        {% endif %}
-                    </div><br>
+                    <div class="resource-section">
+                        <div class="resource-section-title">
+                            <i class="fas fa-question-circle"></i>
+                            Important Questions:
+                        </div>
+                        <div class="resource-links">
+                            {% if details.imp_questions %}
+                                {% for question in details.imp_questions %}
+                                    <a href="{{ question }}" target="_blank" class="resource-link animate__animated animate__fadeIn">
+                                        <i class="fas fa-question"></i> Q {{ loop.index }}
+                                    </a>
+                                {% endfor %}
+                            {% else %}
+                                <span class="not-available">Not available</span>
+                            {% endif %}
+                        </div>
+                    </div>
                     
-                    <strong><i class="fas fa-scroll"></i> Research Papers:</strong>
-                    <div class="resource-links">
-                        {% if details.research_papers %}
-                            {% for paper in details.research_papers %}
-                                <a href="{{ paper }}" target="_blank" class="resource-link">
-                                    <i class="fas fa-file-contract"></i> Research Paper {{ loop.index }}
-                                </a>
-                            {% endfor %}
-                        {% else %}
-                            <span class="not-available">Not available</span>
-                        {% endif %}
-                    </div><br>
+                    <div class="resource-section">
+                        <div class="resource-section-title">
+                            <i class="fas fa-scroll"></i>
+                            Research Papers:
+                        </div>
+                        <div class="resource-links">
+                            {% if details.research_papers %}
+                                {% for paper in details.research_papers %}
+                                    <a href="{{ paper }}" target="_blank" class="resource-link animate__animated animate__fadeIn">
+                                        <i class="fas fa-file-contract"></i> Paper {{ loop.index }}
+                                    </a>
+                                {% endfor %}
+                            {% else %}
+                                <span class="not-available">Not available</span>
+                            {% endif %}
+                        </div>
+                    </div>
                     
-                    <strong><i class="fas fa-info-circle"></i> Description:</strong>
-                    {{ details.description if details.description else 'Not available' }}
-                </li>
+                    <div class="subject-description">
+                        <strong><i class="fas fa-info-circle"></i> Description:</strong>
+                        {{ details.description if details.description else 'No description available' }}
+                    </div>
+                </div>
             {% endfor %}
-        </ul>
+        </div>
     </div>
 
     <footer>
@@ -314,13 +533,61 @@
     
     <script>
         function showPage(page) {
-            // This function can be expanded if needed
             if (page === 'home') {
                 window.location.href = '/';
             } else if (page === 'upload') {
                 window.location.href = '/upload';
             }
         }
+        
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const subjectItems = document.querySelectorAll('.subject-item');
+            const noResults = document.getElementById('noResults');
+            let visibleCount = 0;
+            
+            subjectItems.forEach(item => {
+                const subjectName = item.getAttribute('data-subject');
+                if (subjectName.includes(searchTerm)) {
+                    item.classList.remove('subject-hidden');
+                    visibleCount++;
+                } else {
+                    item.classList.add('subject-hidden');
+                }
+            });
+            
+            // Show/hide no results message
+            if (visibleCount === 0 && searchTerm.length > 0) {
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+            }
+        });
+        
+        // Focus search input on '/' key press
+        document.addEventListener('keydown', function(e) {
+            if (e.key === '/' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+                document.getElementById('searchInput').focus();
+            }
+        });
+
+        // Add animation to resource links when they come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate__fadeIn');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.resource-link').forEach(link => {
+            observer.observe(link);
+        });
     </script>
 </body>
 </html>

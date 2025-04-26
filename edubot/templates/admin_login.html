@@ -4,103 +4,504 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - Learn Lab</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+        :root {
+            --primary-color: #4361ee;
+            --primary-dark: #3a0ca3;
+            --primary-light: #4895ef;
+            --secondary-color: #f72585;
+            --text-color: #333;
+            --light-color: #f8f9fa;
+            --container-bg: #3a3a3a;
+            --input-bg: #f9f9f9;
+            --body-bg: antiquewhite;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
             margin: 0;
             padding: 0;
-            color: #333;
-        }
-        header {
-            background: #007bff;
-            color: white;
-            padding: 10px 0;
-            text-align: center;
-        }
-        .login-container {
-            margin: 50px auto;
-            max-width: 400px;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            text-align: center;
-            color: #007bff;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input[type="text"], input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
             box-sizing: border-box;
         }
-        button {
-            padding: 10px 15px;
-            background: #007bff;
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--body-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header h1 {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-container {
+            margin: 2rem auto;
+            max-width: 450px;
+            width: 90%;
+            background-color:#9d9292;
+            padding: clamp(1.5rem, 5vw, 2rem);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            animation: fadeInUp 0.5s ease;
+            position: relative;
+        }
+        
+        h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            font-size: clamp(1.25rem, 4vw, 1.5rem);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: aliceblue;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+        }
+        
+        input[type="text"], 
+        input[type="password"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            transition: var(--transition);
+            background-color: var(--input-bg);
+        }
+        
+        input[type="text"]:focus, 
+        input[type="password"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+        
+        .login-btn-container {
+            position: relative;
+            height: 50px;
+            margin: 1.5rem 0;
+            overflow: visible;
+        }
+        
+        #loginBtn {
+            padding: 0.75rem;
+            background: var(--primary-color);
             color: white;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            border-radius: var(--border-radius);
+            cursor: grab;
             width: 100%;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            font-weight: 500;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            user-select: none;
+            touch-action: none;
         }
-        button:hover {
-            background: #0056b3;
+        
+        #loginBtn:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+        
+        #loginBtn:active {
+            cursor: grabbing;
+            transform: scale(0.98);
+        }
+        
+        #loginBtn.stable {
+            animation: stabilize 0.5s ease forwards;
+            cursor: pointer;
+        }
+        
+        #loginBtn.magic {
+            animation: magicFloat 3s infinite ease-in-out;
+        }
+        
         .back-link {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 1.5rem;
+            font-size: clamp(0.8rem, 3vw, 0.9rem);
         }
+        
         .back-link a {
-            color: #007bff;
+            color: var(--primary-color);
             text-decoration: none;
+            transition: var(--transition);
         }
+        
         .back-link a:hover {
             text-decoration: underline;
         }
-        .error-message {
-            color: red;
+        
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #777;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+        
+        footer {
             text-align: center;
-            margin-bottom: 15px;
+            padding: 1rem;
+            margin-top: auto;
+            color: #666;
+            font-size: clamp(0.75rem, 3vw, 0.85rem);
+        }
+        
+        .magic-dust {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: gold;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 5;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes stabilize {
+            0% {
+                transform: translate(var(--final-x), var(--final-y)) rotate(var(--final-rotate));
+            }
+            100% {
+                transform: translate(0, 0) rotate(0);
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            }
+        }
+        
+        @keyframes magicFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(5deg);
+            }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        /* Mobile-specific adjustments */
+        @media (max-width: 576px) {
+            .login-container {
+                padding: 1.25rem;
+            }
+            
+            #loginBtn {
+                padding: 0.65rem;
+            }
+            
+            .password-toggle {
+                right: 8px;
+                padding: 0.3rem;
+            }
+        }
+        
+        /* Prevent zoom on input focus for mobile */
+        @media screen and (max-width: 767px) {
+            input, select, textarea {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
+    <header class="animate__animated animate__fadeInDown">
         <h1>Learn Lab - Admin Panel</h1>
     </header>
 
     <div class="login-container">
-        <h2>Admin Login</h2>
+        <h2 style="color: #3a0ca3;">Admin Login</h2>
         
-        {% if error %}
-            <div class="error-message">{{ error }}</div>
-        {% endif %}
-        
-        <form action="{{ url_for('admin') }}" method="POST">
+        <form id="loginForm" method="POST">
             <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required aria-label="Username">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required aria-label="Username" placeholder="Enter your username">
             </div>
             <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required aria-label="Password">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required aria-label="Password" placeholder="Enter your password">
+                <button type="button" class="password-toggle" onclick="togglePassword()" aria-label="Toggle password visibility">
+                    👀
+                </button>
             </div>
-            <button type="submit">Login</button>
+            
+            <div class="login-btn-container">
+                <button type="button" id="loginBtn">
+                    Login
+                </button>
+            </div>
         </form>
-        <div class="back-link">
-            <a href="/">Back to Home</a>
+        
+        <div class="back-link" >
+            <a href="/"><span  style="color: #3a0ca3;">← Back to Home</span></a>
         </div>
     </div>
+    
+    <footer class="animate__animated animate__fadeInUp animate__delay-1s">
+        &copy; 2025 Learn Lab. All rights reserved.
+    </footer>
+
+    <script>
+        const loginBtn = document.getElementById('loginBtn');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        let isDragging = false;
+        let isStable = false;
+        let startX, startY, startLeft, startTop;
+        
+        // Make button draggable
+        loginBtn.addEventListener('mousedown', startDrag);
+        loginBtn.addEventListener('touchstart', handleTouchStart, { passive: false });
+        
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('touchmove', handleTouchMove, { passive: false });
+        
+        document.addEventListener('mouseup', endDrag);
+        document.addEventListener('touchend', endDrag);
+        
+        function startDrag(e) {
+            if (isStable) return;
+            
+            e.preventDefault();
+            isDragging = true;
+            loginBtn.style.cursor = 'grabbing';
+            loginBtn.style.transition = 'none';
+            
+            // Store initial positions
+            const btnRect = loginBtn.getBoundingClientRect();
+            startLeft = btnRect.left;
+            startTop = btnRect.top;
+            startX = e.clientX;
+            startY = e.clientY;
+            
+            createMagicDust();
+        }
+        
+        function handleTouchStart(e) {
+            if (isStable) return;
+            
+            e.preventDefault();
+            isDragging = true;
+            loginBtn.style.cursor = 'grabbing';
+            loginBtn.style.transition = 'none';
+            
+            const touch = e.touches[0];
+            const btnRect = loginBtn.getBoundingClientRect();
+            startLeft = btnRect.left;
+            startTop = btnRect.top;
+            startX = touch.clientX;
+            startY = touch.clientY;
+            
+            createMagicDust();
+        }
+        
+        function drag(e) {
+            if (!isDragging || isStable) return;
+            
+            e.preventDefault();
+            handleMove(e.clientX, e.clientY);
+        }
+        
+        function handleTouchMove(e) {
+            if (!isDragging || isStable) return;
+            
+            e.preventDefault();
+            const touch = e.touches[0];
+            handleMove(touch.clientX, touch.clientY);
+        }
+        
+        function handleMove(clientX, clientY) {
+            const containerRect = document.querySelector('.login-container').getBoundingClientRect();
+            const btnRect = loginBtn.getBoundingClientRect();
+            
+            // Calculate new position
+            let x = startLeft + (clientX - startX) - containerRect.left;
+            let y = startTop + (clientY - startY) - containerRect.top;
+            
+            // Constrain to container boundaries
+            x = Math.max(-btnRect.width / 2, Math.min(x, containerRect.width - btnRect.width / 2));
+            y = Math.max(-btnRect.height / 2, Math.min(y, containerRect.height - btnRect.height / 2));
+            
+            // Random rotation based on position
+            const rotate = (x / containerRect.width) * 45 - 22.5;
+            
+            loginBtn.style.transform = `translate(${x}px, ${y}px) rotate(${rotate}deg)`;
+            
+            // Store final position for stabilization
+            loginBtn.style.setProperty('--final-x', `${x}px`);
+            loginBtn.style.setProperty('--final-y', `${y}px`);
+            loginBtn.style.setProperty('--final-rotate', `${rotate}deg`);
+            
+            // Create magic dust while dragging
+            if (Math.random() > 0.7) {
+                createMagicDust(clientX, clientY);
+            }
+        }
+        
+        function endDrag() {
+            if (!isDragging || isStable) return;
+            
+            isDragging = false;
+            loginBtn.style.cursor = 'grab';
+            loginBtn.style.transition = 'transform 0.5s ease';
+            
+            // Check if credentials are entered
+            if (usernameInput.value && passwordInput.value) {
+                stabilizeButton();
+            } else {
+                // Return to original position if no credentials
+                setTimeout(() => {
+                    if (!isStable) {
+                        loginBtn.style.transform = 'translate(0, 0) rotate(0)';
+                    }
+                }, 100);
+            }
+        }
+        
+        function stabilizeButton() {
+            isStable = true;
+            loginBtn.classList.add('stable');
+            loginBtn.style.cursor = 'pointer';
+            
+            // Add magic floating effect
+            setTimeout(() => {
+                loginBtn.classList.add('magic');
+                
+                // Create celebration magic dust
+                for (let i = 0; i < 20; i++) {
+                    setTimeout(() => {
+                        createMagicDust(
+                            loginBtn.getBoundingClientRect().left + Math.random() * loginBtn.offsetWidth,
+                            loginBtn.getBoundingClientRect().top + Math.random() * loginBtn.offsetHeight
+                        );
+                    }, i * 100);
+                }
+            }, 500);
+            
+            // Make button clickable to submit form
+            loginBtn.onclick = function() {
+                document.getElementById('loginForm').submit();
+            };
+        }
+        
+        function createMagicDust(x, y) {
+            if (!x || !y) {
+                const btnRect = loginBtn.getBoundingClientRect();
+                x = btnRect.left + Math.random() * btnRect.width;
+                y = btnRect.top + Math.random() * btnRect.height;
+            }
+            
+            const dust = document.createElement('div');
+            dust.className = 'magic-dust';
+            dust.style.left = `${x}px`;
+            dust.style.top = `${y}px`;
+            dust.style.opacity = '0.8';
+            dust.style.transform = `scale(${Math.random() * 0.5 + 0.5})`;
+            
+            document.body.appendChild(dust);
+            
+            // Animate dust
+            const angle = Math.random() * Math.PI * 2;
+            const distance = Math.random() * 50 + 20;
+            const duration = Math.random() * 1000 + 500;
+            
+            dust.animate([
+                { 
+                    transform: `translate(0, 0) scale(1)`,
+                    opacity: 0.8 
+                },
+                { 
+                    transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0.2)`,
+                    opacity: 0 
+                }
+            ], {
+                duration: duration,
+                easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
+            });
+            
+            // Remove dust after animation
+            setTimeout(() => {
+                dust.remove();
+            }, duration);
+        }
+        
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleButton = document.querySelector('.password-toggle');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleButton.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                toggleButton.textContent = '👀';
+            }
+        }
+        
+        // Check inputs for changes to potentially stabilize button
+        usernameInput.addEventListener('input', checkCredentials);
+        passwordInput.addEventListener('input', checkCredentials);
+        
+        function checkCredentials() {
+            if (usernameInput.value && passwordInput.value && !isStable) {
+                stabilizeButton();
+            }
+        }
+    </script>
 </body>
 </html>
