@@ -1063,6 +1063,185 @@
                 display: inline;
             }
         }
+        /* Button style */
+    .subject-dialog-btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+        transition: all 0.3s;
+        align-items: center;
+    }
+
+    .subject-dialog-btn:hover {
+        background-color: #45a049;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Dialog styles */
+    .subject-dialog {
+        display: none;
+        position: fixed;
+        z-index: 100;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        overflow: auto;
+        animation: fadeIn 0.3s;
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+
+    .dialog-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 0;
+        border: none;
+        width: 80%;
+        max-width: 800px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .dialog-header {
+        padding: 20px;
+        background: #2c3e50;
+        color: white;
+        border-radius: 10px 10px 0 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .dialog-header h2 {
+        margin: 0;
+        font-size: 1.5em;
+    }
+
+    .close-btn {
+        color: white;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .close-btn:hover {
+        color: #f1f1f1;
+        transform: scale(1.2);
+    }
+
+    .dialog-body {
+        padding: 20px;
+    }
+
+    .dialog-footer {
+        padding: 10px 20px;
+        background: #f5f5f5;
+        text-align: center;
+        font-size: 0.9em;
+        color: #666;
+        border-radius: 0 0 10px 10px;
+    }
+
+    /* Subject list styles */
+    .subject-category {
+        margin-bottom: 25px;
+    }
+
+    .subject-category h3 {
+        color: #3498db;
+        margin-top: 0;
+        margin-bottom: 15px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #f0f0f0;
+    }
+
+    .subject-item {
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
+        margin-bottom: 8px;
+        background: #f9f9f9;
+        border-radius: 5px;
+        transition: all 0.2s;
+    }
+
+    .subject-item:hover {
+        background: #f0f0f0;
+        transform: translateX(5px);
+    }
+
+    .abbreviation {
+        font-weight: bold;
+        color: #e74c3c;
+        width: 80px;
+        min-width: 80px;
+        background: #f9f2f2;
+        padding: 5px 10px;
+        border-radius: 4px;
+        text-align: center;
+        margin-right: 15px;
+    }
+
+    .full-name {
+        flex-grow: 1;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .dialog-content {
+            width: 95%;
+            margin: 10% auto;
+        }
+
+        .abbreviation {
+            width: 60px;
+            min-width: 60px;
+            font-size: 0.9em;
+        }
+    }
+    .quiz-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.quiz-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.quiz-card .btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #4361ee;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.quiz-card .btn:hover {
+    background: #3a56d4;
+}
 
 
     </style>
@@ -1078,19 +1257,188 @@
     <nav>
         <a href="#" onclick="showPage('home')">Home</a>
         <a href="/admin" onclick="showPage('admin')">Admin</a>
+        <a href="/quiz">Quiz</a>
+        
+    <a href="/profile">Profile</a>
+    <a href="/logout">Logout</a>
+
     </nav>
 
     <div class="container">
-        
+
         <div id="home" class="welcome">
             <p>Welcome to Learn Lab! Your one-stop solution for engineering knowledge.</p>
         </div>
-
-        <div class="info">
-            <p><strong>“Please type or speak the subject name you want to access.”</strong></p>
+         <div class="info">
+            <p><strong>“Type or speak the subject name you want to access.”</strong></p>
         </div>
 
-        <div id="chat">
+        <div class="info">
+            <p style="color: red; font-family: Arial, Helvetica, sans-serif;"> <strong> Search Full Abbreviation / Symbol of the Subjects</strong></p>
+        </div>
+        <div>
+        <!-- Button to open the dialog -->
+        <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+            <button onclick="openSubjectDialog()" class="subject-dialog-btn"
+                    style="margin: auto; display: block;">
+                Show All Subjects
+            </button>
+        </div>
+    </div>
+
+    <!-- The Subject Dialog Box -->
+    <div id="subjectDialog" class="subject-dialog">
+        <div class="dialog-content">
+            <div class="dialog-header">
+                <h2>All Subjects Reference</h2>
+                <span class="close-btn" onclick="closeSubjectDialog()">&times;</span>
+            </div>
+
+            <div class="dialog-body">
+                <div class="subject-category">
+                    <h3>Mathematics & Core CS</h3>
+                    <div class="subject-item">
+                        <span class="abbreviation">DM</span>
+                        <span class="full-name">Discrete Mathematics</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">DS</span>
+                        <span class="full-name">Data Structures</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">M&C</span>
+                        <span class="full-name">Matrices and Calculus</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">ODEVC</span>
+                        <span class="full-name">Ordinary Differential Equations and Vector Calculus</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">COSM</span>
+                        <span class="full-name">Computer Oriented Statistical Methods</span>
+                    </div>
+                </div>
+                <div class="subject-category">
+                    <h3>Systems & Engineering</h3>
+                    <div class="subject-item">
+                        <span class="abbreviation">CN</span>
+                        <span class="full-name">Computer Networks</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">OS</span>
+                        <span class="full-name">Operating Systems</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">COA</span>
+                        <span class="full-name">Computer Organization and Architecture</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">DE</span>
+                        <span class="full-name">Digital Electronics</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">EDC</span>
+                        <span class="full-name">Electronic Devices and Circuits</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">BEE</span>
+                        <span class="full-name">Basic Electrical Engineering</span>
+                    </div>
+                </div>
+
+                <div class="subject-category">
+                    <h3>Programming</h3>
+                    <div class="subject-item">
+                        <span class="abbreviation">SE</span>
+                        <span class="full-name">Software Engineering</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">OOPS</span>
+                        <span class="full-name">Object Oriented Programming through Java</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">PPS</span>
+                        <span class="full-name">Programming for Problem Solving</span>
+                    </div>
+                </div>
+
+                <div class="subject-category">
+                    <h3>Other Subjects</h3>
+                    <div class="subject-item">
+                        <span class="abbreviation">BEFA</span>
+                        <span class="full-name">Business Economics & Financial Analysis</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">EC</span>
+                        <span class="full-name">Engineering Chemistry</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">AP</span>
+                        <span class="full-name">Applied Physics</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">CAEG</span>
+                        <span class="full-name">Computer Aided Engineering Graphics</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">ECSE</span>
+                        <span class="full-name">Elements of Computer Science and Engineering</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">ESE</span>
+                        <span class="full-name">English for Skill Enhancement</span>
+                    </div>
+                </div>
+
+                <div class="subject-category">
+                    <h3>Laboratories</h3>
+                    <div class="subject-item">
+                        <span class="abbreviation">DS Lab</span>
+                        <span class="full-name">Data Structures Laboratory</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">CN Lab</span>
+                        <span class="full-name">Computer Networks Laboratory</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">PPS Lab</span>
+                        <span class="full-name">Programming for Problem Solving Laboratory</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">EC Lab</span>
+                        <span class="full-name">Engineering Chemistry Laboratory</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">BEE Lab</span>
+                        <span class="full-name">Basic Electrical Engineering Laboratory</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">AP Lab</span>
+                        <span class="full-name">Applied Physics Laboratory</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">EW</span>
+                        <span class="full-name">Engineering Workshop</span>
+                    </div>
+                    <div class="subject-item">
+                        <span class="abbreviation">PPL Lab</span>
+                        <span class="full-name">Python Programming Laboratory</span>
+                    </div>
+                </div>
+
+
+                    <!-- More subjects... -->
+
+
+            <div class="dialog-footer">
+                <p>Click outside or press ESC to close</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="chat">
             <input type="text" id="subject" placeholder="Type a subject (e.g., maths)" oninput="validateInput()" />
 
             <button id="voice-search" onclick="startVoiceRecognition()">
@@ -1174,6 +1522,11 @@
                 <p>This video showcases the pinnacle of engineering achievements, demonstrating how cutting-edge technology and innovative thinking come together to solve complex challenges and push the boundaries of what's possible.</p>
                 <p>From precision manufacturing to sustainable design, witness the excellence that drives modern engineering forward.</p>
             </div>
+            <div class="quiz-card">
+                <h2>Test Your Knowledge</h2>
+                <p>Take a quiz to assess your understanding of various subjects</p>
+                <a href="/quiz" class="btn">Start Quiz</a>
+            </div>
         </section>
         <div class="developer-info">
             <h2 style="color: #110c98;">Team Lead</h2>
@@ -1233,24 +1586,19 @@
                     <p style="color: #666;">Tap on photo to View</p>
                 </div>
 
-                <!-- Team Member 4 -->
-                <div class="team-member" onclick="openPopup('popup4')">
-                    <img src="https://media-hosting.imagekit.io/50074c0ef5a14844/rajashekhar.jpeg?Expires=1840364674&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=sIeLDZ1PvfyUD~1dEeZS7bTgexdspxlIYnaEYwnCCJPhsCNZzkSXYXoq1soQo88jj11ylvSwE4pZsmmK48fFICDxHbsYwVj91J6wc9LpQ31n7s7H9MxGcHmFKHj~baFQ16K1UezVtQAGV2d0nWVNWZI0ZAedU4rJCXcKWvVJlobsXjV8pq4llIYWuIAahyVecx8jGl2wZBaauLRUZswBX2aeJboVcominEol-7a5sISPNPaQtyV4XMCaCfvSiDSt0ChhUEfcOQ07DaSIA6chaLAvjMiHOw0kZB5Hr6e0kJ6SHuyXRHITgQQ~ttuTz5tsBm6cOpYWknTW0KknzRSd8A__" alt="Team Member 4" />
-                    <h3> S Rajashekhar  </h3>
+                
+                <div class="team-member" onclick="openPopup('popup6')">
+                    <img src="https://media-hosting.imagekit.io/0d19f35524c74ff3/reddy.jpeg?Expires=1840609469&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=YHBaPE1-~Y7PwXwAZSZHuVxJ5qK2vAJn16ajHlA-r0pfEve5mmdzyWFkFFvpQCYArayaaIBH8sUsce96YQZ9t3fBLCsZ-6~DHBydcb0KIeeRZB9nZjIb-C~HK1ZcjLCawAiO0aXkWZKwlckhRixBurSSSfY6RC~X1VY4DzwU8ixOFqbvIMaDPonsaHIs0LnLnTsLj3sytjSXl1nZDmNqY9MZ4GWIfaFpM8Fa2Spvazf42gBkwmAAS4aOBwh0bEKMq0M~~mXvD6Jg4VmydhyROPh4u-rjfA6jZYG73-x1Oz5noHbkBmSfau0F5sPecjfFuvE9Er0UdyzPruTtySAQsA__" alt="Team Member " />
+                    <h3>C Govardhini Reddy</h3>
                     <p style="color: #666;">Tap on photo to View</p>
                 </div>
 
-                <!-- Team Member 5 -->
-                <div class="team-member" onclick="openPopup('popup5')">
-                    <img src="https://media-hosting.imagekit.io/1dbb1bf6b94941a9/Screenshot%202025-04-27%20at%205.56.11%E2%80%AFPM.png?Expires=1840364821&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=Bmr5X4f9S4GegyFIoq1PBBuGQyuthIGv-0g1KdbPwYo52MSTsyAG~OAVEW6zHjfcMgrkFkG1jkKd6O-ydX04M6ah4IGHcrO4Eiu4REWQK83KPSmO4ulD0Z07VYyupr6~8faifS689dIB455N9~xamNHtFGHHcfnvevho6~AtYCv~~LL6YLegjse1LoJfhIXI5PGV35-fSM8CTHQI2F26YrkTrlUBHVpDYjZ2DrRQBwTwLZ-20-kLgHdtQKWsTRVLflPH7dAsN89W8NPg3kp9z6jYCl0eu1UyQD5qa3qIRlTYM2EjUuNs4EnGpSa-hYWl~Wpav0j6VtHCWV~Rk4xYVA__" alt="Team Member 5" />
-                    <h3>N Himank Goud </h3>
-                    <p style="color: #666;">Tap on photo to View</p>
-                </div>
+
             </div>
         </div>
 
         <!-- Popup for Team Member 1 -->
-        
+
 
         <!-- Popup for Team Member 2 -->
         <div id="popup2" class="popup">
@@ -1291,38 +1639,30 @@
         </div>
 
         <!-- Popup for Team Member 4 -->
-        <div id="popup4" class="popup">
+        
+        <div id="popup6" class="popup">
             <div class="popup-content">
-                <span class="close" onclick="closePopup('popup4')">&times;</span>
-                <img src="https://media-hosting.imagekit.io/50074c0ef5a14844/rajashekhar.jpeg?Expires=1840364674&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=sIeLDZ1PvfyUD~1dEeZS7bTgexdspxlIYnaEYwnCCJPhsCNZzkSXYXoq1soQo88jj11ylvSwE4pZsmmK48fFICDxHbsYwVj91J6wc9LpQ31n7s7H9MxGcHmFKHj~baFQ16K1UezVtQAGV2d0nWVNWZI0ZAedU4rJCXcKWvVJlobsXjV8pq4llIYWuIAahyVecx8jGl2wZBaauLRUZswBX2aeJboVcominEol-7a5sISPNPaQtyV4XMCaCfvSiDSt0ChhUEfcOQ07DaSIA6chaLAvjMiHOw0kZB5Hr6e0kJ6SHuyXRHITgQQ~ttuTz5tsBm6cOpYWknTW0KknzRSd8A__" alt="Team Member 4" />
-                <h2>S Rajashekhar</h2>
-                <p>An innovator at heart, always curious and driven to bring fresh ideas to the table. His passion for exploring new technologies keeps the project dynamic and forward-thinking.</p>
+                <span class="close" onclick="closePopup('popup6')">&times;</span>
+                <img src="https://media-hosting.imagekit.io/0d19f35524c74ff3/reddy.jpeg?Expires=1840609469&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=YHBaPE1-~Y7PwXwAZSZHuVxJ5qK2vAJn16ajHlA-r0pfEve5mmdzyWFkFFvpQCYArayaaIBH8sUsce96YQZ9t3fBLCsZ-6~DHBydcb0KIeeRZB9nZjIb-C~HK1ZcjLCawAiO0aXkWZKwlckhRixBurSSSfY6RC~X1VY4DzwU8ixOFqbvIMaDPonsaHIs0LnLnTsLj3sytjSXl1nZDmNqY9MZ4GWIfaFpM8Fa2Spvazf42gBkwmAAS4aOBwh0bEKMq0M~~mXvD6Jg4VmydhyROPh4u-rjfA6jZYG73-x1Oz5noHbkBmSfau0F5sPecjfFuvE9Er0UdyzPruTtySAQsA__" alt="Team Member 6" />
+                <h2>C  Govardhini Reddy </h2>
+                <p><strong>Hi, I’m C Govardhini Reddy</strong>
+                    I’m an enthusiastic and creative application and web developer with a passion for building innovative digital solutions. I love experimenting with new ideas, upgrading existing systems, and bringing fresh versions to life. My journey in tech has been all about curiosity and constant learning — whether it’s designing user-friendly websites or developing smart applications, I enjoy every step of the process. I believe in turning challenges into opportunities and always strive to deliver something unique and impactful through my work..</p>
                 <div class="social-links">
-
-                    <a href="https://www.instagram.com/rajurajack/" target="_blank" title="Follow me on Instagram">
+                    <a href="https://www.linkedin.com/in/chirraiahgari-govardhini-reddy-67a34a321/" target="_blank" title="Connect on LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://www.instagram.com/govardhini__reddy_/" target="_blank" title="Follow me on Instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
 
-                </div>
-            </div>
-        </div>
 
-        <!-- Popup for Team Member 5 -->
-        <div id="popup5" class="popup">
-            <div class="popup-content">
-                <span class="close" onclick="closePopup('popup5')">&times;</span>
-                <img src="https://media-hosting.imagekit.io/1dbb1bf6b94941a9/Screenshot%202025-04-27%20at%205.56.11%E2%80%AFPM.png?Expires=1840364821&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=Bmr5X4f9S4GegyFIoq1PBBuGQyuthIGv-0g1KdbPwYo52MSTsyAG~OAVEW6zHjfcMgrkFkG1jkKd6O-ydX04M6ah4IGHcrO4Eiu4REWQK83KPSmO4ulD0Z07VYyupr6~8faifS689dIB455N9~xamNHtFGHHcfnvevho6~AtYCv~~LL6YLegjse1LoJfhIXI5PGV35-fSM8CTHQI2F26YrkTrlUBHVpDYjZ2DrRQBwTwLZ-20-kLgHdtQKWsTRVLflPH7dAsN89W8NPg3kp9z6jYCl0eu1UyQD5qa3qIRlTYM2EjUuNs4EnGpSa-hYWl~Wpav0j6VtHCWV~Rk4xYVA__" alt="Team Member 5" />
-                <h2>N Himank Goud </h2>
-                <p>A passionate individual with a love for cinematic expression and creative direction. He brings innovation and storytelling into the digital space, helping LearnLab stand out.</p>
-                <div class="social-links">
-
-                    <a href="https://www.instagram.com/dundu.goud/" target="_blank" title="Follow me on Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
 
                 </div>
             </div>
-        </div>
+ </div>
+
+
+
 
 
 
@@ -1376,6 +1716,33 @@
 
 
     <script>
+        // Open the dialog
+    function openSubjectDialog() {
+        document.getElementById('subjectDialog').style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+    }
+
+    // Close the dialog
+    function closeSubjectDialog() {
+        document.getElementById('subjectDialog').style.display = 'none';
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+    }
+
+    // Close when clicking outside
+    window.onclick = function(event) {
+        const dialog = document.getElementById('subjectDialog');
+        if (event.target == dialog) {
+            closeSubjectDialog();
+        }
+    }
+
+    // Close with ESC key
+    document.onkeydown = function(evt) {
+        evt = evt || window.event;
+        if (evt.key === "Escape") {
+            closeSubjectDialog();
+        }
+    };
         // Removed duplicate declaration of currentSubject
         let recognition = null;
 
@@ -1426,7 +1793,7 @@
         function displayResources(data) {
             const responseDiv = document.getElementById('response');
             let html = `<h2>Resources for ${currentSubject}</h2>`;
-            
+
             // Always show description if available
             if (data.description) {
                 html += `
@@ -1476,7 +1843,7 @@
         async function fetchSuggestions() {
             const query = document.getElementById('subject').value.trim().toLowerCase();
             const suggestionsDiv = document.getElementById('suggestions');
-            
+
             if (!query) {
                 suggestionsDiv.style.display = 'none';
                 return;
@@ -1485,9 +1852,9 @@
             try {
                 const response = await fetch(`/suggestions?query=${encodeURIComponent(query)}`);
                 const suggestions = await response.json();
-                
+
                 if (suggestions.length > 0) {
-                    suggestionsDiv.innerHTML = suggestions.map(subject => 
+                    suggestionsDiv.innerHTML = suggestions.map(subject =>
                         `<div onclick="selectSuggestion('${subject.replace(/'/g, "\\'")}')">${subject}</div>`
                     ).join('');
                     suggestionsDiv.style.display = 'block';
@@ -1899,6 +2266,62 @@ function clearInput() {
                 document.getElementById('home').style.display = 'block';
             }
         }
+        async function fetchSuggestions() {
+    const query = document.getElementById('subject').value.trim().toLowerCase();
+    const suggestionsDiv = document.getElementById('suggestions');
+
+    if (!query) {
+        suggestionsDiv.style.display = 'none';
+        return;
+    }
+
+    // List of all subjects with abbreviations
+    const allSubjects = [
+        { abbr: 'DM', full: 'Discrete Mathematics' },
+        { abbr: 'DS', full: 'Data Structures' },
+        { abbr: 'MC', full: 'Matrices and Calculus' },
+        { abbr: 'ODEVC', full: 'Ordinary Differential Equations and Vector Calculus' },
+        { abbr: 'COSM', full: 'Computer Oriented Statistical Methods' },
+        { abbr: 'CN', full: 'Computer Networks' },
+        { abbr: 'OS', full: 'Operating Systems' },
+        { abbr: 'COA', full: 'Computer Organization and Architecture' },
+        { abbr: 'DE', full: 'Digital Electronics' },
+        { abbr: 'EDC', full: 'Electronic Devices and Circuits' },
+        { abbr: 'BEE', full: 'Basic Electrical Engineering' },
+        { abbr: 'SE', full: 'Software Engineering' },
+        { abbr: 'OOPS', full: 'Object Oriented Programming through Java' },
+        { abbr: 'PPS', full: 'Programming for Problem Solving' },
+        { abbr: 'BEFA', full: 'Business Economics & Financial Analysis' },
+        { abbr: 'EC', full: 'Engineering Chemistry' },
+        { abbr: 'AP', full: 'Applied Physics' },
+        { abbr: 'ECEG', full: 'Computer Aided Engineering Graphics' },
+        { abbr: 'ECSE', full: 'Elements of Computer Science and Engineering' },
+        { abbr: 'ESE', full: 'English for Skill Enhancement' },
+        { abbr: 'DS Lab', full: 'Data Structures Laboratory' },
+        { abbr: 'CN Lab', full: 'Computer Networks Laboratory' },
+        { abbr: 'PPS Lab', full: 'Programming for Problem Solving Laboratory' },
+        { abbr: 'EC Lab', full: 'Engineering Chemistry Laboratory' },
+        { abbr: 'BEE Lab', full: 'Basic Electrical Engineering Laboratory' },
+        { abbr: 'AP Lab', full: 'Applied Physics Laboratory' },
+        { abbr: 'EW', full: 'Engineering Workshop' },
+        { abbr: 'PPL Lab', full: 'Python Programming Laboratory' }
+    ];
+
+    // Filter subjects that match the query (either in abbreviation or full name)
+    const suggestions = allSubjects.filter(sub =>
+        sub.abbr.toLowerCase().includes(query) ||
+        sub.full.toLowerCase().includes(query)
+    ).map(sub => `${sub.abbr} - ${sub.full}`);
+
+    if (suggestions.length > 0) {
+        suggestionsDiv.innerHTML = suggestions.map(subject =>
+            `<div onclick="selectSuggestion('${subject.split(' - ')[1]}')">${subject}</div>`
+        ).join('');
+        suggestionsDiv.style.display = 'block';
+    } else {
+        suggestionsDiv.style.display = 'none';
+    }
+}
     </script>
 </body>
 </html>

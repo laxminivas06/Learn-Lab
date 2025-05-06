@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select a Quiz</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            padding-top: 56px; /* Space for fixed navbar */
+        }
+        
+        .navbar-brand {
+            font-weight: 600;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+        }
+        
+        .quiz-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        
+        .quiz-title {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .form-select {
+            margin-bottom: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #dfe6e9;
+            transition: all 0.3s ease;
+        }
+        
+        .form-select:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+        }
+        
+        .btn-quiz {
+            background-color: #3498db;
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-quiz:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .profile-dropdown img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        @media (max-width: 768px) {
+            .quiz-container {
+                margin: 1.5rem auto;
+                padding: 1.5rem;
+            }
+            
+            .navbar-collapse {
+                padding-top: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .quiz-container {
+                margin: 1rem;
+                padding: 1.25rem;
+            }
+            
+            .quiz-title {
+                font-size: 1.5rem;
+            }
+            
+            .form-select {
+                padding: 0.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('home') }}">
+                <i class="bi bi-house-door-fill"></i> QuizApp
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}">
+                            <i class="bi bi-house"></i> Home
+                        </a>
+                    </li>
+                    
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown profile-dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                            <img src="https://via.placeholder.com/32" alt="Profile" class="me-1">
+                            Profile
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> My Profile</a></li>
+                            
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <div class="quiz-container bg-white">
+            <h1 class="quiz-title">Select a Quiz</h1>
+            <form action="{{ url_for('quiz_select') }}" method="post">
+                <div class="mb-3">
+                    <select class="form-select form-select-lg" name="subject" aria-label="Select subject">
+                        <option selected disabled>Choose a subject</option>
+                        {% for subject in subjects %}
+                            <option value="{{ subject }}">{{ subject|title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-quiz btn-lg">
+                    Start Quiz <i class="bi bi-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h2 class="mb-0">{{ subject }} Quiz - {{ quiz_type|title }}</h2>
+      <div class="timer-container">
+        <span class="badge bg-danger fs-5" id="quiz-timer">{{ time_limit }}</span>
+        <span class="ms-1">seconds left</span>
+      </div>
+    </div>
+    
+    <div class="card-body">
+      <form method="POST" action="{{ url_for('quiz_submit') }}" id="quiz-form">
+        {% for question_num, question in questions %}
+        <div class="question mb-4 p-3 border rounded" id="q{{ question_num }}">
+          <h4 class="question-text">
+            <span class="badge bg-secondary me-2">{{ question_num }}</span>
+            {{ question.question }}
+          </h4>
+          
+          {% if question.get('image') %}
+          <div class="question-image mb-3">
+            <img src="{{ question.image }}" alt="Question image" class="img-fluid rounded">
+          </div>
+          {% endif %}
+          
+          <div class="options ps-4">
+            {% for option in question.options %}
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="radio" 
+                     name="q{{ question_num }}" 
+                     value="{{ option }}" 
+                     id="q{{ question_num }}_opt{{ loop.index }}"
+                     {% if question.get('selected_answer') == option %}checked{% endif %}>
+              <label class="form-check-label" for="q{{ question_num }}_opt{{ loop.index }}">
+                {{ option }}
+              </label>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+        
+        <input type="hidden" name="subject" value="{{ subject }}">
+        <input type="hidden" name="quiz_type" value="{{ quiz_type }}">
+        <input type="hidden" name="time_spent" id="time-spent" value="0">
+        
+        <div class="d-flex justify-content-between mt-4">
+          <button type="button" class="btn btn-outline-primary" id="prev-btn" disabled>
+            <i class="bi bi-chevron-left me-2"></i>Previous
+          </button>
+          <button type="button" class="btn btn-outline-primary" id="next-btn">
+            Next<i class="bi bi-chevron-right ms-2"></i>
+          </button>
+          <button type="submit" class="btn btn-success px-4" id="submit-btn">
+            <i class="bi bi-send-fill me-2"></i>Submit Quiz
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style>
+  .question-text {
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+  
+  .options {
+    font-size: 1rem;
+  }
+  
+  .timer-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .question {
+    display: none;
+  }
+  
+  .question.active {
+    display: block;
+  }
+  
+  .question-image {
+    max-width: 100%;
+    margin: 15px 0;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .question-text {
+      font-size: 1rem;
+    }
+    
+    .options {
+      font-size: 0.95rem;
+      padding-left: 1rem !important;
+    }
+    
+    .card-header h2 {
+      font-size: 1.3rem;
+    }
+    
+    .timer-container {
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    
+    .timer-container span:last-child {
+      font-size: 0.8rem;
+    }
+    
+    .nav-buttons {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .nav-buttons button {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const timerElement = document.getElementById('quiz-timer');
+    const quizForm = document.getElementById('quiz-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const timeSpentField = document.getElementById('time-spent');
+    const questions = document.querySelectorAll('.question');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    
+    let currentQuestion = 0;
+    let timeLeft = parseInt(timerElement.textContent);
+    let quizDuration = 0;
+    const totalQuestions = questions.length;
+    
+    // Initialize question navigation
+    function showQuestion(index) {
+      questions.forEach((q, i) => {
+        q.classList.toggle('active', i === index);
+      });
+      
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === totalQuestions - 1;
+      
+      if (index === totalQuestions - 1) {
+        nextBtn.style.display = 'none';
+        submitBtn.style.display = 'block';
+      } else {
+        nextBtn.style.display = 'block';
+        submitBtn.style.display = 'none';
+      }
+    }
+    
+    // Navigation event listeners
+    prevBtn.addEventListener('click', () => {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        showQuestion(currentQuestion);
+      }
+    });
+    
+    nextBtn.addEventListener('click', () => {
+      if (currentQuestion < totalQuestions - 1) {
+        currentQuestion++;
+        showQuestion(currentQuestion);
+      }
+    });
+    
+    // Show first question initially
+    showQuestion(0);
+    
+    // Timer functionality
+    const timerInterval = setInterval(function() {
+      timeLeft--;
+      quizDuration++;
+      timerElement.textContent = timeLeft;
+      timeSpentField.value = quizDuration;
+      
+      // Change color when time is running out
+      const timeLimit = parseInt("{{ time_limit|default(0) }}");
+      if (timeLeft <= Math.floor(timeLimit * 0.2)) { // 20% of time left
+        timerElement.classList.remove('bg-danger');
+        timerElement.classList.add('bg-warning');
+        timerElement.classList.add('text-dark');
+      }
+      
+      // Time's up - submit the form
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        timerElement.textContent = "0";
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="bi bi-clock me-2"></i>Time Expired';
+        
+        // Show alert and submit form
+        alert("Time's up! Your quiz will be submitted automatically.");
+        quizForm.submit();
+      }
+    }, 1000);
+    
+    // Optional: Add warning when trying to leave the page
+    window.addEventListener('beforeunload', function(e) {
+      if (timeLeft > 0) {
+        e.preventDefault();
+        e.returnValue = 'Your quiz is still in progress. Are you sure you want to leave?';
+      }
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowLeft' && !prevBtn.disabled) {
+        prevBtn.click();
+      } else if (e.key === 'ArrowRight' && !nextBtn.disabled) {
+        nextBtn.click();
+      }
+    });
+  });
+</script>
+{% endblock %}
+
+
+

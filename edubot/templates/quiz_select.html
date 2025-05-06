@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Quiz Type - {{ subject|title }}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --light-bg: #f8f9fa;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .quiz-selection-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        .quiz-select-card {
+            width: 100%;
+            max-width: 900px;
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: var(--card-shadow);
+            border: none;
+        }
+        
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        
+        .quiz-title {
+            color: var(--secondary-color);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quiz-subtitle {
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+        
+        .quiz-type-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .quiz-type-btn {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: var(--light-bg);
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
+            transition: var(--transition);
+            cursor: pointer;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quiz-type-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .quiz-type-btn:hover .quiz-icon {
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .quiz-type-btn:hover .quiz-type-name {
+            color: white;
+        }
+        
+        .quiz-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+        
+        .quiz-type-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
+        }
+        
+        .quiz-type-desc {
+            font-size: 0.9rem;
+            color: #6c757d;
+            transition: var(--transition);
+        }
+        
+        .quiz-type-btn:hover .quiz-type-desc {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        @media (max-width: 768px) {
+            .quiz-selection-container {
+                padding: 1rem;
+            }
+            
+            .quiz-select-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .quiz-type-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quiz-header {
+                margin-bottom: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .quiz-select-card {
+                padding: 1.5rem 1rem;
+                border-radius: 12px;
+            }
+            
+            .quiz-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-selection-container">
+        <div class="quiz-select-card">
+            <div class="quiz-header">
+                <h1 class="quiz-title">Select Quiz Type</h1>
+                <p class="quiz-subtitle">Test your knowledge in {{ subject|title }}</p>
+            </div>
+            
+            <form method="POST" action="{{ url_for('quiz_start') }}">
+                <input type="hidden" name="subject" value="{{ subject }}">
+                
+                <div class="quiz-type-grid">
+                    {% for quiz_type in quiz_types %}
+                    <button type="submit" name="quiz_select" value="{{ quiz_type }}" class="quiz-type-btn">
+                        <div class="quiz-icon">
+                            {% if quiz_type == 'aptitude' %}
+                                <i class="bi bi-lightbulb"></i>
+                            {% elif quiz_type == 'technical' %}
+                                <i class="bi bi-code-square"></i>
+                            {% elif quiz_type == 'interview' %}
+                                <i class="bi bi-people"></i>
+                            {% elif quiz_type == 'general-knowledge' %}
+                                <i class="bi bi-globe"></i>
+                            {% elif quiz_type == 'programming-challenges' %}
+                                <i class="bi bi-filetype-py"></i>
+                            
+                            {% else %}
+                                <i class="bi bi-question-circle"></i>
+                            {% endif %}
+                        </div>
+                        <h3 class="quiz-type-name">{{ quiz_type.replace('-', ' ')|title }}</h3>
+                        <p class="quiz-type-desc">
+                            {% if quiz_type == 'aptitude' %}
+                                Logical and problem-solving questions
+                            {% elif quiz_type == 'technical' %}
+                                Subject-specific technical questions
+                            {% elif quiz_type == 'interview' %}
+                                Common interview questions
+                            {% elif quiz_type == 'general-knowledge' %}
+                                General knowledge about the subject
+                            {% elif quiz_type == 'programming-challenges' %}
+                                Python programming language questions
+                            
+                            {% else %}
+                                Test your knowledge
+                            {% endif %}
+                        </p>
+                    </button>
+                    {% endfor %}
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

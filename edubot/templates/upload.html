@@ -5,124 +5,331 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Learn Lab</title>
     <style>
+        :root {
+            --primary-color: #3498db;
+            --primary-dark: #2980b9;
+            --secondary-color: #2c3e50;
+            --light-gray: #ecf0f1;
+            --medium-gray: #bdc3c7;
+            --dark-gray: #7f8c8d;
+            --success-color: #27ae60;
+            --error-color: #e74c3c;
+            --warning-color: #f39c12;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            background-color: #6e6161;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
             margin: 0;
             padding: 0;
             color: #333;
+            line-height: 1.6;
         }
+        
         header {
-            background: #007bff;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 10px 0;
+            padding: 1.5rem 0;
             text-align: center;
-        }
-        nav {
-            background: #0056b3;
-            padding: 10px;
-            text-align: center;
-        }
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        .container {
-            margin: 20px auto;
-            max-width: 800px;
-            background: rgb(201, 196, 196);
-            padding: 20px;
-            border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
+        
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+        
+        nav {
+            background: var(--secondary-color);
+            padding: 1rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+        }
+        
+        .container {
+            margin: 2rem auto;
+            max-width: 1200px;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+        }
+        
         h2 {
-            color: #007bff;
+            color: var(--secondary-color);
+            margin-top: 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-gray);
         }
+        
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 1.5rem;
         }
+        
         label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--secondary-color);
         }
-        input[type="text"], select {
+        
+        input[type="text"], 
+        select,
+        textarea {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
+            padding: 0.8rem;
+            border: 1px solid var(--medium-gray);
             border-radius: 4px;
-            box-sizing: border-box;
+            font-size: 1rem;
+            transition: border-color 0.3s;
         }
+        
+        input[type="text"]:focus, 
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
         button {
-            padding: 10px 15px;
-            background: #007bff;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary-color);
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s;
         }
+        
         button:hover {
-            background: #0056b3;
+            background: var(--primary-dark);
+            transform: translateY(-1px);
         }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
         .message {
-            padding: 10px;
-            margin: 10px 0;
+            padding: 1rem;
+            margin: 1rem 0;
             border-radius: 4px;
+            font-weight: 500;
         }
+        
         .success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
+            background-color: rgba(39, 174, 96, 0.1);
+            color: var(--success-color);
+            border: 1px solid rgba(39, 174, 96, 0.2);
         }
+        
         .error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--error-color);
+            border: 1px solid rgba(231, 76, 60, 0.2);
         }
+        
         .tab {
             overflow: hidden;
-            border: 1px solid #ccc;
-            background-color: #f1f1f1;
+            border: 1px solid var(--medium-gray);
+            background-color: white;
             border-radius: 4px 4px 0 0;
+            display: flex;
+            flex-wrap: wrap;
         }
+        
         .tab button {
             background-color: inherit;
-            float: left;
             border: none;
             outline: none;
             cursor: pointer;
-            padding: 14px 16px;
+            padding: 1rem 1.5rem;
             transition: 0.3s;
-            color: #333;
+            color: var(--dark-gray);
+            font-weight: 600;
+            flex: 1;
+            min-width: 150px;
         }
+        
         .tab button:hover {
-            background-color: #ddd;
+            background-color: var(--light-gray);
+            color: var(--secondary-color);
         }
+        
         .tab button.active {
-            background-color: #007bff;
+            background-color: var(--primary-color);
             color: white;
         }
+        
         .tabcontent {
             display: none;
-            padding: 20px;
-            border: 1px solid #ccc;
+            padding: 2rem;
+            border: 1px solid var(--medium-gray);
             border-top: none;
             border-radius: 0 0 4px 4px;
+            background-color: white;
+            animation: fadeEffect 0.5s;
         }
+        
+        @keyframes fadeEffect {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+        
         .logout {
             text-align: right;
-            margin-bottom: 10px;
+            margin-bottom: 1.5rem;
         }
+        
         .logout a {
-            color: #dc3545;
+            color: var(--error-color);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .logout a:hover {
+            background-color: rgba(231, 76, 60, 0.1);
             text-decoration: none;
         }
-        .logout a:hover {
-            text-decoration: underline;
+        
+        .link-group {
+            margin-bottom: 1rem;
+        }
+        
+        .link-group input {
+            margin-bottom: 0.5rem;
+        }
+        
+        .link-group button {
+            padding: 0.5rem;
+            margin-left: 0.5rem;
+            background: var(--dark-gray);
+        }
+        
+        .link-group button:hover {
+            background: var(--secondary-color);
+        }
+        
+        /* Quiz types section */
+        .quiz-types-container {
+            margin: 2rem 0;
+            border: 1px solid var(--medium-gray);
+            border-radius: 4px;
+            padding: 1rem;
+        }
+        
+        .quiz-type {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+        }
+        
+        .quiz-type-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .quiz-type-title {
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        
+        .quiz-questions {
+            margin-top: 1rem;
+        }
+        
+        .quiz-question {
+            background-color: var(--light-gray);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+        
+        .question-controls {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+            
+            header h1 {
+                font-size: 1.5rem;
+            }
+            
+            nav a {
+                display: block;
+                margin: 0.5rem 0;
+            }
+            
+            .tab button {
+                min-width: 100%;
+            }
+            
+            .tabcontent {
+                padding: 1rem;
+            }
+            
+            .quiz-type-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header {
+                padding: 1rem 0;
+            }
+            
+            button {
+                width: 100%;
+                margin-top: 0.5rem;
+            }
+            
+            .form-group {
+                margin-bottom: 1rem;
+            }
+            
+            .question-controls {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -130,10 +337,9 @@
     <header>
         <h1>Learn Lab - Admin Dashboard</h1>
     </header>
-    
+
     <nav>
         <a href="/" onclick="showPage('home')">Home</a>
-        
         <a href="/admin_subjects" onclick="showPage('admin_subjects')">Manage Subjects</a>
     </nav>
 
@@ -143,223 +349,551 @@
         </div>
 
         <div class="tab">
-            <button class="tablinks active" onclick="openTab(event, 'UpdateSubject')">Update Existing Subject</button>
-            <button class="tablinks" onclick="openTab(event, 'NewSubject')">Add New Subject</button>
+            <button class="tablinks active" onclick="openTab(event, 'UpdateSubject')">Update Subject</button>
+            <button class="tablinks" onclick="openTab(event, 'NewSubject')">Add Subject</button>
             <button class="tablinks" onclick="openTab(event, 'DeleteSubject')">Delete Subject</button>
         </div>
 
         <div id="message" class="message" style="display: none;"></div>
+        
         <div id="UpdateSubject" class="tabcontent" style="display: block;">
-            <h2>Update Existing Subject Resources</h2>
+            <h2>Update Existing Subject</h2>
             <form id="updateForm">
                 <div class="form-group">
                     <label for="existingSubject">Select Subject:</label>
-                    <select id="existingSubject" name="subject" required>
+                    <select id="existingSubject" name="subject" required onchange="loadSubjectData()">
                         <option value="">-- Select a subject --</option>
                         {% for subject in subjects %}
                             <option value="{{ subject }}">{{ subject.capitalize() }}</option>
                         {% endfor %}
                     </select>
                 </div>
-                
-                <div class="form-group" id="notesLinks">
-                    <label for="notesLink">Notes Link:</label>
+
+                <div class="form-group link-group" id="notesLinks">
+                    <label>Notes Links:</label>
                     <input type="text" name="notes[]" placeholder="https://example.com/notes">
-                    <button type="button" onclick="addLinkField('notesLinks')">+</button>
+                    <button type="button" onclick="addLinkField('notesLinks')">+ Add</button>
                 </div>
-                
-                <div class="form-group" id="videosLinks">
-                    <label for="videosLink">Videos Link:</label>
+
+                <div class="form-group link-group" id="videosLinks">
+                    <label>Videos Links:</label>
                     <input type="text" name="videos[]" placeholder="https://example.com/videos">
-                    <button type="button" onclick="addLinkField('videosLinks')">+</button>
+                    <button type="button" onclick="addLinkField('videosLinks')">+ Add</button>
                 </div>
-                
-                <div class="form-group" id="projectsLinks">
-                    <label for="projectsLink">Projects Link:</label>
+
+                <div class="form-group link-group" id="projectsLinks">
+                    <label>Projects Links:</label>
                     <input type="text" name="projects[]" placeholder="https://example.com/projects">
-                    <button type="button" onclick="addLinkField('projectsLinks')">+</button>
+                    <button type="button" onclick="addLinkField('projectsLinks')">+ Add</button>
                 </div>
-                
-                <div class="form-group" id="labManualLinks">
-                    <label for="labManualLink">Lab Manual Link:</label>
+
+                <div class="form-group link-group" id="labManualLinks">
+                    <label>Lab Manual Links:</label>
                     <input type="text" name="lab_manual[]" placeholder="https://example.com/lab_manual">
-                    <button type="button" onclick="addLinkField('labManualLinks')">+</button>
+                    <button type="button" onclick="addLinkField('labManualLinks')">+ Add</button>
                 </div>
-                
-                <div class="form-group" id="assignmentsLinks">
-                    <label for="assignmentsLink">Assignments Link:</label>
+
+                <div class="form-group link-group" id="assignmentsLinks">
+                    <label>Assignments Links:</label>
                     <input type="text" name="assignments[]" placeholder="https://example.com/assignments">
-                    <button type="button" onclick="addLinkField('assignmentsLinks')">+</button>
+                    <button type="button" onclick="addLinkField('assignmentsLinks')">+ Add</button>
                 </div>
-                
-                <div class="form-group" id="questionPapersLinks">
-                    <label for="questionPapersLink">Previous Year Question Papers Link:</label>
+
+                <div class="form-group link-group" id="questionPapersLinks">
+                    <label>Question Papers Links:</label>
                     <input type="text" name="question_papers[]" placeholder="https://example.com/question_papers">
-                    <button type="button" onclick="addLinkField('questionPapersLinks')">+</button>
+                    <button type="button" onclick="addLinkField('questionPapersLinks')">+ Add</button>
                 </div>
-                
-                <div class="form-group" id="impQuestionsLinks">
-                    <label for="impQuestionsLink">Important Questions Link:</label>
+
+                <div class="form-group link-group" id="impQuestionsLinks">
+                    <label>Important Questions Links:</label>
                     <input type="text" name="imp_questions[]" placeholder="https://example.com/imp_questions">
-                    <button type="button" onclick="addLinkField('impQuestionsLinks')">+</button>
+                    <button type="button" onclick="addLinkField('impQuestionsLinks')">+ Add</button>
                 </div>
-                
-                <div class="form-group" id="researchPapersLinks">
-                    <label for="researchPapersLink">Research Papers Link:</label>
+
+                <div class="form-group link-group" id="researchPapersLinks">
+                    <label>Research Papers Links:</label>
                     <input type="text" name="research_papers[]" placeholder="https://example.com/research_papers">
-                    <button type="button" onclick="addLinkField('researchPapersLinks')">+</button>
+                    <button type="button" onclick="addLinkField('researchPapersLinks')">+ Add</button>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="subjectDescription">Subject Description:</label>
                     <input type="text" id="subjectDescription" name="description" placeholder="Enter subject description" required>
                 </div>
-                
+
+                <div class="quiz-types-container">
+                    <h3>Quiz Types</h3>
+                    <p>Add different types of quizzes for this subject:</p>
+                    
+                    <div id="quizTypesContainer">
+                        <!-- Dynamic quiz types will be added here -->
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newQuizType">Add New Quiz Type:</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <select id="newQuizType" style="flex: 1;">
+                                <option value="aptitude">Aptitude</option>
+                                <option value="reasoning">Reasoning</option>
+                                <option value="technical">Technical</option>
+                                <option value="interview">Interview Questions</option>
+                                <option value="mcq">MCQs</option>
+                                <option value="custom">Custom Type</option>
+                            </select>
+                            <input type="text" id="customQuizType" placeholder="Enter custom type" style="flex: 1; display: none;">
+                            <button type="button" onclick="addQuizType()">Add Quiz Type</button>
+                        </div>
+                    </div>
+                </div>
+
                 <button type="button" onclick="uploadResources('update')">Update Resources</button>
             </form>
         </div>
-        
-        
+
         <div id="NewSubject" class="tabcontent">
-            <h2>Add New Subject Resources</h2>
+            <h2>Add New Subject</h2>
             <form id="newSubjectForm">
                 <div class="form-group">
                     <label for="newSubjectName">Subject Name:</label>
                     <input type="text" id="newSubjectName" name="subject" placeholder="Enter subject name (lowercase)" required>
                 </div>
-                
-                <div class="form-group" id="newNotesLinks">
-                    <label for="newNotesLink">Notes Link:</label>
+
+                <div class="form-group link-group" id="newNotesLinks">
+                    <label>Notes Links:</label>
                     <input type="text" name="notes[]" placeholder="https://example.com/notes">
-                    <button type="button" onclick="addLinkField('newNotesLinks')">+</button>
+                    <button type="button" onclick="addLinkField('newNotesLinks')">+ Add</button>
                 </div>
-                
-                <div class="form -group" id="newVideosLinks">
-                    <label for="newVideosLink">Videos Link:</label>
+
+                <div class="form-group link-group" id="newVideosLinks">
+                    <label>Videos Links:</label>
                     <input type="text" name="videos[]" placeholder="https://example.com/videos">
-                    <button type="button" onclick="addLinkField('newVideosLinks')">+</button>
+                    <button type="button" onclick="addLinkField('newVideosLinks')">+ Add</button>
                 </div>
-                
-                <div class="form-group" id="newProjectsLinks">
-                    <label for="newProjectsLink">Projects Link:</label>
+
+                <div class="form-group link-group" id="newProjectsLinks">
+                    <label>Projects Links:</label>
                     <input type="text" name="projects[]" placeholder="https://example.com/projects">
-                    <button type="button" onclick="addLinkField('newProjectsLinks')">+</button>
+                    <button type="button" onclick="addLinkField('newProjectsLinks')">+ Add</button>
                 </div>
-                
-                <div class="form-group" id="newLabManualLinks">
-                    <label for="newLabManualLink">Lab Manual Link:</label>
+
+                <div class="form-group link-group" id="newLabManualLinks">
+                    <label>Lab Manual Links:</label>
                     <input type="text" name="lab_manual[]" placeholder="https://example.com/lab_manual">
-                    <button type="button" onclick="addLinkField('newLabManualLinks')">+</button>
+                    <button type="button" onclick="addLinkField('newLabManualLinks')">+ Add</button>
                 </div>
-                
-                <div class="form-group" id="newAssignmentsLinks">
-                    <label for="newAssignmentsLink">Assignments Link:</label>
+
+                <div class="form-group link-group" id="newAssignmentsLinks">
+                    <label>Assignments Links:</label>
                     <input type="text" name="assignments[]" placeholder="https://example.com/assignments">
-                    <button type="button" onclick="addLinkField('newAssignmentsLinks')">+</button>
+                    <button type="button" onclick="addLinkField('newAssignmentsLinks')">+ Add</button>
                 </div>
-                
-                <div class="form-group" id="newQuestionPapersLinks">
-                    <label for="newQuestionPapersLink">Previous Year Question Papers Link:</label>
+
+                <div class="form-group link-group" id="newQuestionPapersLinks">
+                    <label>Question Papers Links:</label>
                     <input type="text" name="question_papers[]" placeholder="https://example.com/question_papers">
-                    <button type="button" onclick="addLinkField('newQuestionPapersLinks')">+</button>
+                    <button type="button" onclick="addLinkField('newQuestionPapersLinks')">+ Add</button>
                 </div>
-                
-                <div class="form-group" id="newImpQuestionsLinks">
-                    <label for="newImpQuestionsLink">Important Questions Link:</label>
+
+                <div class="form-group link-group" id="newImpQuestionsLinks">
+                    <label>Important Questions Links:</label>
                     <input type="text" name="imp_questions[]" placeholder="https://example.com/imp_questions">
-                    <button type="button" onclick="addLinkField('newImpQuestionsLinks')">+</button>
+                    <button type="button" onclick="addLinkField('newImpQuestionsLinks')">+ Add</button>
                 </div>
-                
-                <div class="form-group" id="newResearchPapersLinks">
-                    <label for="newResearchPapersLink">Research Papers Link:</label>
+
+                <div class="form-group link-group" id="newResearchPapersLinks">
+                    <label>Research Papers Links:</label>
                     <input type="text" name="research_papers[]" placeholder="https://example.com/research_papers">
-                    <button type="button" onclick="addLinkField('newResearchPapersLinks')">+</button>
+                    <button type="button" onclick="addLinkField('newResearchPapersLinks')">+ Add</button>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="newSubjectDescription">Subject Description:</label>
                     <input type="text" id="newSubjectDescription" name="description" placeholder="Enter subject description" required>
                 </div>
-                
+
+                <div class="quiz-types-container">
+                    <h3>Quiz Types</h3>
+                    <p>Add different types of quizzes for this subject:</p>
+                    
+                    <div id="newQuizTypesContainer">
+                        <!-- Dynamic quiz types will be added here -->
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newSubjectQuizType">Add New Quiz Type:</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <select id="newSubjectQuizType" style="flex: 1;">
+                                <option value="aptitude">Aptitude</option>
+                                <option value="reasoning">Reasoning</option>
+                                <option value="technical">Technical</option>
+                                <option value="interview">Interview Questions</option>
+                                <option value="mcq">MCQs</option>
+                                <option value="custom">Custom Type</option>
+                            </select>
+                            <input type="text" id="newCustomQuizType" placeholder="Enter custom type" style="flex: 1; display: none;">
+                            <button type="button" onclick="addNewSubjectQuizType()">Add Quiz Type</button>
+                        </div>
+                    </div>
+                </div>
+
                 <button type="button" onclick="uploadResources('new')">Add Subject</button>
             </form>
         </div>
-        
-        
+
         <div id="DeleteSubject" class="tabcontent">
-        <h2>Delete Subject</h2>
-    <form id="deleteForm" method="POST" action="{{ url_for('delete_subject') }}">
-        <div class="form-group">
-            <label for="deleteSubject">Select Subject to Delete:</label>
-            <select id="deleteSubject" name="subject" required>
-                <option value="">-- Select a subject --</option>
-                {% for subject in subjects %}
-                    <option value="{{ subject }}">{{ subject.capitalize() }}</option>
-                {% endfor %}
-            </select>
+            <h2>Delete Subject</h2>
+            <form id="deleteForm" method="POST" action="{{ url_for('delete_subject') }}">
+                <div class="form-group">
+                    <label for="deleteSubject">Select Subject to Delete:</label>
+                    <select id="deleteSubject" name="subject" required>
+                        <option value="">-- Select a subject --</option>
+                        {% for subject in subjects %}
+                            <option value="{{ subject }}">{{ subject.capitalize() }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" style="background-color: var(--error-color);">Delete Subject</button>
+            </form>
         </div>
-        <button type="submit">Delete Subject</button>
-    </form>
     </div>
-</div>
 
     <script>
-       function addLinkField(containerId) {
-        const container = document.getElementById(containerId);
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.name = containerId.replace('Links', '').toLowerCase() + '[]';
-        input.placeholder = 'https://example.com/';
-        
-        const removeButton = document.createElement('button');
-        removeButton.type = 'button';
-        removeButton.textContent = '-';
-        removeButton.onclick = function() {
-            container.removeChild(input);
-            container.removeChild(removeButton);
-        };
-        
-        container.appendChild(input);
-        container.appendChild(removeButton);
-    }
-         document.getElementById('deleteForm').addEventListener('submit', async function(event) {
-        event.preventDefault(); // Prevent the default form submission
+        // Quiz type templates
+        const quizTypeTemplate = (type) => `
+            <div class="quiz-type" data-type="${type}">
+                <div class="quiz-type-header">
+                    <span class="quiz-type-title">${type.charAt(0).toUpperCase() + type.slice(1)} Questions</span>
+                    <button type="button" onclick="removeQuizType('${type}')" style="background-color: var(--error-color); padding: 0.3rem 0.6rem;">Remove</button>
+                </div>
+                <div class="quiz-questions" id="questions-${type}">
+                    <div class="quiz-question">
+                        <div class="form-group">
+                            <label>Question:</label>
+                            <input type="text" name="quiz[${type}][][question]" placeholder="Enter question text" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Options (comma separated):</label>
+                            <input type="text" name="quiz[${type}][][options]" placeholder="Option 1, Option 2, Option 3, Option 4" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Correct Answer:</label>
+                            <input type="text" name="quiz[${type}][][correct]" placeholder="Enter correct option" required>
+                        </div>
+                        <div class="question-controls">
+                            <button type="button" onclick="addQuestion('${type}')">Add Another Question</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
 
-        const formData = new FormData(this);
-        const response = await fetch('/delete_subject', {
-            method: 'POST',
-            body: formData
+        const questionTemplate = (type, index) => `
+            <div class="quiz-question">
+                <div class="form-group">
+                    <label>Question ${index + 1}:</label>
+                    <input type="text" name="quiz[${type}][${index}][question]" placeholder="Enter question text" required>
+                </div>
+                <div class="form-group">
+                    <label>Options (comma separated):</label>
+                    <input type="text" name="quiz[${type}][${index}][options]" placeholder="Option 1, Option 2, Option 3, Option 4" required>
+                </div>
+                <div class="form-group">
+                    <label>Correct Answer:</label>
+                    <input type="text" name="quiz[${type}][${index}][correct]" placeholder="Enter correct option" required>
+                </div>
+                <div class="question-controls">
+                    <button type="button" onclick="this.parentNode.parentNode.remove()" style="background-color: var(--error-color);">Remove Question</button>
+                </div>
+            </div>
+        `;
+
+        // Quiz management functions
+        function addQuizType() {
+            const select = document.getElementById('newQuizType');
+            const customInput = document.getElementById('customQuizType');
+            let quizType = select.value;
+            
+            if (quizType === 'custom') {
+                quizType = customInput.value.trim().toLowerCase();
+                if (!quizType) {
+                    showMessage("Please enter a custom quiz type name.", "error");
+                    return;
+                }
+            }
+            
+            const container = document.getElementById('quizTypesContainer');
+            if (container.querySelector(`[data-type="${quizType}"]`)) {
+                showMessage("This quiz type already exists.", "error");
+                return;
+            }
+            
+            container.insertAdjacentHTML('beforeend', quizTypeTemplate(quizType));
+            
+            // Reset inputs
+            select.value = 'aptitude';
+            customInput.style.display = 'none';
+            customInput.value = '';
+        }
+
+        function addNewSubjectQuizType() {
+            const select = document.getElementById('newSubjectQuizType');
+            const customInput = document.getElementById('newCustomQuizType');
+            let quizType = select.value;
+            
+            if (quizType === 'custom') {
+                quizType = customInput.value.trim().toLowerCase();
+                if (!quizType) {
+                    showMessage("Please enter a custom quiz type name.", "error");
+                    return;
+                }
+            }
+            
+            const container = document.getElementById('newQuizTypesContainer');
+            if (container.querySelector(`[data-type="${quizType}"]`)) {
+                showMessage("This quiz type already exists.", "error");
+                return;
+            }
+            
+            container.insertAdjacentHTML('beforeend', quizTypeTemplate(quizType));
+            
+            // Reset inputs
+            select.value = 'aptitude';
+            customInput.style.display = 'none';
+            customInput.value = '';
+        }
+
+        function removeQuizType(type) {
+            if (confirm(`Are you sure you want to remove the ${type} quiz type?`)) {
+                const container = document.querySelector(`[data-type="${type}"]`);
+                if (container) {
+                    container.remove();
+                }
+            }
+        }
+
+        function addQuestion(type) {
+            const container = document.getElementById(`questions-${type}`);
+            const questions = container.querySelectorAll('.quiz-question');
+            container.insertAdjacentHTML('beforeend', questionTemplate(type, questions.length));
+        }
+
+        // Toggle custom quiz type input
+        document.getElementById('newQuizType').addEventListener('change', function() {
+            document.getElementById('customQuizType').style.display = 
+                this.value === 'custom' ? 'block' : 'none';
         });
 
-        const data = await response.json();
-        if (response.ok) {
-            alert(data.message);
-            location.reload(); // Reload the page to reflect changes
-        } else {
-            alert(data.error);
+        document.getElementById('newSubjectQuizType').addEventListener('change', function() {
+            document.getElementById('newCustomQuizType').style.display = 
+                this.value === 'custom' ? 'block' : 'none';
+        });
+
+        // Load subject data when selected
+        async function loadSubjectData() {
+            const subject = document.getElementById('existingSubject').value;
+            if (!subject) return;
+            
+            try {
+                const response = await fetch(`/query?subject=${subject}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Populate description
+                    if (data.description) {
+                        document.getElementById('subjectDescription').value = data.description;
+                    }
+                    
+                    // Populate resource links
+                    const resourceTypes = [
+                        'notes', 'videos', 'projects', 'lab_manual', 
+                        'assignments', 'question_papers', 'imp_questions', 
+                        'research_papers'
+                    ];
+                    
+                    resourceTypes.forEach(type => {
+                        const container = document.getElementById(`${type}Links`);
+                        if (container && data[type]) {
+                            container.innerHTML = `
+                                <label>${type.replace('_', ' ').charAt(0).toUpperCase() + type.replace('_', ' ').slice(1)} Links:</label>
+                            `;
+                            
+                            data[type].forEach(link => {
+                                const inputGroup = document.createElement('div');
+                                inputGroup.style.display = 'flex';
+                                inputGroup.style.marginBottom = '0.5rem';
+                                
+                                const input = document.createElement('input');
+                                input.type = 'text';
+                                input.name = `${type}[]`;
+                                input.value = link;
+                                input.style.flex = '1';
+                                input.style.marginRight = '0.5rem';
+                                
+                                const removeButton = document.createElement('button');
+                                removeButton.type = 'button';
+                                removeButton.textContent = '−';
+                                removeButton.style.padding = '0 0.75rem';
+                                removeButton.style.backgroundColor = 'var(--error-color)';
+                                removeButton.onclick = function() {
+                                    container.removeChild(inputGroup);
+                                };
+                                
+                                inputGroup.appendChild(input);
+                                inputGroup.appendChild(removeButton);
+                                container.appendChild(inputGroup);
+                            });
+                            
+                            const addButton = document.createElement('button');
+                            addButton.type = 'button';
+                            addButton.textContent = '+ Add';
+                            addButton.onclick = function() { addLinkField(`${type}Links`); };
+                            addButton.style.marginLeft = '0.5rem';
+                            
+                            container.appendChild(addButton);
+                        }
+                    });
+                    
+                    // Populate quiz types
+                    const container = document.getElementById('quizTypesContainer');
+                    container.innerHTML = '';
+                    
+                    if (data.quiz) {
+                        for (const [type, questions] of Object.entries(data.quiz)) {
+                            container.insertAdjacentHTML('beforeend', quizTypeTemplate(type));
+                            const questionsContainer = document.getElementById(`questions-${type}`);
+                            questionsContainer.innerHTML = '';
+                            
+                            questions.forEach((question, index) => {
+                                questionsContainer.insertAdjacentHTML('beforeend', `
+                                    <div class="quiz-question">
+                                        <div class="form-group">
+                                            <label>Question ${index + 1}:</label>
+                                            <input type="text" name="quiz[${type}][${index}][question]" 
+                                                   value="${question.question || ''}" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Options:</label>
+                                            <input type="text" name="quiz[${type}][${index}][options]" 
+                                                   value="${question.options.join(', ') || ''}" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Correct Answer:</label>
+                                            <input type="text" name="quiz[${type}][${index}][correct]" 
+                                                   value="${question.correct || ''}" required>
+                                        </div>
+                                        <div class="question-controls">
+                                            <button type="button" onclick="this.parentNode.parentNode.remove()" 
+                                                    style="background-color: var(--error-color);">
+                                                Remove Question
+                                            </button>
+                                        </div>
+                                    </div>
+                                `);
+                            });
+                            
+                            // Add "Add Question" button
+                            const addQuestionDiv = document.createElement('div');
+                            addQuestionDiv.className = 'question-controls';
+                            addQuestionDiv.innerHTML = `
+                                <button type="button" onclick="addQuestion('${type}')">
+                                    Add Another Question
+                                </button>
+                            `;
+                            questionsContainer.appendChild(addQuestionDiv);
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error("Error loading subject data:", error);
+                showMessage("Error loading subject data. Please try again.", "error");
+            }
         }
-    });
-        // Load available subjects for dropdown on page load
+
+        function addLinkField(containerId) {
+            const container = document.getElementById(containerId);
+            const inputGroup = document.createElement('div');
+            inputGroup.style.display = 'flex';
+            inputGroup.style.marginBottom = '0.5rem';
+            
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = containerId.replace('Links', '').replace('new', '').toLowerCase() + '[]';
+            input.placeholder = 'https://example.com/';
+            input.style.flex = '1';
+            input.style.marginRight = '0.5rem';
+            
+            const removeButton = document.createElement('button');
+            removeButton.type = 'button';
+            removeButton.textContent = '−';
+            removeButton.style.padding = '0 0.75rem';
+            removeButton.style.backgroundColor = 'var(--error-color)';
+            removeButton.onclick = function() {
+                container.removeChild(inputGroup);
+            };
+            
+            inputGroup.appendChild(input);
+            inputGroup.appendChild(removeButton);
+            container.appendChild(inputGroup);
+        }
+        
+        document.getElementById('deleteForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const subject = document.getElementById('deleteSubject').value;
+            if (!subject) {
+                showMessage("Please select a subject to delete.", "error");
+                return;
+            }
+            
+            if (!confirm(`Are you sure you want to delete "${subject}"? This action cannot be undone.`)) {
+                return;
+            }
+            
+            const formData = new FormData(this);
+            try {
+                const response = await fetch('/delete_subject', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                if (response.ok) {
+                    showMessage(data.message, "success");
+                    loadSubjects();
+                } else {
+                    showMessage(data.error || "Failed to delete subject.", "error");
+                }
+            } catch (error) {
+                showMessage("An error occurred. Please try again.", "error");
+                console.error("Error:", error);
+            }
+        });
+        
         async function loadSubjects() {
             try {
                 const response = await fetch('/subjects');
                 if (response.ok) {
- const subjects = await response.json();
-                    const dropdowns = [document.getElementById('existingSubject')];
+                    const subjects = await response.json();
+                    const dropdowns = [
+                        document.getElementById('existingSubject'),
+                        document.getElementById('deleteSubject')
+                    ];
                     
-                    // Clear existing options
                     dropdowns.forEach(dropdown => {
+                        const currentValue = dropdown.value;
                         dropdown.innerHTML = '<option value="">-- Select a subject --</option>';
-                    });
-
-                    // Add all subjects to dropdowns
-                    subjects.forEach(subject => {
-                        dropdowns.forEach(dropdown => {
+                        
+                        subjects.forEach(subject => {
                             const option = document.createElement('option');
                             option.value = subject;
-                            option.textContent = subject;
+                            option.textContent = subject.charAt(0).toUpperCase() + subject.slice(1);
                             dropdown.appendChild(option);
                         });
+                        
+                        if (subjects.includes(currentValue)) {
+                            dropdown.value = currentValue;
+                        }
                     });
                 }
             } catch (error) {
@@ -367,108 +901,138 @@
                 showMessage("Error loading subjects. Please try again.", "error");
             }
         }
-
+        
         function openTab(evt, tabName) {
             const tabcontent = document.getElementsByClassName("tabcontent");
             for (let i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].style.display = "none";
             }
-
+            
             const tablinks = document.getElementsByClassName("tablinks");
             for (let i = 0; i < tablinks.length; i++) {
                 tablinks[i].className = tablinks[i].className.replace(" active", "");
             }
-
+            
             document.getElementById(tabName).style.display = "block";
             evt.currentTarget.className += " active";
         }
-
+        
         async function uploadResources(type) {
-            const messageDiv = document.getElementById('message');
-            messageDiv.style.display = 'none';
-            
-            let form;
-            if (type === 'update') {
-                form = document.getElementById('updateForm');
-                const subject = document.getElementById('existingSubject').value;
-                if (!subject) {
-                    showMessage("Please select a subject.", "error");
-                    return;
-                }
-            } else {
-                form = document.getElementById('newSubjectForm');
-                const subject = document.getElementById('newSubjectName').value.trim().toLowerCase();
-                if (!subject) {
-                    showMessage("Please enter a subject name.", "error");
-                    return;
-                }
-            }
-
-            const formData = new FormData(form);
-            
-            try {
-                const response = await fetch('/upload', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const data = await response.json();
-                
-                if (response.ok) {
-                    showMessage(data.message, "success");
-                    loadSubjects();
-                    form.reset();
-                } else {
-                    showMessage(data.error || "An error occurred.", "error");
-                }
-            } catch (error) {
-                showMessage("An error occurred. Please try again.", "error");
-                console.error("Error:", error);
-            }
+    const messageDiv = document.getElementById('message');
+    messageDiv.style.display = 'none';
+    
+    let form, subject;
+    if (type === 'update') {
+        form = document.getElementById('updateForm');
+        subject = document.getElementById('existingSubject').value;
+        if (!subject) {
+            showMessage("Please select a subject.", "error");
+            return;
         }
-
+    } else {
+        form = document.getElementById('newSubjectForm');
+        subject = document.getElementById('newSubjectName').value.trim().toLowerCase();
+        if (!subject) {
+            showMessage("Please enter a subject name.", "error");
+            return;
+        }
+        if (!/^[a-z0-9_]+$/.test(subject)) {
+            showMessage("Subject name can only contain lowercase letters, numbers, and underscores.", "error");
+            return;
+        }
+    }
+    
+    // Prepare form data
+    const formData = new FormData(form);
+    
+    // Add quiz data to formData
+    const quizContainer = type === 'update' 
+        ? document.getElementById('quizTypesContainer')
+        : document.getElementById('newQuizTypesContainer');
+    
+    const quizTypes = quizContainer.querySelectorAll('.quiz-type');
+    let quizData = {};
+    
+    quizTypes.forEach(quizType => {
+        const type = quizType.getAttribute('data-type');
+        const questions = [];
+        
+        quizType.querySelectorAll('.quiz-question').forEach((question, index) => {
+            const questionText = question.querySelector('input[name*="question"]').value;
+            const options = question.querySelector('input[name*="options"]').value.split(',').map(opt => opt.trim());
+            const correct = question.querySelector('input[name*="correct"]').value.trim();
+            
+            if (questionText && options.length > 0 && correct) {
+                questions.push({
+                    question: questionText,
+                    options: options,
+                    correct: correct
+                });
+            }
+        });
+        
+        if (questions.length > 0) {
+            quizData[type] = questions;
+        }
+    });
+    
+    // Add quiz data as JSON string
+    formData.append('quiz_data', JSON.stringify(quizData));
+    
+    try {
+        const response = await fetch('/upload', {
+            method: 'POST',
+            body: formData
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            showMessage(data.message || "Resources updated successfully!", "success");
+            loadSubjects();
+            if (type === 'new') {
+                form.reset();
+                document.getElementById('newQuizTypesContainer').innerHTML = quizTypeTemplate('aptitude');
+            }
+        } else {
+            showMessage(data.error || "Failed to update resources. Please try again.", "error");
+        }
+    } catch (error) {
+        console.error("Update error:", error);
+        showMessage("An error occurred while updating. Please check the console for details.", "error");
+    }
+}
+        
         function showMessage(message, type) {
             const messageDiv = document.getElementById('message');
             messageDiv.textContent = message;
             messageDiv.className = `message ${type}`;
             messageDiv.style.display = 'block';
-            messageDiv.scrollIntoView({ behavior: 'smooth' });
-            setTimeout(() => {
-                messageDiv.style.display = 'none';
-            }, 5000);
+            messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            if (type === 'success') {
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 5000);
+            }
         }
-
-        window.addEventListener('DOMContentLoaded', loadSubjects);
         
-        document.getElementById('addSubjectForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            fetch('/add_subject', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert(data.message || data.error);
-                if (data.message) {
-                    this.reset(); // Reset the form after successful submission
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        });
-
-        document.getElementById('updateForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            fetch('/update_subject', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert(data.message || data.error);
-            })
-            .catch(error => console.error('Error:', error));
+        window.addEventListener('DOMContentLoaded', () => {
+            loadSubjects();
+            
+            // Initialize with one aptitude quiz type for new subjects
+            document.getElementById('newQuizTypesContainer').innerHTML = quizTypeTemplate('aptitude');
+            
+            // Set up form validation
+            document.getElementById('newSubjectForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                uploadResources('new');
+            });
+            
+            document.getElementById('updateForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                uploadResources('update');
+            });
         });
     </script>
 </body>

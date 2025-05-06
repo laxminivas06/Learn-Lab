@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Learn Lab</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #3f37c9;
+            --success: #4cc9f0;
+            --danger: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-right: 2rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-section {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2.5rem;
+            transition: var(--transition);
+        }
+
+        .profile-section:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .profile-info {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .profile-info p {
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .profile-info strong {
+            color: var(--primary);
+            min-width: 100px;
+            display: inline-block;
+        }
+
+        .favorites-section {
+            margin-top: 2rem;
+        }
+
+        h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+        }
+
+        .favorites-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .favorites-list li {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .favorites-list li:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .favorites-list a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            flex-grow: 1;
+        }
+
+        .favorites-list a:hover {
+            text-decoration: underline;
+        }
+
+        .remove-favorite {
+            background: var(--danger);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            margin-left: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .remove-favorite:hover {
+            background: #d91a6d;
+            transform: translateY(-2px);
+        }
+
+        .remove-favorite:active {
+            transform: translateY(0);
+        }
+
+        .empty-state {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            color: var(--gray);
+        }
+
+        .empty-state i {
+            font-size: 2rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+                text-align: center;
+            }
+
+            h1 {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+
+            nav {
+                width: 100%;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .profile-section {
+                padding: 1.5rem;
+            }
+
+            .favorites-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .profile-info p {
+                font-size: 1rem;
+            }
+
+            .profile-info strong {
+                display: block;
+                margin-bottom: 0.3rem;
+            }
+
+            .remove-favorite {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Learn Lab</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/profile" class="active">Profile</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="profile-section">
+            <h2>Your Profile</h2>
+            <div class="profile-info">
+                <p><strong>Username:</strong> {{ username }}</p>
+                <p><strong>Email:</strong> {{ email }}</p>
+            </div>
+            
+            <div class="favorites-section">
+                <h3>Your Favorites</h3>
+                {% if favorites %}
+                    <ul class="favorites-list">
+                        {% for subject in favorites %}
+                            <li>
+                                <a href="/?query={{ subject }}">{{ subject }}</a>
+                                <button class="remove-favorite" data-subject="{{ subject }}">
+                                    <i class="fas fa-trash-alt"></i> Remove
+                                </button>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <div class="empty-state">
+                        <i class="fas fa-star"></i>
+                        <p>You haven't added any favorites yet.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle removing favorites
+            document.querySelectorAll('.remove-favorite').forEach(button => {
+                button.addEventListener('click', function() {
+                    const subject = this.getAttribute('data-subject');
+                    const listItem = this.closest('li');
+                    
+                    // Add animation before removal
+                    listItem.style.transform = 'translateX(-100px)';
+                    listItem.style.opacity = '0';
+                    listItem.style.transition = 'all 0.3s ease';
+                    
+                    // Send request to server after animation starts
+                    setTimeout(() => {
+                        fetch('/remove_favorite', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ subject: subject })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.message) {
+                                listItem.remove();
+                                
+                                // Check if no favorites left
+                                if (document.querySelectorAll('.favorites-list li').length === 0) {
+                                    const favoritesSection = document.querySelector('.favorites-section');
+                                    const emptyState = document.createElement('div');
+                                    emptyState.className = 'empty-state';
+                                    emptyState.innerHTML = `
+                                        <i class="fas fa-star"></i>
+                                        <p>You haven't added any favorites yet.</p>
+                                    `;
+                                    favoritesSection.appendChild(emptyState);
+                                }
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
+                    }, 300);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

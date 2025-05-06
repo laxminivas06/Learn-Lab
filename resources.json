@@ -25,7 +25,155 @@
         "research_papers": [
             "https://classroom.google.com/c/Nzc2MDY1NjA5MTcy?cjc=omtbttzx"
         ],
-        "description": "Discrete Mathematics is the study of mathematical structures that are fundamentally discrete rather than continuous. It includes topics such as logic, set theory, graph theory, combinatorics, and algorithms, and forms the mathematical foundation for computer science."
+        "description": "Discrete Mathematics covers fundamental concepts of mathematics including logic, sets, relations, functions, graph theory, and combinatorics.",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is the sum of the first 10 natural numbers?",
+                    "options": [
+                        "45",
+                        "50",
+                        "55",
+                        "60"
+                    ],
+                    "correct": "55"
+                },
+                {
+                    "question": "How many edges does a complete graph with 5 vertices have?",
+                    "options": [
+                        "5",
+                        "10",
+                        "15",
+                        "20"
+                    ],
+                    "correct": "10"
+                },
+                {
+                    "question": "What is the value of 5! (5 factorial)?",
+                    "options": [
+                        "60",
+                        "100",
+                        "120",
+                        "150"
+                    ],
+                    "correct": "120"
+                },
+                {
+                    "question": "Which of these is a prime number?",
+                    "options": [
+                        "15",
+                        "21",
+                        "29",
+                        "33"
+                    ],
+                    "correct": "29"
+                },
+                {
+                    "question": "What is the next number in the sequence: 2, 3, 5, 7, 11, ___?",
+                    "options": [
+                        "12",
+                        "13",
+                        "15",
+                        "17"
+                    ],
+                    "correct": "13"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What is the principle of mathematical induction?",
+                    "options": [
+                        "Base case and inductive step",
+                        "Proof by contradiction",
+                        "Direct proof",
+                        "Counterexample"
+                    ],
+                    "correct": "Base case and inductive step"
+                },
+                {
+                    "question": "Which of these is NOT a type of relation?",
+                    "options": [
+                        "Reflexive",
+                        "Symmetric",
+                        "Transitive",
+                        "Derivative"
+                    ],
+                    "correct": "Derivative"
+                },
+                {
+                    "question": "In graph theory, what is a Hamiltonian path?",
+                    "options": [
+                        "A path that visits every vertex exactly once",
+                        "A path that uses every edge exactly once",
+                        "The shortest path between two vertices",
+                        "A path with no repeated edges"
+                    ],
+                    "correct": "A path that visits every vertex exactly once"
+                },
+                {
+                    "question": "What is the cardinality of the power set of {a, b, c}?",
+                    "options": [
+                        "6",
+                        "8",
+                        "9",
+                        "12"
+                    ],
+                    "correct": "8"
+                },
+                {
+                    "question": "Which logical operator has the highest precedence?",
+                    "options": [
+                        "AND",
+                        "OR",
+                        "NOT",
+                        "IMPLIES"
+                    ],
+                    "correct": "NOT"
+                },
+                {
+                    "question": "What is the chromatic number of a complete graph with n vertices?",
+                    "options": [
+                        "1",
+                        "2",
+                        "n",
+                        "n-1"
+                    ],
+                    "correct": "n"
+                },
+                {
+                    "question": "Which of these is a property of a tree?",
+                    "options": [
+                        "Contains cycles",
+                        "Has multiple paths between nodes",
+                        "Connected and acyclic",
+                        "Must be binary"
+                    ],
+                    "correct": "Connected and acyclic"
+                }
+            ],
+            "advanced": [
+                {
+                    "question": "What is the time complexity of Dijkstra's algorithm with a binary heap?",
+                    "options": [
+                        "O(V)",
+                        "O(V log V)",
+                        "O(V + E)",
+                        "O(V^2)"
+                    ],
+                    "correct": "O(V log V)"
+                },
+                {
+                    "question": "Which theorem states that any planar graph can be colored with no more than 4 colors?",
+                    "options": [
+                        "Euler's formula",
+                        "Four color theorem",
+                        "Kuratowski's theorem",
+                        "Ramsey's theorem"
+                    ],
+                    "correct": "Four color theorem"
+                }
+            ]
+        }
     },
     "computer networks": {
         "notes": [
@@ -53,7 +201,22 @@
         "research_papers": [
             "https://classroom.google.com/c/Njk5MTc3MzA0NjM2?cjc=odrbil6y"
         ],
-        "description": "Computer Network Engineering is a field that focuses on the design, implementation, and management of computer networks, ensuring reliable and secure data transmission. It involves both physical components like routers and switches, and logical elements like protocols and network services. Network engineers work with various types of networks, including LANs, WANs, and the Internet. "
+        "description": "",
+        "quiz": {
+            "interview": [
+                {
+                    "question": "hello indisa",
+                    "options": [
+                        "Option 1",
+                        "Option 2",
+                        "Option 3",
+                        "Option 4",
+                        ""
+                    ],
+                    "correct": "Option 1"
+                }
+            ]
+        }
     },
     "operating systems": {
         "notes": [
@@ -81,7 +244,33 @@
         "research_papers": [
             "https://classroom.google.com/c/Nzc2MDY1NjA5MDkz?cjc=ygqop2f7"
         ],
-        "description": "Operating system (OS) projects can involve designing and implementing various components, such as CPU scheduling algorithms, memory management, file systems, or even creating a basic OS from scratch, offering practical experience with OS concepts. "
+        "description": "Operating system (OS) projects can involve designing and implementing various components, such as CPU scheduling algorithms, memory management, file systems, or even creating a basic OS from scratch, offering practical experience with OS concepts.",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is the main function of an operating system?",
+                    "options": [
+                        "Manage hardware resources",
+                        "Run applications",
+                        "Provide security",
+                        "All of the above"
+                    ],
+                    "correct": "All of the above"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What is a process in operating systems?",
+                    "options": [
+                        "A program in execution",
+                        "A static program",
+                        "A type of memory",
+                        "A user interface"
+                    ],
+                    "correct": "A program in execution"
+                }
+            ]
+        }
     },
     "software engineering": {
         "notes": [
@@ -109,7 +298,33 @@
         "research_papers": [
             "https://classroom.google.com/c/Nzc2MDY1NjA5MjI2?cjc=t2zymmv7"
         ],
-        "description": "Software engineering is a discipline that applies engineering principles to design, develop, test, and maintain software, aiming to create reliable, effective, and efficient software solutions. "
+        "description": "Software engineering is a discipline that applies engineering principles to design, develop, test, and maintain software, aiming to create reliable, effective, and efficient software solutions.",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What does SDLC stand for?",
+                    "options": [
+                        "Software Development Life Cycle",
+                        "System Development Life Cycle",
+                        "Software Design Life Cycle",
+                        "System Design Life Cycle"
+                    ],
+                    "correct": "Software Development Life Cycle"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What is the purpose of a software requirement specification?",
+                    "options": [
+                        "To outline the software's functionality",
+                        "To provide a user manual",
+                        "To define the software's architecture",
+                        "To list programming languages used"
+                    ],
+                    "correct": "To outline the software's functionality"
+                }
+            ]
+        }
     },
     "business economics & financial analysis": {
         "notes": [
@@ -137,7 +352,33 @@
         "research_papers": [
             ""
         ],
-        "description": "Business Economics applies economic theories and methods to analyze and improve business decisions, while Fundamental Analysis assesses a company's value by examining its finances, market conditions, and competitors. Both are crucial for making informed decisions, whether within a business or for investment purposes. "
+        "description": "Business Economics applies economic theories and methods to analyze and improve business decisions, while Fundamental Analysis assesses a company's value by examining its finances, market conditions, and competitors. Both are crucial for making informed decisions, whether within a business or for investment purposes.",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is the law of demand?",
+                    "options": [
+                        "Price increases, demand decreases",
+                        "Price decreases, demand decreases",
+                        "Price increases, demand increases",
+                        "Price decreases, demand increases"
+                    ],
+                    "correct": "Price increases, demand decreases"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What is a balance sheet?",
+                    "options": [
+                        "A financial statement showing assets and liabilities",
+                        "A report on cash flow",
+                        "A summary of income",
+                        "A document for tax purposes"
+                    ],
+                    "correct": "A financial statement showing assets and liabilities"
+                }
+            ]
+        }
     },
     "data structures": {
         "notes": [
@@ -149,7 +390,32 @@
         "projects": [
             "https://classroom.google.com/c/Njk5MTc4NDg3NTQ2?cjc=l3cynu44"
         ],
-        "quizzes": [],
+        "quizzes": {
+            "aptitude": [
+                {
+                    "question": "What is the time complexity of binary search?",
+                    "options": [
+                        "O(1)",
+                        "O(n)",
+                        "O(log n)",
+                        "O(n log n)"
+                    ],
+                    "correct": "O(log n)"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "Which data structure uses FIFO principle?",
+                    "options": [
+                        "Stack",
+                        "Queue",
+                        "Tree",
+                        "Graph"
+                    ],
+                    "correct": "Queue"
+                }
+            ]
+        },
         "lab_manual": [
             ""
         ],
@@ -165,7 +431,33 @@
         "research_papers": [
             "https://classroom.google.com/c/Njk5MTc4NDg3NTQ2?cjc=l3cynu44"
         ],
-        "description": "A data structure will have a collection of data and functions or operations that can be applied on the data. Primitive Data Structure defines a set of primitive elements that do not involve any other elements as its subparts. These are generally built-in data type in programming languages."
+        "description": "A data structure will have a collection of data and functions or operations that can be applied on the data. Primitive Data Structure defines a set of primitive elements that do not involve any other elements as its subparts. These are generally built-in data type in programming languages.",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is the space complexity of an array?",
+                    "options": [
+                        "O(1)",
+                        "O(n)",
+                        "O(n^2)",
+                        "O(log n)"
+                    ],
+                    "correct": "O(n)"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What is a linked list?",
+                    "options": [
+                        "A collection of nodes",
+                        "A type of data structure",
+                        "A linear data structure",
+                        "All of the above"
+                    ],
+                    "correct": "All of the above"
+                }
+            ]
+        }
     },
     "digital electronics": {
         "notes": [
@@ -193,7 +485,33 @@
         "research_papers": [
             "https://classroom.google.com/c/Nzc2MDY1NjA5Mjg4?cjc=bpi6bbrp"
         ],
-        "description": "Digital Electronics involves the study of digital signals and the engineering of devices that use or produce them. It forms the foundation of modern electronic systems, including computers and communication devices."
+        "description": "Digital Electronics involves the study of digital signals and the engineering of devices that use or produce them. It forms the foundation of modern electronic systems, including computers and communication devices.",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is a logic gate?",
+                    "options": [
+                        "A device that performs a logical operation",
+                        "A type of memory",
+                        "A storage device",
+                        "A programming language"
+                    ],
+                    "correct": "A device that performs a logical operation"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What does a NOT gate do?",
+                    "options": [
+                        "Inverts the input signal",
+                        "Amplifies the input signal",
+                        "Adds two signals",
+                        "Subtracts two signals"
+                    ],
+                    "correct": "Inverts the input signal"
+                }
+            ]
+        }
     },
     "computer oriented statistical methods": {
         "notes": [
@@ -221,7 +539,33 @@
         "research_papers": [
             "https://classroom.google.com/c/Nzc2MDY1NjA5MzAz?cjc=ri7azgh6"
         ],
-        "description": "Computer Oriented Statistical Methods focuses on the application of statistical techniques using computational tools. It encompasses probability distributions, hypothesis testing, regression analysis, and the use of software for statistical computations."
+        "description": "Computer Oriented Statistical Methods focuses on the application of statistical techniques using computational tools. It encompasses probability distributions, hypothesis testing, regression analysis, and the use of software for statistical computations.",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is the function of the ALU?",
+                    "options": [
+                        "Perform arithmetic and logical operations",
+                        "Store data",
+                        "Control input/output",
+                        "Manage memory"
+                    ],
+                    "correct": "Perform arithmetic and logical operations"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What does CPU stand for?",
+                    "options": [
+                        "Central Processing Unit",
+                        "Computer Personal Unit",
+                        "Central Program Unit",
+                        "Computer Processing Unit"
+                    ],
+                    "correct": "Central Processing Unit"
+                }
+            ]
+        }
     },
     "computer organization and architecture": {
         "notes": [
@@ -249,7 +593,33 @@
         "research_papers": [
             "https://classroom.google.com/c/Nzc2MDY1NjA5MzI5?cjc=lyrgprty"
         ],
-        "description": "Computer Organization and Architecture delves into the internal structure and operational principles of computer systems, covering topics like instruction sets, memory hierarchy, and processor design."
+        "description": "Computer Organization and Architecture delves into the internal structure and operational principles of computer systems, covering topics like instruction sets, memory hierarchy, and processor design.",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is the function of the ALU?",
+                    "options": [
+                        "Perform arithmetic and logical operations",
+                        "Store data",
+                        "Control input/output",
+                        "Manage memory"
+                    ],
+                    "correct": "Perform arithmetic and logical operations"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What does CPU stand for?",
+                    "options": [
+                        "Central Processing Unit",
+                        "Computer Personal Unit",
+                        "Central Program Unit",
+                        "Computer Processing Unit"
+                    ],
+                    "correct": "Central Processing Unit"
+                }
+            ]
+        }
     },
     "object oriented programming through java": {
         "notes": [
@@ -277,7 +647,33 @@
         "research_papers": [
             ""
         ],
-        "description": "Object Oriented Programming through Java emphasizes the principles of object-oriented design and programming using Java, covering concepts like classes, objects, inheritance, polymorphism, and encapsulation."
+        "description": "Object Oriented Programming through Java emphasizes the principles of object-oriented design and programming using Java, covering concepts like classes, objects, inheritance, polymorphism, and encapsulation.",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is encapsulation?",
+                    "options": [
+                        "Hiding the internal state of an object",
+                        "Inheriting properties from another class",
+                        "Creating multiple instances of a class",
+                        "Defining a class"
+                    ],
+                    "correct": "Hiding the internal state of an object"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What is polymorphism?",
+                    "options": [
+                        "Ability to take many forms",
+                        "Ability to inherit properties",
+                        "Ability to create objects",
+                        "Ability to encapsulate data"
+                    ],
+                    "correct": "Ability to take many forms"
+                }
+            ]
+        }
     },
     "data structures lab": {
         "notes": [
@@ -305,7 +701,33 @@
         "research_papers": [
             ""
         ],
-        "description": "This lab provides practical experience in implementing data structures such as stacks, queues, trees, and graphs using programming languages."
+        "description": "This lab provides practical experience in implementing data structures such as stacks, queues, trees, and graphs using programming languages.",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is a stack?",
+                    "options": [
+                        "A linear data structure",
+                        "A non-linear data structure",
+                        "A type of queue",
+                        "A collection of nodes"
+                    ],
+                    "correct": "A linear data structure"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What is the main operation of a queue?",
+                    "options": [
+                        "LIFO",
+                        "FIFO",
+                        "Random access",
+                        "None of the above"
+                    ],
+                    "correct": "FIFO"
+                }
+            ]
+        }
     },
     "computer networks lab": {
         "notes": [
@@ -333,7 +755,33 @@
         "research_papers": [
             ""
         ],
-        "description": "This lab focuses on implementing object-oriented programming concepts through practical Java programs, covering classes, objects, inheritance, interfaces, exception handling, and file handling."
+        "description": "This lab focuses on implementing object-oriented programming concepts through practical Java programs, covering classes, objects, inheritance, interfaces, exception handling, and file handling.",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is the purpose of a subnet mask?",
+                    "options": [
+                        "To identify the network and host portions of an IP address",
+                        "To encrypt data",
+                        "To manage bandwidth",
+                        "To connect devices"
+                    ],
+                    "correct": "To identify the network and host portions of an IP address"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What protocol is used for secure data transmission?",
+                    "options": [
+                        "HTTP",
+                        "FTP",
+                        "HTTPS",
+                        "SMTP"
+                    ],
+                    "correct": "HTTPS"
+                }
+            ]
+        }
     },
     "matrices and calculus": {
         "notes": [
@@ -360,7 +808,33 @@
         "research_papers": [
             "https://classroom.google.com/c/Nzc1OTkxMDA1Njg5?cjc=rdh7q6tz"
         ],
-        "description": ""
+        "description": "",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is the derivative of x^2?",
+                    "options": [
+                        "2x",
+                        "x^2",
+                        "x",
+                        "1"
+                    ],
+                    "correct": "2x"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What is the integral of 1?",
+                    "options": [
+                        "x",
+                        "1",
+                        "x + C",
+                        "0"
+                    ],
+                    "correct": "x + C"
+                }
+            ]
+        }
     },
     "engineering chemistry": {
         "notes": [
@@ -387,7 +861,33 @@
         "research_papers": [
             "https://classroom.google.com/c/Nzc1OTkyMjgzMjQ4?cjc=ltslp6m7"
         ],
-        "description": ""
+        "description": "",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is the pH of pure water?",
+                    "options": [
+                        "7",
+                        "0",
+                        "14",
+                        "10"
+                    ],
+                    "correct": "7"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What is the chemical formula for table salt?",
+                    "options": [
+                        "NaCl",
+                        "KCl",
+                        "CaCl2",
+                        "MgCl2"
+                    ],
+                    "correct": "NaCl"
+                }
+            ]
+        }
     },
     "programming for problem solving": {
         "notes": [
@@ -414,7 +914,33 @@
         "research_papers": [
             "https://classroom.google.com/c/Nzc1OTkxMTA2MTQ2?cjc=zkcjhulz"
         ],
-        "description": ""
+        "description": "",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is an algorithm?",
+                    "options": [
+                        "A step-by-step procedure for solving a problem",
+                        "A programming language",
+                        "A type of data structure",
+                        "A software application"
+                    ],
+                    "correct": "A step-by-step procedure for solving a problem"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What is a loop in programming?",
+                    "options": [
+                        "A sequence of instructions that repeats",
+                        "A data structure",
+                        "A type of variable",
+                        "A function"
+                    ],
+                    "correct": "A sequence of instructions that repeats"
+                }
+            ]
+        }
     },
     "basic electrical engineering": {
         "notes": [
@@ -441,7 +967,33 @@
         "research_papers": [
             "https://classroom.google.com/c/Nzc1OTkyNDM4MDA0?cjc=cjlbniy5"
         ],
-        "description": ""
+        "description": "",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is Ohm's Law?",
+                    "options": [
+                        "V = IR",
+                        "P = IV",
+                        "E = mc^2",
+                        "F = ma"
+                    ],
+                    "correct": "V = IR"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What is the unit of electrical resistance?",
+                    "options": [
+                        "Ohm",
+                        "Volt",
+                        "Ampere",
+                        "Watt"
+                    ],
+                    "correct": "Ohm"
+                }
+            ]
+        }
     },
     "computer aided engineering graphics": {
         "notes": [
@@ -468,7 +1020,33 @@
         "research_papers": [
             "https://classroom.google.com/c/Nzc1OTkxODQzNzcy?cjc=g5emhp3l"
         ],
-        "description": ""
+        "description": "",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is the purpose of CAD software?",
+                    "options": [
+                        "To create technical drawings",
+                        "To manage projects",
+                        "To analyze data",
+                        "To simulate processes"
+                    ],
+                    "correct": "To create technical drawings"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What does 2D stand for in graphics?",
+                    "options": [
+                        "Two Dimensions",
+                        "Two Data",
+                        "Two Designs",
+                        "Two Drawings"
+                    ],
+                    "correct": "Two Dimensions"
+                }
+            ]
+        }
     },
     "elements of computer science and engineering": {
         "notes": [
@@ -495,7 +1073,33 @@
         "research_papers": [
             "https://classroom.google.com/c/Nzc1OTkyMzQ2ODk1?cjc=shrog4zs"
         ],
-        "description": ""
+        "description": "",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is the primary function of an operating system?",
+                    "options": [
+                        "Manage hardware resources",
+                        "Run applications",
+                        "Provide security",
+                        "All of the above"
+                    ],
+                    "correct": "All of the above"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What is a compiler?",
+                    "options": [
+                        "A program that translates code",
+                        "A type of software",
+                        "A hardware component",
+                        "A programming language"
+                    ],
+                    "correct": "A program that translates code"
+                }
+            ]
+        }
     },
     "engineering chemistry laboratory": {
         "notes": [
@@ -522,7 +1126,33 @@
         "research_papers": [
             ""
         ],
-        "description": ""
+        "description": "",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is the main focus of chemistry?",
+                    "options": [
+                        "The study of matter and its interactions",
+                        "The study of living organisms",
+                        "The study of physical forces",
+                        "The study of data"
+                    ],
+                    "correct": "The study of matter and its interactions"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What is a chemical reaction?",
+                    "options": [
+                        "A process that leads to the transformation of one set of chemical substances to another",
+                        "A physical change",
+                        "A type of mixture",
+                        "A method of separation"
+                    ],
+                    "correct": "A process that leads to the transformation of one set of chemical substances to another"
+                }
+            ]
+        }
     },
     "programming for problem solving laboratory": {
         "notes": [
@@ -549,7 +1179,33 @@
         "research_papers": [
             ""
         ],
-        "description": ""
+        "description": "",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is debugging?",
+                    "options": [
+                        "Finding and fixing errors in code",
+                        "Writing code",
+                        "Compiling code",
+                        "Running code"
+                    ],
+                    "correct": "Finding and fixing errors in code"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What is a variable?",
+                    "options": [
+                        "A storage location identified by a name",
+                        "A type of function",
+                        "A programming language",
+                        "A data structure"
+                    ],
+                    "correct": "A storage location identified by a name"
+                }
+            ]
+        }
     },
     "basic electrical engineering laboratory": {
         "notes": [
@@ -576,7 +1232,33 @@
         "research_papers": [
             ""
         ],
-        "description": ""
+        "description": "",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is Kirchhoff's Voltage Law?",
+                    "options": [
+                        "The sum of the electrical potential differences around any closed network is zero",
+                        "The sum of currents entering a junction equals the sum of currents leaving",
+                        "The total resistance in a series circuit is the sum of individual resistances",
+                        "The total current in a parallel circuit is the sum of individual currents"
+                    ],
+                    "correct": "The sum of the electrical potential differences around any closed network is zero"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What is the unit of capacitance?",
+                    "options": [
+                        "Farad",
+                        "Henry",
+                        "Ohm",
+                        "Volt"
+                    ],
+                    "correct": "Farad"
+                }
+            ]
+        }
     },
     "ordinary differential equations and vector calculus": {
         "notes": [
@@ -603,7 +1285,33 @@
         "research_papers": [
             "https://classroom.google.com/c/Nzc1OTkwNDcxMzcw?cjc=2ajrohpt"
         ],
-        "description": ""
+        "description": "",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is the order of a differential equation?",
+                    "options": [
+                        "The highest derivative present",
+                        "The number of variables",
+                        "The degree of the equation",
+                        "The number of solutions"
+                    ],
+                    "correct": "The highest derivative present"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What is a vector field?",
+                    "options": [
+                        "A function that assigns a vector to every point in space",
+                        "A scalar function",
+                        "A type of matrix",
+                        "A linear equation"
+                    ],
+                    "correct": "A function that assigns a vector to every point in space"
+                }
+            ]
+        }
     },
     "applied physics": {
         "notes": [
@@ -630,7 +1338,33 @@
         "research_papers": [
             "https://classroom.google.com/c/Nzc1OTkzOTkyOTg2?cjc=x27y74f4"
         ],
-        "description": ""
+        "description": "",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is Newton's first law of motion?",
+                    "options": [
+                        "An object at rest stays at rest",
+                        "Force equals mass times acceleration",
+                        "For every action, there is an equal and opposite reaction",
+                        "Energy cannot be created or destroyed"
+                    ],
+                    "correct": "An object at rest stays at rest"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What is the unit of force?",
+                    "options": [
+                        "Newton",
+                        "Joule",
+                        "Watt",
+                        "Pascal"
+                    ],
+                    "correct": "Newton"
+                }
+            ]
+        }
     },
     "engineering workshop": {
         "notes": [
@@ -657,7 +1391,33 @@
         "research_papers": [
             ""
         ],
-        "description": ""
+        "description": "",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is the purpose of a workshop?",
+                    "options": [
+                        "To provide hands-on experience",
+                        "To conduct theoretical classes",
+                        "To manage projects",
+                        "To analyze data"
+                    ],
+                    "correct": "To provide hands-on experience"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What is a lathe used for?",
+                    "options": [
+                        "Shaping materials",
+                        "Cutting wood",
+                        "Welding",
+                        "Painting"
+                    ],
+                    "correct": "Shaping materials"
+                }
+            ]
+        }
     },
     "english for skill enhancement": {
         "notes": [
@@ -684,7 +1444,33 @@
         "research_papers": [
             ""
         ],
-        "description": ""
+        "description": "",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is the main purpose of effective communication?",
+                    "options": [
+                        "To convey information clearly",
+                        "To confuse the audience",
+                        "To entertain",
+                        "To avoid misunderstandings"
+                    ],
+                    "correct": "To convey information clearly"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What is a thesis statement?",
+                    "options": [
+                        "A summary of the main point",
+                        "A question posed in an essay",
+                        "A type of conclusion",
+                        "An introduction to a topic"
+                    ],
+                    "correct": "A summary of the main point"
+                }
+            ]
+        }
     },
     "electronic devices and circuits": {
         "notes": [
@@ -711,7 +1497,33 @@
         "research_papers": [
             "https://classroom.google.com/c/Nzc1OTkzOTU1NTMw?cjc=2ntuufng"
         ],
-        "description": ""
+        "description": "",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is a diode?",
+                    "options": [
+                        "A device that allows current to flow in one direction",
+                        "A type of resistor",
+                        "A capacitor",
+                        "A type of transistor"
+                    ],
+                    "correct": "A device that allows current to flow in one direction"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What is the function of a capacitor?",
+                    "options": [
+                        "To store electrical energy",
+                        "To amplify signals",
+                        "To convert AC to DC",
+                        "To measure voltage"
+                    ],
+                    "correct": "To store electrical energy"
+                }
+            ]
+        }
     },
     "python programming laboratory": {
         "notes": [
@@ -738,7 +1550,33 @@
         "research_papers": [
             ""
         ],
-        "description": ""
+        "description": "",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is a list in Python?",
+                    "options": [
+                        "A collection of items",
+                        "A type of variable",
+                        "A function",
+                        "A module"
+                    ],
+                    "correct": "A collection of items"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What does 'def' keyword do in Python?",
+                    "options": [
+                        "Defines a function",
+                        "Declares a variable",
+                        "Imports a module",
+                        "Creates a class"
+                    ],
+                    "correct": "Defines a function"
+                }
+            ]
+        }
     },
     "applied physics laboratory": {
         "notes": [
@@ -765,6 +1603,32 @@
         "research_papers": [
             ""
         ],
-        "description": ""
+        "description": "",
+        "quiz": {
+            "aptitude": [
+                {
+                    "question": "What is the principle of conservation of energy?",
+                    "options": [
+                        "Energy cannot be created or destroyed",
+                        "Energy can be created",
+                        "Energy can be destroyed",
+                        "Energy is always constant"
+                    ],
+                    "correct": "Energy cannot be created or destroyed"
+                }
+            ],
+            "technical": [
+                {
+                    "question": "What is the unit of work?",
+                    "options": [
+                        "Joule",
+                        "Newton",
+                        "Watt",
+                        "Pascal"
+                    ],
+                    "correct": "Joule"
+                }
+            ]
+        }
     }
 }

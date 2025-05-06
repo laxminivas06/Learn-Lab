@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .leaderboard-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            background-color: #fff;
+        }
+        .leaderboard-header {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #343a40;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .leaderboard-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .leaderboard-item {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            margin-bottom: 0.75rem;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+        .leaderboard-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .leaderboard-item.top-3 {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        .leaderboard-item:nth-child(1) {
+            background: linear-gradient(135deg, #ffd700 0%, #f8f9fa 100%);
+            border-left: 4px solid #ffd700;
+        }
+        .leaderboard-item:nth-child(2) {
+            background: linear-gradient(135deg, #c0c0c0 0%, #f8f9fa 100%);
+            border-left: 4px solid #c0c0c0;
+        }
+        .leaderboard-item:nth-child(3) {
+            background: linear-gradient(135deg, #cd7f32 0%, #f8f9fa 100%);
+            border-left: 4px solid #cd7f32;
+        }
+        .leaderboard-rank {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #495057;
+            width: 50px;
+            text-align: center;
+        }
+        .leaderboard-user {
+            flex: 1;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #212529;
+            min-width: 150px;
+        }
+        .leaderboard-score {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #28a745;
+            width: 100px;
+            text-align: right;
+        }
+        .leaderboard-details {
+            width: 100%;
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .current-user {
+            background-color: #e7f5ff !important;
+            border-left: 4px solid #4dabf7 !important;
+        }
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1.5rem;
+            background-color: #4dabf7;
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .btn-back:hover {
+            background-color: #339af0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .leaderboard-container {
+                padding: 1rem;
+                margin: 1rem;
+            }
+            .leaderboard-header {
+                font-size: 1.5rem;
+            }
+            .leaderboard-item {
+                padding: 0.75rem 1rem;
+            }
+            .leaderboard-rank {
+                width: 40px;
+                font-size: 1.1rem;
+            }
+            .leaderboard-user {
+                font-size: 1rem;
+                min-width: 120px;
+            }
+            .leaderboard-score {
+                width: 80px;
+                font-size: 1.1rem;
+            }
+            .leaderboard-details {
+                font-size: 0.8rem;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container py-4">
+        <div class="leaderboard-container bg-white">
+            <h1 class="leaderboard-header">
+                <i class="bi bi-trophy-fill me-2 text-warning"></i>
+                {{ subject|title }} - {{ quiz_type|title }} Leaderboard
+            </h1>
+            
+            <ul class="leaderboard-list">
+                {% for entry in leaderboard|sort(attribute='score', reverse=True) %}
+                    <li class="leaderboard-item {% if loop.index <= 3 %}top-3{% endif %} {% if entry.username == session.username %}current-user{% endif %}">
+                        <span class="leaderboard-rank">
+                            {% if loop.index == 1 %}
+                                <i class="bi bi-trophy-fill text-warning"></i>
+                            {% elif loop.index == 2 %}
+                                <i class="bi bi-trophy-fill text-secondary"></i>
+                            {% elif loop.index == 3 %}
+                                <i class="bi bi-trophy-fill text-danger"></i>
+                            {% else %}
+                                #{{ loop.index }}
+                            {% endif %}
+                        </span>
+                        
+                        <span class="leaderboard-user">
+                            {{ entry.username }}
+                            {% if entry.username == session.username %}
+                                <span class="badge bg-primary ms-2">You</span>
+                            {% endif %}
+                        </span>
+                        <span class="leaderboard-score">{{ "%.1f"|format(entry.score) }}%</span>
+                        <span class="leaderboard-details">
+                            <span><i class="bi bi-calendar me-1"></i>{{ entry.timestamp|format_timestamp }}</span>
+                            {% if users and users.get(entry.username) %}
+                                <span><i class="bi bi-envelope me-1"></i>{{ users[entry.username].email }}</span>
+                                {% if users[entry.username].get('favorites') %}
+                                    <span><i class="bi bi-star me-1"></i>{{ users[entry.username].favorites|length }} favorites</span>
+                                {% endif %}
+                            {% endif %}
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+            
+            <div class="text-center mt-4">
+                <a href="{{ url_for('quiz_home') }}" class="btn-back">
+                    <i class="bi bi-arrow-left me-2"></i> Back to Quiz Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

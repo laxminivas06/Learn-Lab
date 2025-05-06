@@ -1,0 +1,30 @@
+{
+  "Nivas": {
+    "password": "scrypt:32768:8:1$dISHgMAeDxikjBZr$7e4b89223271c83ea7cd3136d357eb12054e33ad65669fee01e3c0d0565b196ced67fb5aa238c2ca4feb82125be5b6f286cfd31bde301e5dcbf98b595c92a6d6",
+    "email": "user@example.com",
+    "join_date": "2023-01-15",
+    "last_active": "2023-06-20 14:30",
+    "favorites": ["Mathematics", "Physics"],
+    "quiz_history": [
+      {
+        "id": "quiz123",
+        "timestamp": "2023-06-15 10:30",
+        "subject": "Mathematics",
+        "quiz_type": "Aptitude",
+        "score": 85,
+        "time_spent": 120,
+        "details": {
+          "correct": 8,
+          "total": 10,
+          "answers": {}
+        }
+      }
+    ],
+    "stats": {
+      "leaderboard_position": 42,
+      "percentile": 15,
+      "average_score": 78,
+      "mastered_subjects": 3
+    }
+  }
+}

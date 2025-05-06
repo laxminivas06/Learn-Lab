@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <style>
+        .results-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        .results-header {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            border-bottom: 2px solid #f1f1f1;
+            padding-bottom: 1rem;
+        }
+        .score-display {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #3498db;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        .position-badge {
+            display: inline-block;
+            background-color: #f39c12;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        .leaderboard {
+            margin: 2rem 0;
+        }
+        .leaderboard-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 1.25rem;
+            margin-bottom: 0.5rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        .leaderboard-item:hover {
+            background-color: #e9ecef;
+            transform: translateX(5px);
+        }
+        .leaderboard-item.you {
+            background-color: #d4edff;
+            font-weight: 500;
+        }
+        .leaderboard-position {
+            font-weight: 600;
+            color: #6c757d;
+            min-width: 30px;
+        }
+        .leaderboard-name {
+            flex-grow: 1;
+            padding: 0 1rem;
+        }
+        .leaderboard-score {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .btn-leaderboard {
+            background-color: #3498db;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .btn-leaderboard:hover {
+            background-color: #2980b9;
+            color: white;
+            transform: translateY(-2px);
+        }
+        @media (max-width: 768px) {
+            .results-container {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            .score-display {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container py-4">
+        <div class="results-container bg-white">
+            <h1 class="results-header">
+                {{ subject|title }} - {{ quiz_type|title }} Quiz Results
+            </h1>
+            
+            <div class="text-center">
+                <div class="score-display">
+                    Your Score: <span class="text-primary">{{ "%.1f"|format(score) }}%</span>
+                </div>
+                <div class="position-badge">
+                    Position: #{{ position }}
+                </div>
+            </div>
+            
+            <div class="leaderboard">
+                <h3 class="mb-3 text-center">
+                    <i class="bi bi-trophy-fill me-2 text-warning"></i>
+                    Top Performers
+                </h3>
+                
+                <div class="list-group">
+                    {% for entry in leaderboard %}
+                        <div class="leaderboard-item {% if entry.username == session.username %}you{% endif %}">
+                            <span class="leaderboard-position">#{{ loop.index }}</span>
+                            <span class="leaderboard-name">
+                                {{ entry.username }}
+                                {% if entry.username == session.username %}(You){% endif %}
+                            </span>
+                            <span class="leaderboard-score">{{ "%.1f"|format(entry.score) }}%</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="{{ url_for('leaderboard', subject=subject, quiz_type=quiz_type) }}" 
+                   class="btn btn-leaderboard">
+                    View Full Leaderboard <i class="bi bi-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
